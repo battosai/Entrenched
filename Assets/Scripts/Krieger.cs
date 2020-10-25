@@ -18,21 +18,28 @@ public class Krieger : MonoBehaviour
     //components
     private Rigidbody2D rb;
     private SpriteRenderer rend;
+    private Animator anim;
 
     private void Awake() 
     {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     private void Start() {}
 
     private void Update()
     {
+        ReadInput();
         InputHandler();
+        AnimatorHandler();
     }
 
-    private void InputHandler()
+    /// <summary>
+    /// Reads keyboard input to manipulate status flags.
+    /// </summary>
+    private void ReadInput()
     {
         //hold downs
         isMoving = false;
@@ -47,17 +54,33 @@ public class Krieger : MonoBehaviour
         }
 
         //one taps (and take animation time to reset)
-        if(Input.GetMouseDown(1))
+        if(Input.GetMouseButtonDown(1))
             isSwitchingWeapons = true;
-        if(isSwitchingWeapons)
+        if(!isSwitchingWeapons)
         {
             if(Input.GetKeyDown(KeyCode.R))
             {
                 if(!isMelee)
                     isReloading = true;
             }
-            if(Input.GetMouseDown(0))
+            if(Input.GetMouseButton(0))
                 isAttacking = true;
         }
+    }
+
+    /// <summary>
+    /// Interprets status flags.
+    /// </summary>
+    private void InputHandler()
+    {
+        rb.velocity = isMoving ? new Vector2(moveSpeed, 0) : Vector2.zero;
+    }
+
+    private void AnimatorHandler()
+    {
+        anim.SetBool("Moving", isMoving);
+        anim.SetBool("Crouching", isCrouching);
+        anim.SetBool("Shooting", isAttacking && !isMelee);
+        anim.SetBool("Attacking", isAttacking && isMelee);
     }
 }
