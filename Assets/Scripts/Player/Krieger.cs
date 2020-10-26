@@ -27,7 +27,13 @@ public class Krieger : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    private void Start() {}
+    private void Start() 
+    {
+        // float spriteWidth = rend.sprite.bounds.size.x;
+        // float spriteHeight = rend.sprite.bounds.size.y;
+        // transform.position = Camera.main.ScreenToWorldPoint(
+        //     new Vector3(spriteWidth/2, spriteHeight/2, 10));
+    }
 
     private void Update()
     {
@@ -64,7 +70,10 @@ public class Krieger : MonoBehaviour
                     isReloading = true;
             }
             if(Input.GetMouseButton(0))
+            {
                 isAttacking = true;
+                isMoving = false;
+            }
         }
     }
 
@@ -73,9 +82,14 @@ public class Krieger : MonoBehaviour
     /// </summary>
     private void InputHandler()
     {
-        rb.velocity = isMoving ? new Vector2(moveSpeed, 0) : Vector2.zero;
+        rb.velocity = isMoving ? 
+            new Vector2(moveSpeed, 0) : 
+            Vector2.zero;
     }
 
+    /// <summary>
+    /// Updates animator parameters to match status flags.
+    /// </summary>
     private void AnimatorHandler()
     {
         anim.SetBool("Moving", isMoving);
