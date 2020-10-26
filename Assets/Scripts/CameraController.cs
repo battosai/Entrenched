@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
         targetWidth = targetRend.sprite.bounds.size.x;
         targetHeight = targetRend.sprite.bounds.size.y;
         Vector3 currentBottomLeft = cam.ScreenToWorldPoint(new Vector3(0f, 0f, 10f));
-        currentBottomLeft += new Vector3(targetWidth/2f, targetHeight/2f, 0f);
+        currentBottomLeft += new Vector3(targetWidth/2f-1f, targetHeight/2f-1f, 0f);
         Vector3 move = followTarget.position - currentBottomLeft;
         transform.position += move;
         offsetFromTarget = transform.position - followTarget.position;
