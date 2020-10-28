@@ -5,7 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform followTarget;
-    private SpriteRenderer targetRend;
+    public Sprite targetSprite;
+
     private float targetWidth;
     private float targetHeight;
     private Vector2 offsetFromTarget;
@@ -14,15 +15,14 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         cam = GetComponent<Camera>();
-        targetRend = followTarget.GetComponent<SpriteRenderer>();
-        Debug.Assert(targetRend != null);
+        Debug.Assert(followTarget != null);
     }
 
     private void Start()
     {
         //initially position target at bottom left
-        targetWidth = targetRend.sprite.bounds.size.x;
-        targetHeight = targetRend.sprite.bounds.size.y;
+        targetWidth = targetSprite.bounds.size.x;
+        targetHeight = targetSprite.bounds.size.y;
         Vector3 currentBottomLeft = cam.ScreenToWorldPoint(new Vector3(0f, 0f, 10f));
         currentBottomLeft += new Vector3(targetWidth/2f-1f, targetHeight/2f-1f, 0f);
         Vector3 move = followTarget.position - currentBottomLeft;
@@ -37,8 +37,6 @@ public class CameraController : MonoBehaviour
 
     private void HorizontalFollow()
     {
-        Debug.Assert(followTarget != null);
-
         transform.position = new Vector3(
             followTarget.position.x + offsetFromTarget.x, 
             transform.position.y, 

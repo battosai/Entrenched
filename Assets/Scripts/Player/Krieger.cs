@@ -17,29 +17,26 @@ public class Krieger : MonoBehaviour
 
     //components
     private Rigidbody2D rb;
-    private SpriteRenderer rend;
     private Animator anim;
+    private SpriteRenderer torsoRend;
+    private SpriteRenderer legsRend;
+    private SpriteRenderer weaponRend;
 
     private void Awake() 
     {
         rb = GetComponent<Rigidbody2D>();
-        rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        torsoRend = transform.Find("Torso").GetComponent<SpriteRenderer>();
+        legsRend = transform.Find("Legs").GetComponent<SpriteRenderer>();
+        weaponRend = transform.Find("Weapon").GetComponent<SpriteRenderer>();
     }
 
-    private void Start() 
-    {
-        // float spriteWidth = rend.sprite.bounds.size.x;
-        // float spriteHeight = rend.sprite.bounds.size.y;
-        // transform.position = Camera.main.ScreenToWorldPoint(
-        //     new Vector3(spriteWidth/2, spriteHeight/2, 10));
-    }
+    private void Start() {}
 
     private void Update()
     {
         ReadInput();
         InputHandler();
-        AnimatorHandler();
     }
 
     /// <summary>
@@ -61,20 +58,33 @@ public class Krieger : MonoBehaviour
 
         //one taps (and take animation time to reset)
         if(Input.GetMouseButtonDown(1))
+        {
             isSwitchingWeapons = true;
+            anim.SetTrigger("SwitchWeapon");
+        }
         if(!isSwitchingWeapons)
         {
             if(Input.GetKeyDown(KeyCode.R))
             {
                 if(!isMelee)
+                {
                     isReloading = true;
+                    anim.SetTrigger("Reload");
+                }
             }
-            if(Input.GetMouseButton(0))
-            {
-                isAttacking = true;
-                isMoving = false;
-            }
+            if(!isReloading)
+                if(Input.GetMouseButtonDown(0))
+                {
+                    isAttacking = true;
+                    if(isMelee)
+                        anim.SetTrigger("Attack");
+                    else
+                        anim.SetTrigger("Shoot");
+                }
         }
+
+        anim.SetBool("Moving", isMoving);
+        anim.SetBool("Crouching", isCrouching);
     }
 
     /// <summary>
@@ -85,16 +95,5 @@ public class Krieger : MonoBehaviour
         rb.velocity = isMoving ? 
             new Vector2(moveSpeed, 0) : 
             Vector2.zero;
-    }
-
-    /// <summary>
-    /// Updates animator parameters to match status flags.
-    /// </summary>
-    private void AnimatorHandler()
-    {
-        anim.SetBool("Moving", isMoving);
-        anim.SetBool("Crouching", isCrouching);
-        anim.SetBool("Shooting", isAttacking && !isMelee);
-        anim.SetBool("Attacking", isAttacking && isMelee);
     }
 }
