@@ -48,13 +48,15 @@ public class Krieger : MonoBehaviour
         isMoving = false;
         isCrouching = false;
         isAttacking = false;
-        if(Input.GetKey(KeyCode.D))    
-            isMoving = true;
-        if(Input.GetKey(KeyCode.LeftShift))
-        {
-            isCrouching = true;
-            isMoving = false;
-        }
+        if(!isReloading)
+            if(Input.GetKey(KeyCode.D))    
+                isMoving = true;
+        if(!isAttacking)
+            if(Input.GetKey(KeyCode.LeftShift))
+            {
+                isCrouching = true;
+                isMoving = false;
+            }
 
         //one taps (and take animation time to reset)
         if(Input.GetMouseButtonDown(1))
@@ -95,5 +97,20 @@ public class Krieger : MonoBehaviour
         rb.velocity = isMoving ? 
             new Vector2(moveSpeed, 0) : 
             Vector2.zero;
+    }
+
+    /// <summary>
+    /// Ends reload state 0=incomplete 1=complete
+    /// </summary>
+    private void EndReload(int status)
+    {
+        isReloading = false;
+        if(status > 0)
+            Debug.Log($"Successful Reload!");
+    }
+
+    private void EndSwitchWeapon()
+    {
+        isSwitchingWeapons = false;
     }
 }
