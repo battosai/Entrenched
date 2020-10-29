@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform followTarget;
-    public Sprite targetSprite;
 
     private float targetWidth;
     private float targetHeight;
@@ -21,10 +20,11 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         //initially position target at bottom left
+        Sprite targetSprite = followTarget.Find("Torso").GetComponent<SpriteRenderer>().sprite;
         targetWidth = targetSprite.bounds.size.x;
         targetHeight = targetSprite.bounds.size.y;
         Vector3 currentBottomLeft = cam.ScreenToWorldPoint(new Vector3(0f, 0f, 10f));
-        currentBottomLeft += new Vector3(targetWidth/2f-1f, targetHeight/2f-1f, 0f);
+        currentBottomLeft += new Vector3(targetWidth/2f-2f, targetHeight/2f-1f, 0f);
         Vector3 move = followTarget.position - currentBottomLeft;
         transform.position += move;
         offsetFromTarget = transform.position - followTarget.position;

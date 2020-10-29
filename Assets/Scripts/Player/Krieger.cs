@@ -20,6 +20,10 @@ public class Krieger : MonoBehaviour
     private Animator anim;
     private SpriteRenderer torsoRend;
     private SpriteRenderer legsRend;
+
+    //weapon components
+    private Transform weaponTrans;
+    private Animator weaponAnim;
     private SpriteRenderer weaponRend;
 
     private void Awake() 
@@ -28,7 +32,10 @@ public class Krieger : MonoBehaviour
         anim = GetComponent<Animator>();
         torsoRend = transform.Find("Torso").GetComponent<SpriteRenderer>();
         legsRend = transform.Find("Legs").GetComponent<SpriteRenderer>();
-        weaponRend = transform.Find("Weapon").GetComponent<SpriteRenderer>();
+
+        weaponTrans = transform.Find("Weapon");
+        weaponAnim = weaponTrans.GetComponent<Animator>();
+        weaponRend = weaponTrans.GetComponent<SpriteRenderer>();
     }
 
     private void Start() {}
@@ -109,6 +116,9 @@ public class Krieger : MonoBehaviour
             Debug.Log($"Successful Reload!");
     }
 
+    /// <summary>
+    /// Ends switchweapon state 0=incomplete 1=complete
+    /// </summary>
     private void EndSwitchWeapon()
     {
         isSwitchingWeapons = false;

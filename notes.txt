@@ -1,0 +1,6 @@
+ART NOTES:
+	- kriegsman leg height standing=7, crouching=4
+ANIMATION NOTES:
+	TRANSITIONS:
+		- exit time is what %ofanimation that the transition can begin
+		- transition duration units fixedduration=sec nonfixedduration=%ofanimation
