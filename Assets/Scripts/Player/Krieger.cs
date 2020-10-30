@@ -113,7 +113,10 @@ public class Krieger : MonoBehaviour
     {
         isReloading = false;
         if(status > 0)
+        {
+            //reset ammo
             Debug.Log($"Successful Reload!");
+        }
     }
 
     /// <summary>
@@ -122,5 +125,9 @@ public class Krieger : MonoBehaviour
     private void EndSwitchWeapon()
     {
         isSwitchingWeapons = false;
+        //do something to trigger weaponAnim to update and match the weapon
+
+        //start unequip anim (which will auto transition to equip anim)
+        //  - will need to update the anim clip before the transition
     }
 }
