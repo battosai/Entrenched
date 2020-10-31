@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: f9b00bb7f41a8d54588359eff9f7a7c3
+guid: 57bb64cf870df154081e37e61482fff5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1617712398222566994
-    second: crouchEquip_0
+      213: 2283891523307675119
+    second: standUnequip_0
   - first:
-      213: -766859955033357867
-    second: crouchEquip_1
+      213: 428538297409083200
+    second: standUnequip_1
   - first:
-      213: 7433260681848033632
-    second: crouchEquip_2
+      213: 1618646951599780550
+    second: standUnequip_2
   - first:
-      213: 29729348499094678
-    second: crouchEquip_3
+      213: 2844815344820258812
+    second: standUnequip_3
+  - first:
+      213: 6409593708249864247
+    second: standUnequip_4
+  - first:
+      213: 118336577293873956
+    second: standUnequip_5
+  - first:
+      213: 8543821120057285494
+    second: standUnequip_6
+  - first:
+      213: 1441829783056024662
+    second: standUnequip_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -60,7 +72,7 @@ TextureImporter:
   spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 1
+  alphaUsage: 0
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
@@ -134,7 +146,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crouchEquip_0
+      name: standUnequip_0
       rect:
         serializedVersion: 2
         x: 0
@@ -148,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea9d233152bbc89e0800000000000000
-      internalID: -1617712398222566994
+      spriteID: fed97486d3302bf10800000000000000
+      internalID: 2283891523307675119
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouchEquip_1
+      name: standUnequip_1
       rect:
         serializedVersion: 2
         x: 20
@@ -169,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d1c3c31fe09b55f0800000000000000
-      internalID: -766859955033357867
+      spriteID: 04718bd9f4972f500800000000000000
+      internalID: 428538297409083200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouchEquip_2
+      name: standUnequip_2
       rect:
         serializedVersion: 2
         x: 40
@@ -190,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0611e60053f382760800000000000000
-      internalID: 7433260681848033632
+      spriteID: 6c2bfd693d6967610800000000000000
+      internalID: 1618646951599780550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouchEquip_3
+      name: standUnequip_3
       rect:
         serializedVersion: 2
         x: 60
@@ -211,8 +223,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69c31b85fae996000800000000000000
-      internalID: 29729348499094678
+      spriteID: cf7879fcb70da7720800000000000000
+      internalID: 2844815344820258812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: standUnequip_4
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 738dfc6a48373f850800000000000000
+      internalID: 6409593708249864247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: standUnequip_5
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42379857d7a64a100800000000000000
+      internalID: 118336577293873956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: standUnequip_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67b9e75aa00c19670800000000000000
+      internalID: 8543821120057285494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: standUnequip_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65402ad6c88620410800000000000000
+      internalID: 1441829783056024662
       vertices: []
       indices: 
       edges: []

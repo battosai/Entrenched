@@ -14,18 +14,6 @@ TextureImporter:
   - first:
       213: 3312240839466054971
     second: standEquip_3
-  - first:
-      213: 8620641170603632108
-    second: standEquip_4
-  - first:
-      213: -4999509927694269288
-    second: standEquip_5
-  - first:
-      213: -70511644806970149
-    second: standEquip_6
-  - first:
-      213: -4136010862068063308
-    second: standEquip_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -72,7 +60,7 @@ TextureImporter:
   spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 0
+  alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
@@ -225,90 +213,6 @@ TextureImporter:
       bones: []
       spriteID: b357ae69e7177fd20800000000000000
       internalID: 3312240839466054971
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: standEquip_4
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce5efe5787ba2a770800000000000000
-      internalID: 8620641170603632108
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: standEquip_5
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8948eb4953c2e9ab0800000000000000
-      internalID: -4999509927694269288
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: standEquip_6
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bd480ca580e750ff0800000000000000
-      internalID: -70511644806970149
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: standEquip_7
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 0
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4b3a643d800f996c0800000000000000
-      internalID: -4136010862068063308
       vertices: []
       indices: 
       edges: []

@@ -1,19 +1,40 @@
 fileFormatVersion: 2
-guid: f9b00bb7f41a8d54588359eff9f7a7c3
+guid: df66bfa7faee155459b87a17c3e4a010
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1617712398222566994
-    second: crouchEquip_0
+      213: -1930829950508227598
+    second: crouchUnequip_0
   - first:
-      213: -766859955033357867
-    second: crouchEquip_1
+      213: 8912069931179110784
+    second: crouchUnequip_1
   - first:
-      213: 7433260681848033632
-    second: crouchEquip_2
+      213: -2097485967371449572
+    second: crouchUnequip_2
   - first:
-      213: 29729348499094678
-    second: crouchEquip_3
+      213: -6317269787344604617
+    second: crouchUnequip_0
+  - first:
+      213: -4069435343636953018
+    second: crouchUnequip_1
+  - first:
+      213: 1235154062798745880
+    second: crouchUnequip_2
+  - first:
+      213: 9034707382719072074
+    second: crouchUnequip_3
+  - first:
+      213: -6298050254730573946
+    second: crouchUnequip_4
+  - first:
+      213: -4954205439130069420
+    second: crouchUnequip_5
+  - first:
+      213: 615697145701714217
+    second: crouchUnequip_6
+  - first:
+      213: -8208213521918072459
+    second: crouchUnequip_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -60,7 +81,7 @@ TextureImporter:
   spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 1
+  alphaUsage: 0
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
@@ -134,7 +155,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crouchEquip_0
+      name: crouchUnequip_0
       rect:
         serializedVersion: 2
         x: 0
@@ -148,14 +169,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea9d233152bbc89e0800000000000000
-      internalID: -1617712398222566994
+      spriteID: 7327407499c8458a0800000000000000
+      internalID: -6317269787344604617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouchEquip_1
+      name: crouchUnequip_1
       rect:
         serializedVersion: 2
         x: 20
@@ -169,14 +190,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d1c3c31fe09b55f0800000000000000
-      internalID: -766859955033357867
+      spriteID: 6488912ad167687c0800000000000000
+      internalID: -4069435343636953018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouchEquip_2
+      name: crouchUnequip_2
       rect:
         serializedVersion: 2
         x: 40
@@ -190,14 +211,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0611e60053f382760800000000000000
-      internalID: 7433260681848033632
+      spriteID: 811fff37316242110800000000000000
+      internalID: 1235154062798745880
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crouchEquip_3
+      name: crouchUnequip_3
       rect:
         serializedVersion: 2
         x: 60
@@ -211,8 +232,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69c31b85fae996000800000000000000
-      internalID: 29729348499094678
+      spriteID: a47c1942f7ab16d70800000000000000
+      internalID: 9034707382719072074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crouchUnequip_4
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 687c93d69a4d898a0800000000000000
+      internalID: -6298050254730573946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crouchUnequip_5
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4561850d6602f3bb0800000000000000
+      internalID: -4954205439130069420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crouchUnequip_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 929c5caba456b8800800000000000000
+      internalID: 615697145701714217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crouchUnequip_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 579e3817a41961e80800000000000000
+      internalID: -8208213521918072459
       vertices: []
       indices: 
       edges: []

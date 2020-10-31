@@ -177,7 +177,7 @@ PrefabInstance:
     - target: {fileID: 236548550910505062, guid: 0d10300bd8dbb0147b8e0c459dd501de,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 236548550910505062, guid: 0d10300bd8dbb0147b8e0c459dd501de,
         type: 3}
@@ -450,7 +450,7 @@ PrefabInstance:
     - target: {fileID: 236548550910505062, guid: 0d10300bd8dbb0147b8e0c459dd501de,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 236548550910505062, guid: 0d10300bd8dbb0147b8e0c459dd501de,
         type: 3}
@@ -494,17 +494,17 @@ PrefabInstance:
     - target: {fileID: 8427667212324950913, guid: 1f72df765bcb6b74ea63a80416ed778f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8427667212324950913, guid: 1f72df765bcb6b74ea63a80416ed778f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8427667212324950913, guid: 1f72df765bcb6b74ea63a80416ed778f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8427667212324950913, guid: 1f72df765bcb6b74ea63a80416ed778f,
         type: 3}
@@ -514,7 +514,7 @@ PrefabInstance:
     - target: {fileID: 8427667212324950913, guid: 1f72df765bcb6b74ea63a80416ed778f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8427667212324950913, guid: 1f72df765bcb6b74ea63a80416ed778f,
         type: 3}
@@ -536,6 +536,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Krieger
       objectReference: {fileID: 0}
+    - target: {fileID: 8427667212324950942, guid: 1f72df765bcb6b74ea63a80416ed778f,
+        type: 3}
+      propertyPath: armory
+      value: 
+      objectReference: {fileID: 11400000, guid: aee87a740342b0643b002bceeb051ac0,
+        type: 2}
     - target: {fileID: 8427667212379966977, guid: 1f72df765bcb6b74ea63a80416ed778f,
         type: 3}
       propertyPath: m_Layer

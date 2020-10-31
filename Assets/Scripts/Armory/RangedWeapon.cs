@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
       
-[CreateAssetMenu(menuName = ("Weapon/Ranged"))]
+[CreateAssetMenu(menuName = ("Wargear/Ranged"))]
 public class RangedWeapon : ScriptableObject
 {
     [Header("Animations")]

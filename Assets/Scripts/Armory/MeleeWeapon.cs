@@ -1,7 +1,7 @@
 
 using UnityEngine;
       
-[CreateAssetMenu(menuName = ("Weapon/Melee"))]
+[CreateAssetMenu(menuName = ("Wargear/Melee"))]
 public class MeleeWeapon : ScriptableObject
 {
     [Header("Animations")]

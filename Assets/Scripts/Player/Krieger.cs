@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,19 +16,27 @@ public class Krieger : MonoBehaviour
     public bool isSwitchingWeapons;
     public bool isMelee;
 
-    //components
+    //krieger components
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer torsoRend;
     private SpriteRenderer legsRend;
 
     //weapon components
+    public static string startingRangedWeapon; //thinking this should be read in from a pre-game scene
+    public static string startingMeleeWeapon;  //thinking this should be read in from a pre-game scene
+    public Armory armory;
+    private RangedWeapon rangedWeapon;
+    private MeleeWeapon meleeWeapon;
     private Transform weaponTrans;
     private Animator weaponAnim;
     private SpriteRenderer weaponRend;
 
     private void Awake() 
     {
+        Debug.Assert(armory != null);
+        armory.Define();
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         torsoRend = transform.Find("Torso").GetComponent<SpriteRenderer>();
@@ -38,7 +47,13 @@ public class Krieger : MonoBehaviour
         weaponRend = weaponTrans.GetComponent<SpriteRenderer>();
     }
 
-    private void Start() {}
+    private void Start() 
+    {
+        if(String.IsNullOrEmpty(startingRangedWeapon))
+            rangedWeapon = armory.ranged["Lasgun"];
+        // if(String.IsNullOrEmpty(startingMeleeWeapon))
+        //     meleeWeapon = armory.melee["Shovel"];
+    }
 
     private void Update()
     {
