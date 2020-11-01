@@ -4,6 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = ("Wargear/Melee"))]
 public class MeleeWeapon : ScriptableObject
 {
+    [Header("Stats")]
+    public float speed;
+    public int ap;
+    public int dmg;
+
     [Header("Animations")]
     public AnimationClip standIdle;
     public AnimationClip crouchIdle;
@@ -14,9 +19,4 @@ public class MeleeWeapon : ScriptableObject
     public AnimationClip crouchEquip;
     public AnimationClip standUnequip;
     public AnimationClip crouchUnequip;
-
-    [Header("Stats")]
-    public float speed;
-    public int ap;
-    public int dmg;
 }

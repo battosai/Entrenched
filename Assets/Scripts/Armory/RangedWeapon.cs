@@ -3,6 +3,12 @@
 [CreateAssetMenu(menuName = ("Wargear/Ranged"))]
 public class RangedWeapon : ScriptableObject
 {
+    [Header("Stats")]
+    public int ammo;
+    public float chargeTime;
+    public int ap;
+    public int dmg;
+
     [Header("Animations")]
     public AnimationClip standIdle;
     public AnimationClip crouchIdle;
@@ -15,10 +21,4 @@ public class RangedWeapon : ScriptableObject
     public AnimationClip crouchEquip;
     public AnimationClip standUnequip;
     public AnimationClip crouchUnequip;
-
-    [Header("Stats")]
-    public int ammo;
-    public float chargeTime;
-    public int ap;
-    public int dmg;
 }

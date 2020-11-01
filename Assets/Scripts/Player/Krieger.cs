@@ -26,11 +26,35 @@ public class Krieger : MonoBehaviour
     public static string startingRangedWeapon; //thinking this should be read in from a pre-game scene
     public static string startingMeleeWeapon;  //thinking this should be read in from a pre-game scene
     public Armory armory;
-    private RangedWeapon rangedWeapon;
-    private MeleeWeapon meleeWeapon;
     private Transform weaponTrans;
     private Animator weaponAnim;
     private SpriteRenderer weaponRend;
+    private RangedWeapon _rangedWeapon;
+    public RangedWeapon rangedWeapon
+    {
+        get
+        {
+            return this._rangedWeapon;
+        }
+        private set
+        {
+            _rangedWeapon = value;
+            SwapAnimations(ranged: _rangedWeapon);
+        }
+    }
+    private MeleeWeapon _meleeWeapon;
+    public MeleeWeapon meleeWeapon
+    {
+        get
+        {
+            return this._meleeWeapon;
+        }
+        private set
+        {
+            _meleeWeapon = value;
+            SwapAnimations(melee: _meleeWeapon);
+        }
+    }
 
     private void Awake() 
     {
@@ -49,10 +73,13 @@ public class Krieger : MonoBehaviour
 
     private void Start() 
     {
-        if(String.IsNullOrEmpty(startingRangedWeapon))
-            rangedWeapon = armory.ranged["Lasgun"];
-        // if(String.IsNullOrEmpty(startingMeleeWeapon))
-        //     meleeWeapon = armory.melee["Shovel"];
+        //equip starting weapons
+        rangedWeapon = String.IsNullOrEmpty(startingRangedWeapon) ?
+            armory.ranged["Lasgun"] :
+            armory.ranged[startingRangedWeapon];
+        meleeWeapon = String.IsNullOrEmpty(startingMeleeWeapon) ?
+            armory.melee["Shovel"] :
+            armory.melee[startingMeleeWeapon];
     }
 
     private void Update()
@@ -119,6 +146,22 @@ public class Krieger : MonoBehaviour
         rb.velocity = isMoving ? 
             new Vector2(moveSpeed, 0) : 
             Vector2.zero;
+    }
+
+    /// <summary>
+    /// Updates animations of equipped weapons.
+    /// </summary>
+    private void SwapAnimations(RangedWeapon ranged=null, MeleeWeapon melee=null)
+    {
+        if(ranged != null)
+        {
+            //swap out animations
+        }
+
+        if(melee != null)
+        {
+            //swap out animations
+        }
     }
 
     /// <summary>

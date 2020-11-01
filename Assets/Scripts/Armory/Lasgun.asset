@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64120de0911310440be18c02f11ab5c6, type: 3}
   m_Name: Lasgun
   m_EditorClassIdentifier: 
+  name: Lasgun
+  ammo: 10
+  chargeTime: 0
+  ap: 0
+  dmg: 1
   standIdle: {fileID: 7400000, guid: acaf2e5c1e47a30498730db67e807cd0, type: 2}
   crouchIdle: {fileID: 7400000, guid: 9c5a52f4b00c38a4388c161652f011f5, type: 2}
   run: {fileID: 7400000, guid: 2c5877b644d162644bed1ab61e38538f, type: 2}
@@ -23,7 +28,3 @@ MonoBehaviour:
   crouchEquip: {fileID: 7400000, guid: 0eb6a918c24884e43af96917755dd017, type: 2}
   standUnequip: {fileID: 7400000, guid: 95aff534392ca1d49bb982a73ff39fad, type: 2}
   crouchUnequip: {fileID: 7400000, guid: 0fdb9b88f70b0114e8f9b8a1f6e3c4d2, type: 2}
-  ammo: 10
-  chargeTime: 0
-  ap: 0
-  dmg: 1

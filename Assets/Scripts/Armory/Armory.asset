@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ranged:
   - {fileID: 11400000, guid: 64eb4840b20800645892d67eda55a781, type: 2}
-  _melee: []
+  _melee:
+  - {fileID: 11400000, guid: 8385eb70da262c943833f4231e2e8fac, type: 2}

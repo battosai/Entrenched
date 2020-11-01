@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e78e1e3cf8f76a45b8ef46e50a49c58, type: 3}
+  m_Name: Shovel
+  m_EditorClassIdentifier: 
+  name: Shovel
+  speed: 1
+  ap: 0
+  dmg: 1
+  standIdle: {fileID: 7400000, guid: f134fb11a431b8945847845659e2ab59, type: 2}
+  crouchIdle: {fileID: 7400000, guid: 46b5694177d2f3940a776c55b77eb8f3, type: 2}
+  run: {fileID: 7400000, guid: 29e0fc5161d212645b179445628e4563, type: 2}
+  standAttack: {fileID: 7400000, guid: 01ca8c5a66fb69d4fb8184727a9bdb58, type: 2}
+  crouchAttack: {fileID: 7400000, guid: 87994a5f1bcfadc499b0d96afd250385, type: 2}
+  standEquip: {fileID: 7400000, guid: f9fe25f7a57c10e4eb215bde22594337, type: 2}
+  crouchEquip: {fileID: 7400000, guid: 9e1b0ecee852738448c303f77fdc710b, type: 2}
+  standUnequip: {fileID: 7400000, guid: c02e1cf6252e42a4f9bd7729b2e3b65e, type: 2}
+  crouchUnequip: {fileID: 7400000, guid: 73a2f85597702c447bd90ae47508b5df, type: 2}
