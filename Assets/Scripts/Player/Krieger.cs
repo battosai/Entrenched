@@ -28,6 +28,8 @@ public class Krieger : MonoBehaviour
     public Armory armory;
     private Transform weaponTrans;
     private Animator weaponAnim;
+    private AnimatorOverrideController weaponAnimOverCont;
+    private AnimationClipOverrides weaponAnimOverrides;
     private SpriteRenderer weaponRend;
     private RangedWeapon _rangedWeapon;
     public RangedWeapon rangedWeapon
@@ -39,7 +41,7 @@ public class Krieger : MonoBehaviour
         private set
         {
             _rangedWeapon = value;
-            SwapAnimations(ranged: _rangedWeapon);
+            UpdateEquippedWeaponAnims();
         }
     }
     private MeleeWeapon _meleeWeapon;
@@ -52,7 +54,7 @@ public class Krieger : MonoBehaviour
         private set
         {
             _meleeWeapon = value;
-            SwapAnimations(melee: _meleeWeapon);
+            UpdateEquippedWeaponAnims();
         }
     }
 
@@ -73,6 +75,17 @@ public class Krieger : MonoBehaviour
 
     private void Start() 
     {
+        //anim
+        weaponAnimOverCont = 
+            new AnimatorOverrideController(weaponAnim.runtimeAnimatorController);
+        weaponAnim.runtimeAnimatorController = weaponAnimOverCont;
+        weaponAnimOverrides = 
+            new AnimationClipOverrides(weaponAnimOverCont.overridesCount);
+        weaponAnimOverCont.GetOverrides(weaponAnimOverrides);
+
+        //status
+        isMelee = false;
+
         //equip starting weapons
         rangedWeapon = String.IsNullOrEmpty(startingRangedWeapon) ?
             armory.ranged["Lasgun"] :
@@ -97,7 +110,7 @@ public class Krieger : MonoBehaviour
         isMoving = false;
         isCrouching = false;
         isAttacking = false;
-        if(!isReloading)
+        if(!isReloading && !isSwitchingWeapons)
             if(Input.GetKey(KeyCode.D))    
                 isMoving = true;
         if(!isAttacking)
@@ -111,9 +124,11 @@ public class Krieger : MonoBehaviour
         if(Input.GetMouseButtonDown(1))
         {
             isSwitchingWeapons = true;
+            isMoving = false;
             anim.SetTrigger("SwitchWeapon");
+            weaponAnim.SetTrigger("SwitchWeapon");
         }
-        if(!isSwitchingWeapons)
+        if(!isReloading && !isSwitchingWeapons)
         {
             if(Input.GetKeyDown(KeyCode.R))
             {
@@ -121,21 +136,32 @@ public class Krieger : MonoBehaviour
                 {
                     isReloading = true;
                     anim.SetTrigger("Reload");
+                    weaponAnim.SetTrigger("Reload");
                 }
             }
+
+            //check if reloading again to see if happened this loop
             if(!isReloading)
                 if(Input.GetMouseButtonDown(0))
                 {
                     isAttacking = true;
                     if(isMelee)
+                    {
                         anim.SetTrigger("Attack");
+                        weaponAnim.SetTrigger("Attack");
+                    }
                     else
+                    {
                         anim.SetTrigger("Shoot");
+                        weaponAnim.SetTrigger("Shoot");
+                    }
                 }
         }
 
         anim.SetBool("Moving", isMoving);
         anim.SetBool("Crouching", isCrouching);
+        weaponAnim.SetBool("Moving", isMoving);
+        weaponAnim.SetBool("Crouching", isCrouching);
     }
 
     /// <summary>
@@ -146,22 +172,6 @@ public class Krieger : MonoBehaviour
         rb.velocity = isMoving ? 
             new Vector2(moveSpeed, 0) : 
             Vector2.zero;
-    }
-
-    /// <summary>
-    /// Updates animations of equipped weapons.
-    /// </summary>
-    private void SwapAnimations(RangedWeapon ranged=null, MeleeWeapon melee=null)
-    {
-        if(ranged != null)
-        {
-            //swap out animations
-        }
-
-        if(melee != null)
-        {
-            //swap out animations
-        }
     }
 
     /// <summary>
@@ -180,12 +190,56 @@ public class Krieger : MonoBehaviour
     /// <summary>
     /// Ends switchweapon state 0=incomplete 1=complete
     /// </summary>
-    private void EndSwitchWeapon()
+    private void EndSwitchWeapon(int status)
     {
         isSwitchingWeapons = false;
-        //do something to trigger weaponAnim to update and match the weapon
+        if(status > 0)
+        {
+            isMelee = !isMelee;
+            UpdateEquippedWeaponAnims();
+            Debug.Log($"Successful Switch Weapon");
+        }
+    }
 
-        //start unequip anim (which will auto transition to equip anim)
-        //  - will need to update the anim clip before the transition
+    /// <summary>
+    /// Updates animations to match currently equipped weapons.
+    /// fullUpdate - New weapon, update all animations
+    /// </summary>
+    private void UpdateEquippedWeaponAnims(bool newWeapon=false)
+    {
+        if(isMelee)
+        {
+            weaponAnimOverrides["standIdle"] = meleeWeapon?.standIdle;
+            weaponAnimOverrides["crouchIdle"] = meleeWeapon?.crouchIdle;
+            weaponAnimOverrides["run"] = meleeWeapon?.run;
+            weaponAnimOverrides["standUnequip"] = meleeWeapon?.standUnequip;
+            weaponAnimOverrides["crouchUnequip"] = meleeWeapon?.crouchUnequip;
+
+            weaponAnimOverrides["standEquip"] = rangedWeapon?.standEquip;
+            weaponAnimOverrides["crouchEquip"] = rangedWeapon?.crouchEquip;
+        }
+        else
+        {
+            weaponAnimOverrides["standIdle"] = rangedWeapon?.standIdle;
+            weaponAnimOverrides["crouchIdle"] = rangedWeapon?.crouchIdle;
+            weaponAnimOverrides["run"] = rangedWeapon?.run;
+            weaponAnimOverrides["standUnequip"] = rangedWeapon?.standUnequip;
+            weaponAnimOverrides["crouchUnequip"] = rangedWeapon?.crouchUnequip;
+
+            weaponAnimOverrides["standEquip"] = meleeWeapon?.standEquip;
+            weaponAnimOverrides["crouchEquip"] = meleeWeapon?.crouchEquip;
+        }
+
+        if(newWeapon)
+        {
+            weaponAnimOverrides["standAttack"] = meleeWeapon?.standAttack;
+            weaponAnimOverrides["crouchAttack"] = meleeWeapon?.crouchAttack;
+            weaponAnimOverrides["standShoot"] = rangedWeapon?.standShoot;
+            weaponAnimOverrides["crouchShoot"] = rangedWeapon?.crouchShoot;
+            weaponAnimOverrides["standReload"] = rangedWeapon?.standReload;
+            weaponAnimOverrides["crouchReload"] = rangedWeapon?.crouchReload;
+        }
+
+        weaponAnimOverCont.ApplyOverrides(weaponAnimOverrides);
     }
 }
