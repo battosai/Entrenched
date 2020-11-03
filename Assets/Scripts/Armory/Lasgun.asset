@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64120de0911310440be18c02f11ab5c6, type: 3}
   m_Name: Lasgun
   m_EditorClassIdentifier: 
-  name: Lasgun
   ammo: 10
   chargeTime: 0
   ap: 0
@@ -22,6 +21,8 @@ MonoBehaviour:
   run: {fileID: 7400000, guid: 2c5877b644d162644bed1ab61e38538f, type: 2}
   standShoot: {fileID: 7400000, guid: 7e4bcfe5ea8fd42448ad4b77397169a2, type: 2}
   crouchShoot: {fileID: 7400000, guid: 25e1977d36e318a47947b8f0a8f8fb14, type: 2}
+  standEmpty: {fileID: 7400000, guid: b5e73974cf85830428caa6277b049694, type: 2}
+  crouchEmpty: {fileID: 7400000, guid: 2e276b47c77553846b4641e04c50abe4, type: 2}
   standReload: {fileID: 7400000, guid: 6cc1660fac86f214bb94ee973f18af3b, type: 2}
   crouchReload: {fileID: 7400000, guid: abb5c51ab06888644aeb84f7f2931a19, type: 2}
   standEquip: {fileID: 7400000, guid: 99805c447a75a2d448624c71f04ff5d8, type: 2}

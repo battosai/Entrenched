@@ -15,6 +15,8 @@ public class RangedWeapon : ScriptableObject
     public AnimationClip run;
     public AnimationClip standShoot;
     public AnimationClip crouchShoot;
+    public AnimationClip standEmpty;
+    public AnimationClip crouchEmpty;
     public AnimationClip standReload;
     public AnimationClip crouchReload;
     public AnimationClip standEquip;
