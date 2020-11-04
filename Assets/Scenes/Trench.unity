@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 1728373842}
   - component: {fileID: 1728373843}
   - component: {fileID: 1728373844}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Scroller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
