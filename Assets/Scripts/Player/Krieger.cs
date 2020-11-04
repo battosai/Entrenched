@@ -8,6 +8,7 @@ public class Krieger : MonoBehaviour
     //player settings
     public float moveSpeed;
     public int ammo;
+    public float weaponRange;
 
     //player input
     public bool isMoving;
@@ -193,16 +194,24 @@ public class Krieger : MonoBehaviour
     /// <summary>
     /// Applies weapon to whatever is in front of player.
     /// </summary>
-    private void SwingWeapon()
-    {
-
-    }
+    private void SwingWeapon() {}
 
     /// <summary>
     /// Applies weapon to whatever is ahead of player.
     /// </summary>
     private void ShootWeapon()
     {
+        int mask = LayerMask.GetMask("Enemies");
+        RaycastHit2D hit = Physics2D.Raycast(
+            transform.position, 
+            Vector2.right,
+            weaponRange,
+            mask);
+        
+        if(hit.collider != null)
+        {
+            hit.collider.GetComponent<Enemy>().OnWounded?.Invoke(rangedWeapon.dmg);
+        }
         
         ammo = Mathf.Max(ammo-1, 0);
     }
