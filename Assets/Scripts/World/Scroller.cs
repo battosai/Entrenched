@@ -41,7 +41,7 @@ public class Scroller : MonoBehaviour
         chunkB.position = chunkA.position + Vector3.right * chunkWidth;
 
         //setup scroll collider
-        float collDistFromEdge = 10f;
+        float collDistFromEdge = 20f;
         transform.position = 
             Camera.main.ScreenToWorldPoint(
                 new Vector3(0, Screen.height/2)) +
@@ -66,6 +66,14 @@ public class Scroller : MonoBehaviour
         string layer = LayerMask.LayerToName(other.gameObject.layer);
         switch(layer)
         {
+            //TODO:
+            //decide how enemy colliders/rigidbodies wanna work throughout lifetime
+            //NEED: design work
+            case "Enemies":
+                Enemy enemy = other.GetComponent<Enemy>();
+                if(enemy.isDead)
+                    enemy.Cleanup();
+                break;
             case "Chunk":
                 Scroll();
                 break;

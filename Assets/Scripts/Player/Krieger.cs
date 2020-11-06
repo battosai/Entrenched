@@ -26,8 +26,11 @@ public class Krieger : MonoBehaviour
     private SpriteRenderer legsRend;
 
     //weapon components
-    public static string startingRangedWeapon; //thinking this should be read in from a pre-game scene
-    public static string startingMeleeWeapon;  //thinking this should be read in from a pre-game scene
+    //TODO:
+    //starting weapons should probably be read in from a pre-game scene
+    //NEEDS: a pre-game scene 
+    public static string startingRangedWeapon;
+    public static string startingMeleeWeapon;
     public Armory armory;
     private Transform weaponTrans;
     private Animator weaponAnim;
