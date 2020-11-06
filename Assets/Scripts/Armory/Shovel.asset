@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e78e1e3cf8f76a45b8ef46e50a49c58, type: 3}
   m_Name: Shovel
   m_EditorClassIdentifier: 
-  name: Shovel
+  range: 10
   speed: 1
   ap: 0
   dmg: 1

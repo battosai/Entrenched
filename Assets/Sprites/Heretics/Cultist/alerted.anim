@@ -124,9 +124,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1.1666666
-    functionName: EndAlert
+    functionName: Alert
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 0
     messageOptions: 0

@@ -5,6 +5,7 @@ public class RangedWeapon : ScriptableObject
 {
     [Header("Stats")]
     public int ammo;
+    public float range;
     public float chargeTime;
     public int ap;
     public int dmg;

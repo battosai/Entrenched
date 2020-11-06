@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeleeWeapon : ScriptableObject
 {
     [Header("Stats")]
+    public float range;
     public float speed;
     public int ap;
     public int dmg;

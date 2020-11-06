@@ -20,6 +20,7 @@ public class Krieger : MonoBehaviour
 
     //krieger components
     private Rigidbody2D rb;
+    private Collider2D hitbox;
     private Animator anim;
     private SpriteRenderer torsoRend;
     private SpriteRenderer legsRend;
@@ -67,6 +68,7 @@ public class Krieger : MonoBehaviour
         armory.Define();
 
         rb = GetComponent<Rigidbody2D>();
+        hitbox = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         torsoRend = transform.Find("Torso").GetComponent<SpriteRenderer>();
         legsRend = transform.Find("Legs").GetComponent<SpriteRenderer>();
@@ -183,41 +185,34 @@ public class Krieger : MonoBehaviour
             Vector2.zero;
         
         if(isAttacking)
-        {
-            if(isMelee)
-                SwingWeapon();
-            else
-                ShootWeapon();
-        }
+            UseWeapon();
     }
-
-    /// <summary>
-    /// Applies weapon to whatever is in front of player.
-    /// </summary>
-    private void SwingWeapon() {}
 
     /// <summary>
     /// Applies weapon to whatever is ahead of player.
     /// </summary>
-    private void ShootWeapon()
+    private void UseWeapon()
     {
+        int dmg = isMelee ? meleeWeapon.dmg : rangedWeapon.dmg;
+        float range = isMelee ? meleeWeapon.range : rangedWeapon.range;
+
         int mask = LayerMask.GetMask("Enemies");
         RaycastHit2D hit = Physics2D.Raycast(
             transform.position, 
             Vector2.right,
-            weaponRange,
+            range,
             mask);
         
         if(hit.collider != null)
         {
-            hit.collider.GetComponent<Enemy>().OnWounded?.Invoke(rangedWeapon.dmg);
+            hit.collider.GetComponent<Enemy>().OnWounded?.Invoke(dmg);
         }
         
         ammo = Mathf.Max(ammo-1, 0);
     }
 
     /// <summary>
-    /// Ends reload state 0=incomplete 1=complete
+    /// Animation Event: Ends reload state 0=incomplete 1=complete
     /// </summary>
     private void EndReload(int status)
     {
@@ -230,7 +225,7 @@ public class Krieger : MonoBehaviour
     }
 
     /// <summary>
-    /// Ends switchweapon state 0=incomplete 1=complete
+    /// Animation Event: Ends switchweapon state 0=incomplete 1=complete
     /// </summary>
     private void EndSwitchWeapon(int status)
     {
