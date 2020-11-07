@@ -149,8 +149,9 @@ MonoBehaviour:
   powerLevel: 1
   maxWounds: 1
   toughness: 3
-  dmg: 1
   moveSpeed: 10
+  meleeRange: 10
+  rangedRange: 0
 --- !u!95 &2802309893681352689
 Animator:
   serializedVersion: 3

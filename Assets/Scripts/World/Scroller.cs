@@ -66,13 +66,12 @@ public class Scroller : MonoBehaviour
         string layer = LayerMask.LayerToName(other.gameObject.layer);
         switch(layer)
         {
-            //TODO:
-            //decide how enemy colliders/rigidbodies wanna work throughout lifetime
-            //NEED: design work
-            case "Enemies":
+            case "Corpses":
                 Enemy enemy = other.GetComponent<Enemy>();
                 if(enemy.isDead)
                     enemy.Cleanup();
+                else
+                    Debug.LogWarning($"Corpse isn't dead: {enemy.gameObject.name}");
                 break;
             case "Chunk":
                 Scroll();

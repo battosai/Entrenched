@@ -10,13 +10,14 @@ public class Krieger : MonoBehaviour
     public int ammo;
     public float weaponRange;
 
-    //player input
+    //state
     public bool isMoving;
     public bool isCrouching;
     public bool isAttacking;
     public bool isReloading;
     public bool isSwitchingWeapons;
     public bool isMelee;
+    public bool isDead;
 
     //krieger components
     private Rigidbody2D rb;
@@ -65,6 +66,10 @@ public class Krieger : MonoBehaviour
         }
     }
 
+    //events
+    public delegate void Wounded();
+    public static Wounded OnWounded;
+
     private void Awake() 
     {
         Debug.Assert(armory != null);
@@ -93,6 +98,7 @@ public class Krieger : MonoBehaviour
 
         //status
         isMelee = false;
+        isDead = false;
 
         //equip starting weapons
         rangedWeapon = String.IsNullOrEmpty(startingRangedWeapon) ?
@@ -101,6 +107,8 @@ public class Krieger : MonoBehaviour
         meleeWeapon = String.IsNullOrEmpty(startingMeleeWeapon) ?
             armory.melee["Shovel"] :
             armory.melee[startingMeleeWeapon];
+
+        OnWounded += TakeDamage;
     }
 
     private void Update()
@@ -196,6 +204,10 @@ public class Krieger : MonoBehaviour
     /// </summary>
     private void UseWeapon()
     {
+        //make sure gun has ammo
+        if(!isMelee && ammo == 0)
+            return;
+
         int dmg = isMelee ? meleeWeapon.dmg : rangedWeapon.dmg;
         float range = isMelee ? meleeWeapon.range : rangedWeapon.range;
 
@@ -283,5 +295,19 @@ public class Krieger : MonoBehaviour
         }
 
         weaponAnimOverCont.ApplyOverrides(weaponAnimOverrides);
+    }
+
+    /// <summary>
+    /// Called by enemies when they hit the player.
+    /// </summary>
+    private void TakeDamage()
+    {
+        if(!isDead)
+        {
+            isDead = true;
+            //TODO:
+            //set an anim param for taking a hit
+            //NEEDS: animation work
+        }
     }
 }

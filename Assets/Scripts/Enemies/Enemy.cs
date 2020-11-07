@@ -13,8 +13,9 @@ public class Enemy : MonoBehaviour
     //determine how to utilize toughness stat
     //NEED: design work
     public int toughness;
-    public int dmg;
     public int moveSpeed;
+    public float meleeRange;
+    public float rangedRange;
 
     //state
     public bool isDead {get; private set;}
@@ -30,6 +31,7 @@ public class Enemy : MonoBehaviour
     //need some other trigger collider that will tell the enemy they are in range
     //NEEDS: design work, this isn't concrete yet, could just use distance calcs
     private Animator anim;
+    private SpriteRenderer rend;
 
     //events
     public delegate void Wounded(int dmg);
@@ -40,6 +42,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         hitbox = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+        rend = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -53,6 +56,13 @@ public class Enemy : MonoBehaviour
     {
         if(!isDead)
         {
+            //only set trigger if not already alerted
+            if(rend.isVisible && !isAlerted)
+            {
+                isAlerted = true;
+                anim.SetTrigger("Alert");
+            }
+
             if(isAttacking)
             {
                 if(isMelee)
@@ -61,18 +71,6 @@ public class Enemy : MonoBehaviour
                     anim.SetTrigger("Shoot");
             }
 
-            //test
-            if(Input.GetKeyDown(KeyCode.R))
-            {
-                //only set trigger if not already alerted
-                anim.SetTrigger("Alert");
-            }
-
-            if(wounds <= 0)
-            {
-                StartDeath();
-                anim.SetTrigger("Die");
-            }
             anim.SetBool("Moving", rb.velocity.magnitude > 0);
         }
     }
@@ -89,14 +87,28 @@ public class Enemy : MonoBehaviour
             return;
 
         //stats
+        isAlerted = false;
         isDead = false;
         wounds = maxWounds;
 
         //components
         anim.enabled = true;
-        hitbox.enabled = true;
+        this.gameObject.layer = LayerMask.NameToLayer("Enemies");
 
         this.gameObject.SetActive(false);
+    }
+
+    private void Attack()
+    {
+        int mask = LayerMask.GetMask("Player");
+        RaycastHit2D hit = Physics2D.Raycast(
+            transform.position, 
+            Vector2.left,
+            isMelee ? meleeRange : rangedRange,
+            mask);
+        
+        if(hit.collider != null)
+            Krieger.OnWounded?.Invoke();
     }
 
     /// <summary>
@@ -114,7 +126,7 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
         rb.velocity = Vector3.zero;
-        hitbox.enabled = false;
+        this.gameObject.layer = LayerMask.NameToLayer("Corpses");
     }
 
     /// <summary>
@@ -134,9 +146,19 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void TakeDamage(int dmg)
     {
-        wounds = Mathf.Max(0, wounds-dmg);
-        //TODO:
-        //set an anim param for taking a hit
-        //NEEDS: animation work
+        if(!isDead)
+        {
+            wounds = Mathf.Max(0, wounds-dmg);
+
+            //TODO:
+            //set an anim param for taking a hit
+            //NEEDS: animation work
+
+            if(wounds <= 0)
+            {
+                StartDeath();
+                anim.SetTrigger("Die");
+            }
+        }
     }
 }
