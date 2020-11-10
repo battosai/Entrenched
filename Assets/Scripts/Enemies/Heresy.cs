@@ -7,16 +7,16 @@ public class Heresy : ScriptableObject
 {
     public List<Enemy> enemies;
 
-    public Dictionary<Enemy.Type, Enemy> enemyByType;
-    public Dictionary<int, List<Enemy.Type>> typeByPowerLevel;
+    public Dictionary<EnemyType, Enemy> enemyByType;
+    public Dictionary<int, List<EnemyType>> typeByPowerLevel;
 
     /// <summary>
     /// Creates dictionaries by powerLevel, Enemy type, etc.
     /// </summary>
     public void Define()
     {
-        enemyByType = new Dictionary<Enemy.Type, Enemy>();
-        typeByPowerLevel = new Dictionary<int, List<Enemy.Type>>();
+        enemyByType = new Dictionary<EnemyType, Enemy>();
+        typeByPowerLevel = new Dictionary<int, List<EnemyType>>();
         foreach(Enemy e in enemies)
         {
             enemyByType.Add(e.type, e);
@@ -24,7 +24,7 @@ public class Heresy : ScriptableObject
             if(typeByPowerLevel.ContainsKey(e.powerLevel))
                 typeByPowerLevel[e.powerLevel].Add(e.type);
             else
-                typeByPowerLevel.Add(e.powerLevel, new List<Enemy.Type>{e.type});
+                typeByPowerLevel.Add(e.powerLevel, new List<EnemyType>{e.type});
         }
     }
 }

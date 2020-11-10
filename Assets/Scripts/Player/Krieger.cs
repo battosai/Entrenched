@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Krieger : MonoBehaviour
 {
+    public static Krieger instance;
+
     //player settings
     public float moveSpeed;
     public int ammo;
@@ -72,6 +74,10 @@ public class Krieger : MonoBehaviour
 
     private void Awake() 
     {
+        if(instance == null)
+            instance = this;
+        else if(instance != this)
+            Destroy(this.gameObject);
         Debug.Assert(armory != null);
         armory.Define();
 
@@ -227,30 +233,24 @@ public class Krieger : MonoBehaviour
     }
 
     /// <summary>
-    /// Animation Event: Ends reload state 0=incomplete 1=complete
+    /// Animation Event: Ends reload state.
     /// </summary>
-    private void EndReload(int status)
+    private void EndReload()
     {
         isReloading = false;
-        if(status > 0)
-        {
-            ammo = rangedWeapon.ammo;
-            Debug.Log($"Successful Reload!");
-        }
+        ammo = rangedWeapon.ammo;
+        Debug.Log($"Successful Reload!");
     }
 
     /// <summary>
     /// Animation Event: Ends switchweapon state 0=incomplete 1=complete
     /// </summary>
-    private void EndSwitchWeapon(int status)
+    private void EndSwitchWeapon()
     {
         isSwitchingWeapons = false;
-        if(status > 0)
-        {
-            isMelee = !isMelee;
-            UpdateEquippedWeaponAnims();
-            Debug.Log($"Successful Switch Weapon");
-        }
+        isMelee = !isMelee;
+        UpdateEquippedWeaponAnims();
+        Debug.Log($"Successful Switch Weapon");
     }
 
     /// <summary>

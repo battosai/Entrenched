@@ -1,12 +1,14 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType {CULTIST};
 public class Enemy : MonoBehaviour
 {
-    public enum Type {CULTIST};
 
     //stats
-    public Type type;
+    public EnemyType type;
     public int powerLevel;
     public int maxWounds;
     //TODO:
@@ -14,23 +16,25 @@ public class Enemy : MonoBehaviour
     //NEED: design work
     public int toughness;
     public int moveSpeed;
+    public float aggroRange;
+    [Header("Combat")]
+    public bool isMelee;
     public float meleeRange;
+    public float meleeCooldown;
     public float rangedRange;
+    public float rangedCooldown;
 
     //state
     public bool isDead {get; private set;}
-    private bool isAlerted;
-    private bool isMelee;
-    private bool isAttacking;
+    public bool isAlerted;
+    public bool isAttacking;
     private int wounds;
 
     //components
-    private Rigidbody2D rb;
+    public StateMachine stateMachine {get; private set;}
+    public Rigidbody2D rb {get; private set;}
+    public Animator anim {get; private set;}
     private Collider2D hitbox;
-    //TODO:
-    //need some other trigger collider that will tell the enemy they are in range
-    //NEEDS: design work, this isn't concrete yet, could just use distance calcs
-    private Animator anim;
     private SpriteRenderer rend;
 
     //events
@@ -43,6 +47,7 @@ public class Enemy : MonoBehaviour
         hitbox = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
+        stateMachine = GetComponent<StateMachine>();
     }
 
     private void Start()
@@ -50,29 +55,25 @@ public class Enemy : MonoBehaviour
         wounds = maxWounds;
         isDead = false;
         OnWounded += TakeDamage;
+
+        InitializeStateMachine();
+    }
+
+    private void InitializeStateMachine()
+    {
+        Dictionary<Type, BaseState> states = new Dictionary<Type, BaseState>()
+        {
+            {typeof(IdleState), new IdleState(this)},
+            {typeof(AlertState), new AlertState(this)},
+            {typeof(ChaseState), new ChaseState(this)},
+            {typeof(AttackState),  new AttackState(this)}
+        };
+        stateMachine.SetStates(states);
     }
 
     private void Update()
     {
-        if(!isDead)
-        {
-            //only set trigger if not already alerted
-            if(rend.isVisible && !isAlerted)
-            {
-                isAlerted = true;
-                anim.SetTrigger("Alert");
-            }
-
-            if(isAttacking)
-            {
-                if(isMelee)
-                    anim.SetTrigger("Attack");
-                else
-                    anim.SetTrigger("Shoot");
-            }
-
-            anim.SetBool("Moving", rb.velocity.magnitude > 0);
-        }
+        anim.SetBool("Moving", rb.velocity.magnitude > 0);
     }
 
     /// <summary>
@@ -80,16 +81,12 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void Cleanup()
     {
-        //TODO:
-        //not sure what to do yet if enemies reach scroller and are alive
-        //NEEDS: design work
-        if(!isDead)
-            return;
-
         //stats
-        isAlerted = false;
         isDead = false;
+        isAlerted = false;
+        isAttacking = false;
         wounds = maxWounds;
+        stateMachine.Reset();
 
         //components
         anim.enabled = true;
@@ -98,25 +95,51 @@ public class Enemy : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void Attack()
-    {
-        int mask = LayerMask.GetMask("Player");
-        RaycastHit2D hit = Physics2D.Raycast(
-            transform.position, 
-            Vector2.left,
-            isMelee ? meleeRange : rangedRange,
-            mask);
-        
-        if(hit.collider != null)
-            Krieger.OnWounded?.Invoke();
-    }
-
     /// <summary>
     /// Animation Event: Move after alert.
     /// </summary>
     private void Alert()
     {
-        rb.velocity = Vector3.left * moveSpeed;
+        isAlerted = false;
+        rb.velocity = Vector2.left * moveSpeed;
+    }
+
+    /// <summary>
+    /// Checks if the player is in range of our attacks.
+    /// </summary>
+    public bool InRange()
+    {
+        float range2 = Mathf.Pow(
+            isMelee ? meleeRange : rangedRange, 
+            2);
+
+        Vector3 dist = Krieger.instance.transform.position - transform.position;
+        float dist2 = Mathf.Pow(dist.magnitude, 2);
+
+        return dist2 <= range2;
+    }
+
+    /// <summary>
+    /// Animation Event: End attack state and initiate cooldown.
+    /// </summary>
+    private void EndAttack()
+    {
+        float cd = isMelee ? meleeCooldown : rangedCooldown;
+        if(cd > 0)
+            StartCoroutine(Cooldown(cd));
+        else
+            isAttacking = false;
+    }
+
+    /// <summary>
+    /// Delay ending attack state.
+    /// </summary>
+    private IEnumerator Cooldown(float cooldown)
+    {
+        float t = Time.time;
+        while(Time.time - t < cooldown)
+            yield return null;
+        isAttacking = false;
     }
 
     /// <summary>
@@ -136,9 +159,6 @@ public class Enemy : MonoBehaviour
     {
         anim.enabled = false;
         Gamestate.EnemyDefeated(this);
-        //TODO:
-        //maybe do any stat tracking updates here
-        //NEEDS: a stat tracker 
     }
 
     /// <summary>

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6997742343505171661}
   - component: {fileID: 6997742343505171660}
   - component: {fileID: 2802309893681352689}
+  - component: {fileID: 9193663129020601853}
   m_Layer: 11
   m_Name: Cultist
   m_TagString: Enemies
@@ -150,8 +151,13 @@ MonoBehaviour:
   maxWounds: 1
   toughness: 3
   moveSpeed: 10
-  meleeRange: 10
+  aggroRange: 100
+  isMelee: 1
+  meleeRange: 4
+  meleeCooldown: 2
   rangedRange: 0
+  rangedCooldown: 0
+  isAttacking: 0
 --- !u!95 &2802309893681352689
 Animator:
   serializedVersion: 3
@@ -162,7 +168,7 @@ Animator:
   m_GameObject: {fileID: 6997742343505171665}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b79a18866a46eee4fbba7961a489a6f6, type: 2}
+  m_Controller: {fileID: 22100000, guid: 7be2cba5b2d22c6468efc3fc75097af8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -171,3 +177,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9193663129020601853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6997742343505171665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fdef524d6be2243b2173381259f745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -44,7 +44,7 @@ public class Gamestate : MonoBehaviour
         //test
         if(Input.GetKeyDown(KeyCode.T))
         {
-            Enemy enemy = SpawnEnemy(Enemy.Type.CULTIST);
+            Enemy enemy = SpawnEnemy(EnemyType.CULTIST);
             if(enemy != null)
                 enemy.transform.position = player.transform.position + new Vector3(100, 0, 0);
         }
@@ -53,7 +53,7 @@ public class Gamestate : MonoBehaviour
     /// <summary>
     /// Create an enemy from the object pool. Does not position.
     /// </summary>
-    private Enemy SpawnEnemy(Enemy.Type eType)
+    private Enemy SpawnEnemy(EnemyType eType)
     {
         if(totalPowerLevel > difficulty)
             return null;
@@ -86,7 +86,8 @@ public class Gamestate : MonoBehaviour
     /// </summary>
     public static void EnemyDefeated(Enemy enemy)
     {
-        Gamestate.instance.totalEnemies--;
-        Gamestate.instance.totalPowerLevel -= enemy.powerLevel;
+        instance.difficulty++;
+        instance.totalEnemies--;
+        instance.totalPowerLevel -= enemy.powerLevel;
     }
 }
