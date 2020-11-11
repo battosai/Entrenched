@@ -34,8 +34,8 @@ public class Enemy : MonoBehaviour
     public StateMachine stateMachine {get; private set;}
     public Rigidbody2D rb {get; private set;}
     public Animator anim {get; private set;}
+    public SpriteRenderer rend {get; private set;}
     private Collider2D hitbox;
-    private SpriteRenderer rend;
 
     //events
     public delegate void Wounded(int dmg);
@@ -158,7 +158,7 @@ public class Enemy : MonoBehaviour
     private void EndDeath()
     {
         anim.enabled = false;
-        Gamestate.EnemyDefeated(this);
+        GameState.EnemyDefeated(this);
     }
 
     /// <summary>

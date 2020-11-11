@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 599293719}
   - component: {fileID: 599293718}
   m_Layer: 0
-  m_Name: Gamestate
+  m_Name: GameState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heresy: {fileID: 11400000, guid: f8d55637c95af254c99af6244d0996c2, type: 2}
+  spawnInterval: 5
 --- !u!4 &599293719
 Transform:
   m_ObjectHideFlags: 0

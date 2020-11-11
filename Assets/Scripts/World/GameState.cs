@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gamestate : MonoBehaviour
+public class GameState : MonoBehaviour
 {
     //reference for all enemy types
     public Heresy heresy;
+
 
     //determines the max power level that enemies can sum to
     public int difficulty {get; private set;}
@@ -15,9 +16,13 @@ public class Gamestate : MonoBehaviour
     private int totalPowerLevel;
 
     //util
-    public static Gamestate instance;
-    private Krieger player;
+    public static GameState instance;
+    public float spawnInterval;
     private float lastSpawnTime;
+    private Krieger player;
+    //TODO:
+    //make enemyPools into multiple lists based on power level
+    //NEED: do it:^) and add more enemies bitch
     private List<Enemy> enemyPool;
 
     private void Awake()
@@ -35,18 +40,47 @@ public class Gamestate : MonoBehaviour
 
     private void Start()
     {
+        difficulty = 1;
+        totalPowerLevel = 0;
+        totalEnemies = 0;
         lastSpawnTime = -1f;
         enemyPool = new List<Enemy>();
     }
 
     private void Update()
     {
-        //test
-        if(Input.GetKeyDown(KeyCode.T))
+        Spawner();
+    }
+
+    /// <summary>
+    /// Handles spawning enemies as difficulty increases etc.
+    /// </summary>
+    private void Spawner()
+    {
+        if(Time.time - lastSpawnTime > spawnInterval)
         {
-            Enemy enemy = SpawnEnemy(EnemyType.CULTIST);
-            if(enemy != null)
-                enemy.transform.position = player.transform.position + new Vector3(100, 0, 0);
+            float spacing = 0;
+            int powerLevelDeficit = difficulty - totalPowerLevel;
+            if(powerLevelDeficit > 0)
+            {
+                //TODO:
+                //spawn stronger enemies if there are higher numbers of enemies and enough space. will probably be a sort of rework for this initial system
+                //NEED: need more enemies and the enemyPool TODO to be finished
+
+                for(int i = 0; i < powerLevelDeficit; i++)
+                {
+                    Enemy enemy = SpawnEnemy(EnemyType.CULTIST);
+                    if(enemy != null)
+                        enemy.transform.position = 
+                            player.transform.position + 
+                            new Vector3(100 + spacing, 0, 0);
+
+                    //this new spacing will be used for the next enemy
+                    spacing = enemy.rend.sprite.bounds.size.x;
+                }
+
+                lastSpawnTime = Time.time;
+            }
         }
     }
 

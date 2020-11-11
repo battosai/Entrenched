@@ -44,7 +44,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6997742343505171665}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -157,6 +157,7 @@ MonoBehaviour:
   meleeCooldown: 2
   rangedRange: 0
   rangedCooldown: 0
+  isAlerted: 0
   isAttacking: 0
 --- !u!95 &2802309893681352689
 Animator:
