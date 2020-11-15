@@ -122,6 +122,24 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
+    /// Animation Event: Functional act of attacking. Called on specific frame of attack animation.
+    /// </summary>
+    private void Attack()
+    {
+        float range = isMelee ? meleeRange : rangedRange;
+        int mask = LayerMask.GetMask("Player");
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            transform.position, 
+            Vector2.left,
+            range,
+            mask);
+        
+        if(hit.collider != null)
+            Krieger.OnWounded?.Invoke();
+    }
+
+    /// <summary>
     /// Animation Event: End attack state and initiate cooldown.
     /// </summary>
     private void EndAttack()

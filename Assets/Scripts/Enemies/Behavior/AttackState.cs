@@ -15,8 +15,6 @@ public class AttackState : BaseState
             if(me.InRange())
             {
                 me.rb.velocity = Vector3.zero;
-
-                Attack();
                 me.isAttacking = true;
 
                 if(me.isMelee)
@@ -30,19 +28,5 @@ public class AttackState : BaseState
             }
         }
         return null;
-    }
-
-    private void Attack()
-    {
-        float range = me.isMelee ? me.meleeRange : me.rangedRange;
-
-        RaycastHit2D hit = Physics2D.Raycast(
-            me.transform.position, 
-            Vector2.left,
-            range,
-            mask);
-        
-        if(hit.collider != null)
-            Krieger.OnWounded?.Invoke();
     }
 }
