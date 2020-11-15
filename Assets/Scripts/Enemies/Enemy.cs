@@ -56,6 +56,8 @@ public class Enemy : MonoBehaviour
         isDead = false;
         OnWounded += TakeDamage;
 
+        Krieger.OnDeath += Freeze;
+
         InitializeStateMachine();
     }
 
@@ -180,5 +182,14 @@ public class Enemy : MonoBehaviour
                 anim.SetTrigger("Die");
             }
         }
+    }
+
+    /// <summary>
+    /// Subscriber to Krieger OnDeath event. Freeze enemy state.
+    /// </summary>
+    private void Freeze()
+    {
+        anim.speed = 0f;
+        rb.velocity = Vector3.zero;
     }
 }

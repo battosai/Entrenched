@@ -71,6 +71,7 @@ public class Krieger : MonoBehaviour
     //events
     public delegate void Wounded();
     public static Wounded OnWounded;
+    public static event Action OnDeath;
 
     private void Awake() 
     {
@@ -132,6 +133,10 @@ public class Krieger : MonoBehaviour
         isMoving = false;
         isCrouching = false;
         isAttacking = false;
+
+        if(isDead)
+            return;
+
         if(!isReloading && !isSwitchingWeapons)
             if(Input.GetKey(KeyCode.D))    
                 isMoving = true;
@@ -298,16 +303,28 @@ public class Krieger : MonoBehaviour
     }
 
     /// <summary>
-    /// Called by enemies when they hit the player.
+    /// Subscriber to OnWounded event.
     /// </summary>
     private void TakeDamage()
     {
         if(!isDead)
         {
             isDead = true;
-            //TODO:
-            //set an anim param for taking a hit
-            //NEEDS: animation work
+            anim.SetTrigger("Die");
+
+            //death animation is entirely on torso rend
+            legsRend.enabled = false;
+            weaponRend.enabled = false;
+
+            OnDeath?.Invoke();
         }
+    }
+
+    /// <summary>
+    /// Animation Event: Freeze player state.
+    /// </summary>
+    private void EndDeath()
+    {
+        anim.speed = 0f;
     }
 }
