@@ -11,6 +11,30 @@ TextureImporter:
   - first:
       213: -2097485967371449572
     second: crouchUnequip_2
+  - first:
+      213: -6317269787344604617
+    second: crouchUnequip_0
+  - first:
+      213: -4069435343636953018
+    second: crouchUnequip_1
+  - first:
+      213: 1235154062798745880
+    second: crouchUnequip_2
+  - first:
+      213: 9034707382719072074
+    second: crouchUnequip_3
+  - first:
+      213: -6298050254730573946
+    second: crouchUnequip_4
+  - first:
+      213: -4954205439130069420
+    second: crouchUnequip_5
+  - first:
+      213: 615697145701714217
+    second: crouchUnequip_6
+  - first:
+      213: -8208213521918072459
+    second: crouchUnequip_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -145,8 +169,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f3a546d3605435e0800000000000000
-      internalID: -1930829950508227598
+      spriteID: 7327407499c8458a0800000000000000
+      internalID: -6317269787344604617
       vertices: []
       indices: 
       edges: []
@@ -166,8 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 081fe5d52680eab70800000000000000
-      internalID: 8912069931179110784
+      spriteID: 6488912ad167687c0800000000000000
+      internalID: -4069435343636953018
       vertices: []
       indices: 
       edges: []
@@ -187,8 +211,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1b457920ab34e2e0800000000000000
-      internalID: -2097485967371449572
+      spriteID: 811fff37316242110800000000000000
+      internalID: 1235154062798745880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crouchUnequip_3
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a47c1942f7ab16d70800000000000000
+      internalID: 9034707382719072074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crouchUnequip_4
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 687c93d69a4d898a0800000000000000
+      internalID: -6298050254730573946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crouchUnequip_5
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4561850d6602f3bb0800000000000000
+      internalID: -4954205439130069420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crouchUnequip_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 929c5caba456b8800800000000000000
+      internalID: 615697145701714217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crouchUnequip_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 579e3817a41961e80800000000000000
+      internalID: -8208213521918072459
       vertices: []
       indices: 
       edges: []

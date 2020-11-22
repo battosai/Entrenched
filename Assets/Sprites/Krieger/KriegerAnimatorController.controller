@@ -727,9 +727,6 @@ AnimatorStateMachine:
     m_State: {fileID: 108416168492527781}
     m_Position: {x: 1830, y: -390, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 4161376644846289485}
-    m_Position: {x: 1865, y: -325, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 6167908022724278966}
     m_Position: {x: 1260, y: -700, z: 0}
   m_ChildStateMachines: []
@@ -2271,32 +2268,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &4161376644846289485
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: crouchAttack
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 87994a5f1bcfadc499b0d96afd250385, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1107 &4391526143509283599
 AnimatorStateMachine:
   serializedVersion: 5

@@ -17,16 +17,16 @@ MonoBehaviour:
   chargeTime: 3
   ap: 3
   dmg: 2
-  standIdle: {fileID: 0}
-  crouchIdle: {fileID: 0}
-  run: {fileID: 0}
-  standShoot: {fileID: 0}
-  crouchShoot: {fileID: 0}
-  standEmpty: {fileID: 0}
-  crouchEmpty: {fileID: 0}
-  standReload: {fileID: 0}
-  crouchReload: {fileID: 0}
-  standEquip: {fileID: 0}
-  crouchEquip: {fileID: 0}
-  standUnequip: {fileID: 0}
-  crouchUnequip: {fileID: 0}
+  standIdle: {fileID: 7400000, guid: fab01775c2cbb0246a7be7476afbe48a, type: 2}
+  crouchIdle: {fileID: 7400000, guid: 204856309bc270b479be5b5c87fbcdd2, type: 2}
+  run: {fileID: 7400000, guid: d0db939ed75942a4cbc5e13f2c84d1a0, type: 2}
+  standShoot: {fileID: 7400000, guid: d7c525ad842eaca4193e0beef41d7e6e, type: 2}
+  crouchShoot: {fileID: 7400000, guid: c2f02c2b94f51354bb45ec37cd6cb22a, type: 2}
+  standEmpty: {fileID: 7400000, guid: 838cbbef0eaf5414cb64ff235feb43ba, type: 2}
+  crouchEmpty: {fileID: 7400000, guid: 695d993c62f6e1b4994831c627a120e8, type: 2}
+  standReload: {fileID: 7400000, guid: 53c179096df5df549a65376e2591d243, type: 2}
+  crouchReload: {fileID: 7400000, guid: 7641e1e873f953b47bee7da004bea97c, type: 2}
+  standEquip: {fileID: 7400000, guid: d10882c1d675bfe4e89282b20dac0b1f, type: 2}
+  crouchEquip: {fileID: 7400000, guid: c6f7f44f3fe9bd747bf04ee047f8efc2, type: 2}
+  standUnequip: {fileID: 7400000, guid: 5d686498a029376488b3a5401ecc5f52, type: 2}
+  crouchUnequip: {fileID: 7400000, guid: 53af35baf149c8642b39458e69fdf77e, type: 2}
