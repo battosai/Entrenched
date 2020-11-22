@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64120de0911310440be18c02f11ab5c6, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: 
+  ammo: 5
+  range: 75
+  chargeTime: 0
+  ap: 0
+  dmg: 2
+  standIdle: {fileID: 0}
+  crouchIdle: {fileID: 0}
+  run: {fileID: 0}
+  standShoot: {fileID: 0}
+  crouchShoot: {fileID: 0}
+  standEmpty: {fileID: 0}
+  crouchEmpty: {fileID: 0}
+  standReload: {fileID: 0}
+  crouchReload: {fileID: 0}
+  standEquip: {fileID: 0}
+  crouchEquip: {fileID: 0}
+  standUnequip: {fileID: 0}
+  crouchUnequip: {fileID: 0}
