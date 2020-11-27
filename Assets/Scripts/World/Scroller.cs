@@ -19,10 +19,7 @@ public class Scroller : MonoBehaviour
         Debug.Assert(chunkA != null && chunkB != null);
 
         coll = GetComponent<BoxCollider2D>();
-    }
 
-    private void Start()
-    {
         SpriteRenderer playerRend = 
             player.Find("Torso").GetComponent<SpriteRenderer>();
         playerWidth = playerRend.sprite.bounds.size.x; 
