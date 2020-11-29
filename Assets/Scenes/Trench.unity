@@ -365,8 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e40495384f3c0b4595fe95f79efe301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followTarget: {fileID: 87551535}
-  parallaxEffect: 0
+  followTarget: {fileID: 8427667212376096175}
+  parallaxEffect: 0.5
 --- !u!1 &599293717
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 639325464}
   - component: {fileID: 639325465}
   m_Layer: 0
-  m_Name: Fighting
+  m_Name: FightingA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 1800157850}
   - component: {fileID: 1800157851}
   m_Layer: 13
-  m_Name: Sky
+  m_Name: SkyA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -887,3 +887,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f72df765bcb6b74ea63a80416ed778f, type: 3}
+--- !u!50 &8427667212376096175 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 8427667212324950912, guid: 1f72df765bcb6b74ea63a80416ed778f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8427667212376096174}
+  m_PrefabAsset: {fileID: 0}

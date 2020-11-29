@@ -10,8 +10,8 @@ public class Scroller : MonoBehaviour
 
     private float playerWidth;
     private float playerHeight;
-    private float chunkWidth;
-    private float chunkHeight;
+    public float chunkWidth {get; private set;}
+    public float chunkHeight {get; private set;}
     private BoxCollider2D coll;
 
     private void Awake()
