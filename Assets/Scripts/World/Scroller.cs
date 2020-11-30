@@ -46,18 +46,6 @@ public class Scroller : MonoBehaviour
         coll.size = new Vector2(coll.size.x, Camera.main.orthographicSize*2);
     }
 
-    /// <summary> 
-    /// Moves left most chunk to the right side of other one.
-    /// </summary>
-    private void Scroll()
-    {
-        Transform scrollChunk = 
-            (chunkA.transform.position.x < chunkB.transform.position.x) ?
-            chunkA :
-            chunkB; 
-        scrollChunk.position += Vector3.right * chunkWidth * 2;
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         string layer = LayerMask.LayerToName(other.gameObject.layer);
@@ -71,7 +59,8 @@ public class Scroller : MonoBehaviour
                     Debug.LogWarning($"Corpse isn't dead: {enemy.gameObject.name}");
                 break;
             case "Chunk":
-                Scroll();
+            case "Background":
+                other.transform.position += Vector3.right * chunkWidth * 2;
                 break;
             default:
                 Debug.LogWarning($"Scroller hit unknown object named {other.gameObject.name} on layer {layer}.");
