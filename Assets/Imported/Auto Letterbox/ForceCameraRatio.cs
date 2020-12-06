@@ -155,7 +155,7 @@ namespace LetterboxCamera
 
         public Camera letterBoxCamera;
 
-        private void Start () {
+        private void Awake () {
             // If no cameras have been assigned in editor, search for cameras in the scene
             if (findCamerasAutomatically) {
                 FindAllCamerasInScene();

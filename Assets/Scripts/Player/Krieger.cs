@@ -244,7 +244,6 @@ public class Krieger : MonoBehaviour
     {
         isReloading = false;
         ammo = rangedWeapon.ammo;
-        Debug.Log($"Successful Reload!");
     }
 
     /// <summary>
@@ -255,7 +254,6 @@ public class Krieger : MonoBehaviour
         isSwitchingWeapons = false;
         isMelee = !isMelee;
         UpdateEquippedWeaponAnims();
-        Debug.Log($"Successful Switch Weapon");
     }
 
     /// <summary>

@@ -492,7 +492,10 @@ MonoBehaviour:
   createCameraForLetterBoxRendering: 1
   findCamerasAutomatically: 1
   letterBoxCameraColor: {r: 0, g: 0, b: 0, a: 1}
-  cameras: []
+  cameras:
+  - camera: {fileID: 519420031}
+    anchor: 0
+    vectorAnchor: {x: 0.5, y: 0.5}
   letterBoxCamera: {fileID: 0}
 --- !u!1 &1728373841
 GameObject:
