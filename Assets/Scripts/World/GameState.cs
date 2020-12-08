@@ -7,7 +7,6 @@ public class GameState : MonoBehaviour
     //reference for all enemy types
     public Heresy heresy;
 
-
     //determines the max power level that enemies can sum to
     public int difficulty {get; private set;}
 
@@ -78,7 +77,7 @@ public class GameState : MonoBehaviour
                             new Vector3(100 + spacing, 0, 0);
 
                     //this new spacing will be used for the next enemy
-                    spacing = enemy.rend.sprite.bounds.size.x;
+                    spacing += enemy.rend.sprite.bounds.size.x;
                 }
 
                 lastSpawnTime = Time.time;

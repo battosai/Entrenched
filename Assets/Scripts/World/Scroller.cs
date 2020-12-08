@@ -40,8 +40,7 @@ public class Scroller : MonoBehaviour
         //setup scroll collider
         float collDistFromEdge = 20f;
         transform.position = 
-            Camera.main.ViewportToWorldPoint(
-                new Vector3(0, Screen.height/2)) +
+            Camera.main.ViewportToWorldPoint(new Vector3(0f, 0.5f)) +
             (Vector3.left * (coll.size.x + collDistFromEdge));
         coll.size = new Vector2(coll.size.x, Camera.main.orthographicSize*2);
     }
