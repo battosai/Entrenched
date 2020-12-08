@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
+    //reference for game ui
+    public GameUI ui;
+
     //reference for all enemy types
     public Heresy heresy;
 
@@ -24,6 +27,9 @@ public class GameState : MonoBehaviour
     //NEED: do it:^) and add more enemies bitch
     private List<Enemy> enemyPool;
 
+    //stat tracker
+    private int enemiesDefeated;
+
     private void Awake()
     {
         if(instance == null)
@@ -33,7 +39,9 @@ public class GameState : MonoBehaviour
 
         Screen.orientation = ScreenOrientation.LandscapeRight;
         
+        Debug.Assert(ui != null);
         Debug.Assert(heresy != null);
+
         heresy.Define();
 
         player = GameObject.FindWithTag("Player").GetComponent<Krieger>();
@@ -124,5 +132,7 @@ public class GameState : MonoBehaviour
         instance.difficulty++;
         instance.totalEnemies--;
         instance.totalPowerLevel -= enemy.powerLevel;
+
+        instance.enemiesDefeated++;
     }
 }
