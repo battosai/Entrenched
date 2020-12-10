@@ -29,6 +29,7 @@ public class GameState : MonoBehaviour
 
     //stat tracker
     private int enemiesDefeated;
+    private int feetTraversed;
 
     private void Awake()
     {
@@ -54,6 +55,8 @@ public class GameState : MonoBehaviour
         totalEnemies = 0;
         lastSpawnTime = -1f;
         enemyPool = new List<Enemy>();
+
+        Krieger.OnDeath += CalculateDistanceTraversed;
     }
 
     private void Update()
@@ -134,5 +137,14 @@ public class GameState : MonoBehaviour
         instance.totalPowerLevel -= enemy.powerLevel;
 
         instance.enemiesDefeated++;
+    }
+
+    /// <summary>
+    /// Subscriber to Krieger.OnDeath Event. Find end game distance stat.
+    /// </summary>
+    private void CalculateDistanceTraversed()
+    {
+        int dist = (int)Mathf.Floor(Krieger.instance.transform.position.x / 3);
+        feetTraversed = dist;
     }
 }
