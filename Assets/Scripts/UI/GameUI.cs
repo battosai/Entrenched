@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameUI : MonoBehaviour
 {
     public Image fader;
+    public Text endGameText;
 
     private void Awake()
     {
@@ -15,26 +16,62 @@ public class GameUI : MonoBehaviour
 
     private void Start()
     {
-        Krieger.OnDeath += FadeWrapper;
+        Krieger.OnDeath += EndScreenSequenceWrapper;
+    }
+
+
+    /// <summary>
+    /// Subscriber to Krieger.OnDeath Event. Starts the end screen sequence.
+    /// </summary>
+    private void EndScreenSequenceWrapper() {StartCoroutine(EndScreenSequence());}
+    private IEnumerator EndScreenSequence() 
+    {
+        yield return StartCoroutine(FadeScreen(Color.black));
+        yield return StartCoroutine(FadeText(1f));
     }
 
     /// <summary>
-    /// Fader screen to black. Wrapper subscribes to Krieger OnDeath event.
+    /// Fade end screen text in and out.
     /// </summary>
-    private void FadeWrapper() {StartCoroutine(Fade());}
-    private IEnumerator Fade()
+    private IEnumerator FadeText(float targetAlpha)
     {
-        float fadeTime = 2f;
+        float fadeTime = 1f;
         float timer = Time.time;
-        Color c = Color.clear;
+        float alphaDiff = targetAlpha - endGameText.color.a;
+        Color c = endGameText.color;
         while(Time.time - timer < fadeTime)
         {
             float elapsedTime = Time.time - timer;
-            float alpha = elapsedTime/fadeTime;
-            c.a = alpha;
-            fader.color = c;
+            float ratio = elapsedTime/fadeTime;
+
+            //have to do the ratio from targetAlpha as base point
+            //bc initial endGameText.color.a will be lost
+            c.a = targetAlpha - (alphaDiff * (1-ratio));
+            endGameText.color = c;
             yield return null;
         }
-        fader.color = Color.black;
+        c.a = targetAlpha;
+        endGameText.color = c;
+    }
+
+    /// <summary>
+    /// Fader screen to desired color.
+    /// </summary>
+    private IEnumerator FadeScreen(Color targetColor)
+    {
+        float fadeTime = 1f;
+        float timer = Time.time;
+        Color colorDiff = targetColor - fader.color;
+        while(Time.time - timer < fadeTime)
+        {
+            float elapsedTime = Time.time - timer;
+            float ratio = elapsedTime/fadeTime;
+
+            //have to do the ratio from targetColor as base point 
+            //bc initial fader.color will be lost
+            fader.color = targetColor - (colorDiff * (1-ratio));
+            yield return null;
+        }
+        fader.color = targetColor;
     }
 }
