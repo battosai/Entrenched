@@ -9,6 +9,11 @@ public class GameUI : MonoBehaviour
     public Image fader;
     public Text endGameText;
 
+    // Custom font needs to scale via transform
+    // Ratio established w/ iPhone 5/5S/5C/SE
+    // (scale of 7)/(viewport width AKA Camera.pixelWidth of 1136)
+    private float textWidthRatio = 7f/1136f;
+
     private void Awake()
     {
         Debug.Assert(fader != null);
@@ -16,9 +21,9 @@ public class GameUI : MonoBehaviour
 
     private void Start()
     {
+        endGameText.transform.localScale = Vector3.one * Camera.main.pixelWidth * textWidthRatio;
         Krieger.OnDeath += EndScreenSequenceWrapper;
     }
-
 
     /// <summary>
     /// Subscriber to Krieger.OnDeath Event. Starts the end screen sequence.
