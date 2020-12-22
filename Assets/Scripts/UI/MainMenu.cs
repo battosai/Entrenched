@@ -6,7 +6,6 @@ public class MainMenu : MonoBehaviour
 {
     private void Awake()
     {
-        Screen.orientation = ScreenOrientation.Portrait;
     }
     public void Play()
     {

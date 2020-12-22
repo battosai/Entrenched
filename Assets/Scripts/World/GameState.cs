@@ -38,8 +38,6 @@ public class GameState : MonoBehaviour
         else if(instance != this)
             Destroy(this.gameObject);
 
-        Screen.orientation = ScreenOrientation.LandscapeRight;
-        
         Debug.Assert(ui != null);
         Debug.Assert(heresy != null);
 
