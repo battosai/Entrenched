@@ -1,14 +1,26 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    private void Awake()
+    public Image fader;
+
+    /// <summary>
+    /// OnClick Listener for Play button.
+    /// </summary>
+    public void PlayWrapper(){StartCoroutine(Play());}
+    private IEnumerator Play()
     {
-    }
-    public void Play()
-    {
+        yield return StartCoroutine(
+            Utils.Fade(
+                fader,
+                Color.clear,
+                Color.black,
+                1f));
         SceneManager.LoadScene("Game");
     }
 
