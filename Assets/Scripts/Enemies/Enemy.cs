@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
         isDead = false;
         OnWounded += TakeDamage;
 
-        Krieger.OnDeath += Freeze;
+        Krieger.instance.OnDeath += Freeze;
 
         InitializeStateMachine();
     }
@@ -136,7 +136,7 @@ public class Enemy : MonoBehaviour
             mask);
         
         if(hit.collider != null)
-            Krieger.OnWounded?.Invoke();
+            Krieger.instance.OnWounded?.Invoke();
     }
 
     /// <summary>

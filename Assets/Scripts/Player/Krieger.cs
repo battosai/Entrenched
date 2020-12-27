@@ -70,15 +70,15 @@ public class Krieger : MonoBehaviour
 
     //events
     public delegate void Wounded();
-    public static Wounded OnWounded;
-    public static event Action OnDeath;
+    public Wounded OnWounded;
+    public event Action OnDeath;
 
     private void Awake() 
     {
-        if(instance == null)
-            instance = this;
-        else if(instance != this)
-            Destroy(this.gameObject);
+        //always replace instance bc we know
+        //there will only be one instance active at a time
+        instance = this;
+
         Debug.Assert(armory != null);
         armory.Define();
 
@@ -126,6 +126,12 @@ public class Krieger : MonoBehaviour
 
     /// <summary>
     /// Reads keyboard input to manipulate status flags.
+    /// Mobile Inputs:
+    /// - hold down a point (no swipe) on the right side to move
+    /// - swipe down and hold on right side to crouch
+    /// - tap on left side to shoot/attack
+    /// - swipe up to reload
+    /// - swipe to left or right to switch weapons
     /// </summary>
     private void ReadInput()
     {

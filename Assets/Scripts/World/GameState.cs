@@ -28,15 +28,14 @@ public class GameState : MonoBehaviour
     private List<Enemy> enemyPool;
 
     //stat tracker
-    private int enemiesDefeated;
-    private int feetTraversed;
+    public int enemiesDefeated {get; private set;}
+    public int feetTraversed {get; private set;}
 
     private void Awake()
     {
-        if(instance == null)
-            instance = this;
-        else if(instance != this)
-            Destroy(this.gameObject);
+        //always replace instance bc we know
+        //there will only be one instance active at a time
+        instance = this;
 
         Debug.Assert(ui != null);
         Debug.Assert(heresy != null);
@@ -54,7 +53,7 @@ public class GameState : MonoBehaviour
         lastSpawnTime = -1f;
         enemyPool = new List<Enemy>();
 
-        Krieger.OnDeath += CalculateDistanceTraversed;
+        Krieger.instance.OnDeath += CalculateDistanceTraversed;
     }
 
     private void Update()

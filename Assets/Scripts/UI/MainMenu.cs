@@ -24,6 +24,9 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    /// <summary>
+    /// OnClick Listener for Exit button.
+    /// </summary>
     public void Exit()
     {
         #if UNITY_EDITOR
@@ -33,6 +36,9 @@ public class MainMenu : MonoBehaviour
         #endif
     }
 
+    /// <summary>
+    /// OnClick Listener for Options button.
+    /// </summary>
     public void Options()
     {
         Debug.Log($"There are no options yet c:");
