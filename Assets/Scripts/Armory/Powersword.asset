@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e78e1e3cf8f76a45b8ef46e50a49c58, type: 3}
+  m_Name: Powersword
+  m_EditorClassIdentifier: 
+  range: 10
+  speed: 1
+  ap: 3
+  dmg: 1
+  standIdle: {fileID: 7400000, guid: 00f2b17cd1a6e6841937bfb96cafef02, type: 2}
+  crouchIdle: {fileID: 7400000, guid: 7cdc9a6eaf217694db6b7dd1fd672926, type: 2}
+  run: {fileID: 7400000, guid: 598cb661977f3d14ba1b5359a982acc3, type: 2}
+  standAttack: {fileID: 7400000, guid: 1da159b5aca1e13488e316d2c187ed87, type: 2}
+  crouchAttack: {fileID: 7400000, guid: e69a94bad4f2ceb4aab78ca1c245f67a, type: 2}
+  standEquip: {fileID: 7400000, guid: e1edf046703af7048a28ac8680f71cbd, type: 2}
+  crouchEquip: {fileID: 7400000, guid: 6c9ee7659dbb96844bbf08040805b3ef, type: 2}
+  standUnequip: {fileID: 7400000, guid: 6a4f8cf9d77ba3441af63f2db63ff956, type: 2}
+  crouchUnequip: {fileID: 7400000, guid: 701f7556b9cf6784fa300ffa876f0749, type: 2}

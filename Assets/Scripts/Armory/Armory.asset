@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ranged:
   - {fileID: 11400000, guid: 64eb4840b20800645892d67eda55a781, type: 2}
+  - {fileID: 11400000, guid: f55f05abfe720974aafbf2cd50583c71, type: 2}
+  - {fileID: 11400000, guid: c02fd6eb33957384c96331ebfdce1623, type: 2}
+  - {fileID: 11400000, guid: c3785057733c1e243b8dbb34ce759790, type: 2}
+  - {fileID: 11400000, guid: e7390edb12d407b47a7284fb84eb8950, type: 2}
   _melee:
   - {fileID: 11400000, guid: 8385eb70da262c943833f4231e2e8fac, type: 2}
+  - {fileID: 11400000, guid: e20f9ab49ec3d894d801ed23275bcf85, type: 2}

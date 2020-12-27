@@ -51,7 +51,7 @@ public class Krieger : MonoBehaviour
         {
             _rangedWeapon = value;
             ammo = _rangedWeapon.ammo;
-            UpdateEquippedWeaponAnims();
+            UpdateEquippedWeaponAnims(newWeapon:true);
         }
     }
     private MeleeWeapon _meleeWeapon;
@@ -64,7 +64,7 @@ public class Krieger : MonoBehaviour
         private set
         {
             _meleeWeapon = value;
-            UpdateEquippedWeaponAnims();
+            UpdateEquippedWeaponAnims(newWeapon:true);
         }
     }
 
