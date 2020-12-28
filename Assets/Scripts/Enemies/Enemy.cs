@@ -209,5 +209,6 @@ public class Enemy : MonoBehaviour
     {
         anim.speed = 0f;
         rb.velocity = Vector3.zero;
+        stateMachine.Pause();
     }
 }
