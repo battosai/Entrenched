@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyType {CULTIST};
+public enum EnemyType {CULTIST, POSSESSED};
 public class Enemy : MonoBehaviour
 {
 
