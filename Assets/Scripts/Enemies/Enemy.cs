@@ -102,6 +102,9 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Alert()
     {
+        if(isDead)
+            return;
+
         isAlerted = false;
         rb.velocity = Vector2.left * moveSpeed;
     }

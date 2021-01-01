@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Random=UnityEngine.Random;
+
 public class GameState : MonoBehaviour
 {
     //reference for game ui
@@ -22,10 +24,7 @@ public class GameState : MonoBehaviour
     public float spawnInterval;
     private float lastSpawnTime;
     private Krieger player;
-    //TODO:
-    //make enemyPools into multiple lists based on power level
-    //NEED: do it:^) and add more enemies bitch
-    private List<Enemy> enemyPool;
+    private Dictionary<int, List<Enemy>> enemyPoolsByPowerLevel;
 
     //stat tracker
     public int enemiesDefeated {get; private set;}
@@ -51,13 +50,20 @@ public class GameState : MonoBehaviour
         totalPowerLevel = 0;
         totalEnemies = 0;
         lastSpawnTime = -1f;
-        enemyPool = new List<Enemy>();
+        enemyPoolsByPowerLevel = new Dictionary<int, List<Enemy>>()
+        {
+            {1, new List<Enemy>()},
+            {2, new List<Enemy>()}
+        };
 
         Krieger.instance.OnDeath += CalculateDistanceTraversed;
     }
 
     private void Update()
     {
+        if(Krieger.instance.isDead)
+            return;
+
         Spawner();
     }
 
@@ -74,11 +80,20 @@ public class GameState : MonoBehaviour
             {
                 //TODO:
                 //spawn stronger enemies if there are higher numbers of enemies and enough space. will probably be a sort of rework for this initial system
-                //NEED: need more enemies and the enemyPool TODO to be finished
+                //NEED: do it, currently just randomly selects any plausible ones, could lean towards stronger ones
 
-                for(int i = 0; i < powerLevelDeficit; i++)
+                while(powerLevelDeficit > 0)
                 {
-                    Enemy enemy = SpawnEnemy(EnemyType.CULTIST);
+                    //randomly pick a power level to spawn for
+                    //between 1 and deficit or highest level we have
+                    int incomingPowerLevel = Random.Range(
+                        1, 
+                        1 + Math.Min(
+                            enemyPoolsByPowerLevel.Count, 
+                            powerLevelDeficit));
+                    powerLevelDeficit -= incomingPowerLevel;
+
+                    Enemy enemy = SpawnEnemy(incomingPowerLevel);
                     if(enemy != null)
                         enemy.transform.position = 
                             player.transform.position + 
@@ -94,19 +109,17 @@ public class GameState : MonoBehaviour
     }
 
     /// <summary>
-    /// Create an enemy from the object pool. Does not position.
+    /// Create an enemy of specific type. Does not position.
     /// </summary>
     private Enemy SpawnEnemy(EnemyType eType)
     {
-        if(totalPowerLevel > difficulty)
-            return null;
-
         Enemy enemy = heresy.enemyByType[eType];
 
         lastSpawnTime = Time.time;
         totalEnemies++;
         totalPowerLevel += enemy.powerLevel;
 
+        List<Enemy> enemyPool = enemyPoolsByPowerLevel[enemy.powerLevel];
         foreach(Enemy e in enemyPool)
         {
             if(enemy.type == e.type)
@@ -119,7 +132,42 @@ public class GameState : MonoBehaviour
             }
         }
 
-        Enemy newEnemy = Instantiate(heresy.enemyByType[enemy.type]);
+        Enemy newEnemy = Instantiate(enemy);
+        enemyPool.Add(newEnemy);
+        return newEnemy;
+    }
+
+    /// <summary>
+    /// Create an enemy of a specific power level. Does not position.
+    /// </summary>
+    private Enemy SpawnEnemy(int powerLevel)
+    {
+        //randomly pick which enemy of that power level to spawn
+        List<EnemyType> eTypes = heresy.typesByPowerLevel[powerLevel];
+        EnemyType eType = eTypes[
+            Random.Range(
+                0,
+                eTypes.Count)];
+        Enemy enemy = heresy.enemyByType[eType];
+
+        lastSpawnTime = Time.time;
+        totalEnemies++;
+        totalPowerLevel += enemy.powerLevel;
+
+        List<Enemy> enemyPool = enemyPoolsByPowerLevel[powerLevel];
+        foreach(Enemy e in enemyPool)
+        {
+            if(enemy.type == e.type)
+            {
+                if(!e.gameObject.activeInHierarchy)
+                {
+                    e.gameObject.SetActive(true);
+                    return e;
+                }
+            }
+        }
+
+        Enemy newEnemy = Instantiate(enemy);
         enemyPool.Add(newEnemy);
         return newEnemy;
     }
