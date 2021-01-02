@@ -15,6 +15,8 @@ public class Krieger : MonoBehaviour
     //state
     public bool isMoving;
     public bool isCrouching;
+    public bool isCharging;
+    private float chargeStartTime;
     public bool isAttacking;
     public bool isReloading;
     public bool isSwitchingWeapons;
@@ -124,12 +126,15 @@ public class Krieger : MonoBehaviour
         InputHandler();
     }
 
+    //TODO:
+    //mobile input reading
+    //NEED: do it
     /// <summary>
     /// Reads keyboard input to manipulate status flags.
     /// Mobile Inputs:
     /// - hold down a point (no swipe) on the right side to move
     /// - swipe down and hold on right side to crouch
-    /// - tap on left side to shoot/attack
+    /// - tap or hold (for charging guns) on left side to shoot/attack
     /// - swipe up to reload
     /// - swipe to left or right to switch weapons
     /// </summary>
@@ -182,14 +187,22 @@ public class Krieger : MonoBehaviour
         {
             if(Input.GetMouseButtonDown(0))
             {
-                isAttacking = true;
                 if(isMelee)
                 {
+                    isAttacking = true;
                     anim.SetTrigger("Attack");
                     weaponAnim.SetTrigger("Attack");
                 }
                 else
                 {
+                    chargeStartTime = Time.time;
+                }
+            }
+            if(Input.GetMouseButtonUp(0) && !isMelee)
+            {
+                if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
+                {
+                    isAttacking = true;
                     anim.SetTrigger("Shoot");
                     weaponAnim.SetTrigger("Shoot");
                 }
@@ -222,8 +235,12 @@ public class Krieger : MonoBehaviour
     private void UseWeapon()
     {
         //make sure gun has ammo
-        if(!isMelee && ammo == 0)
-            return;
+        if(!isMelee)
+        {
+            if(ammo == 0)
+                return;
+            ammo = Mathf.Max(ammo-1, 0);
+        }
 
         int dmg = isMelee ? meleeWeapon.dmg : rangedWeapon.dmg;
         float range = isMelee ? meleeWeapon.range : rangedWeapon.range;
@@ -239,8 +256,6 @@ public class Krieger : MonoBehaviour
         {
             hit.collider.GetComponent<Enemy>().OnWounded?.Invoke(dmg);
         }
-        
-        ammo = Mathf.Max(ammo-1, 0);
     }
 
     /// <summary>

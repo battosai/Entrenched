@@ -11,10 +11,6 @@ public class Enemy : MonoBehaviour
     public EnemyType type;
     public int powerLevel;
     public int maxWounds;
-    //TODO:
-    //determine how to utilize toughness stat
-    //NEED: design work
-    public int toughness;
     public int moveSpeed;
     public float aggroRange;
     [Header("Combat")]

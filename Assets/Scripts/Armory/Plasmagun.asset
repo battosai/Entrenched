@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammo: 5
   range: 100
-  chargeTime: 3
+  chargeTime: 0.5
   ap: 3
   dmg: 2
   standIdle: {fileID: 7400000, guid: fab01775c2cbb0246a7be7476afbe48a, type: 2}
