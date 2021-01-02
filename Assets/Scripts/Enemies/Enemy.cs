@@ -171,6 +171,9 @@ public class Enemy : MonoBehaviour
         this.gameObject.layer = LayerMask.NameToLayer("Corpses");
     }
 
+    //TODO:
+    //bodies should probably have a timer to make them inactive if they've been on screen too long (reduce object creation)
+    //NEED: do it
     /// <summary>
     /// Animation Event: After death clip to finalize.
     /// </summary>

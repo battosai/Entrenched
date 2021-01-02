@@ -226,35 +226,39 @@ public class Krieger : MonoBehaviour
             Vector2.zero;
         
         if(isAttacking)
-            UseWeapon();
+            UseWeapon(
+                isMelee ?
+                (Weapon)meleeWeapon :
+                (Weapon)rangedWeapon);
     }
 
     /// <summary>
     /// Applies weapon to whatever is ahead of player.
     /// </summary>
-    private void UseWeapon()
+    private void UseWeapon(Weapon weapon)
     {
         //make sure gun has ammo
         if(!isMelee)
         {
             if(ammo == 0)
                 return;
-            ammo = Mathf.Max(ammo-1, 0);
+            ammo = Math.Max(ammo-1, 0);
         }
 
-        int dmg = isMelee ? meleeWeapon.dmg : rangedWeapon.dmg;
-        float range = isMelee ? meleeWeapon.range : rangedWeapon.range;
-
         int mask = LayerMask.GetMask("Enemies");
-        RaycastHit2D hit = Physics2D.Raycast(
+        RaycastHit2D[] hits = Physics2D.RaycastAll(
             transform.position, 
             Vector2.right,
-            range,
+            weapon.range,
             mask);
         
-        if(hit.collider != null)
+        if(hits.Length > 0)
         {
-            hit.collider.GetComponent<Enemy>().OnWounded?.Invoke(dmg);
+            int wounds = Math.Min(1+weapon.ap, hits.Length);
+            for(int i = 0; i < wounds; i++)
+            {
+                hits[i].collider.GetComponent<Enemy>().OnWounded?.Invoke(weapon.dmg);
+            }
         }
     }
 

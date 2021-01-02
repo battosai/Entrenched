@@ -1,20 +1,13 @@
 ﻿using UnityEngine;
       
 [CreateAssetMenu(menuName = ("Wargear/Ranged"))]
-public class RangedWeapon : ScriptableObject
+public class RangedWeapon : Weapon
 {
-    [Header("Stats")]
     //TODO:
     //actually implement ammo: weapon ammo count is just how many left in clip, actual total ammo will be on krieger, enemies should probably drop ammo
     //NEED: design work
     public int ammo;
-    public float range;
     public float chargeTime;
-    //TODO:
-    //decide what to do with ap, maybe penetration level?
-    //NEED: design work
-    public int ap;
-    public int dmg;
 
     [Header("Animations")]
     public AnimationClip standIdle;

@@ -2,19 +2,12 @@
 using UnityEngine;
       
 [CreateAssetMenu(menuName = ("Wargear/Melee"))]
-public class MeleeWeapon : ScriptableObject
+public class MeleeWeapon : Weapon
 {
-    [Header("Stats")]
-    public float range;
     //TODO:
     //implement speed limitations, aka cooldowns
     //NEED: do it
     public float speed;
-    //TODO:
-    //decide what to do with ap, maybe cleave level?
-    //NEED: design work
-    public int ap;
-    public int dmg;
 
     [Header("Animations")]
     public AnimationClip standIdle;
