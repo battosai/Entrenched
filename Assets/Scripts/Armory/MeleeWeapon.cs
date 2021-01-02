@@ -6,7 +6,7 @@ public class MeleeWeapon : Weapon
 {
     //TODO:
     //implement speed limitations, aka cooldowns
-    //NEED: do it
+    //NEED: do it, maybe scrap speed and implement a durability to melee?
     public float speed;
 
     [Header("Animations")]
