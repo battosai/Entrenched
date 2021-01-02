@@ -4,10 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = ("Wargear/Melee"))]
 public class MeleeWeapon : Weapon
 {
-    //TODO:
-    //implement speed limitations, aka cooldowns
-    //NEED: do it, maybe scrap speed and implement a durability to melee?
-    public float speed;
+    public float cooldown;
 
     [Header("Animations")]
     public AnimationClip standIdle;

@@ -10,7 +10,6 @@ public class Krieger : MonoBehaviour
     //player settings
     public float moveSpeed;
     public int ammo;
-    public float weaponRange;
 
     //state
     public bool isMoving;
@@ -18,6 +17,7 @@ public class Krieger : MonoBehaviour
     public bool isCharging;
     private float chargeStartTime;
     public bool isAttacking;
+    private float lastMeleeAttackTime;
     public bool isReloading;
     public bool isSwitchingWeapons;
     public bool isMelee;
@@ -188,9 +188,13 @@ public class Krieger : MonoBehaviour
             {
                 if(isMelee)
                 {
-                    isAttacking = true;
-                    anim.SetTrigger("Attack");
-                    weaponAnim.SetTrigger("Attack");
+                    if(Time.time - lastMeleeAttackTime > meleeWeapon.cooldown)
+                    {
+                        isAttacking = true;
+                        lastMeleeAttackTime = Time.time;
+                        anim.SetTrigger("Attack");
+                        weaponAnim.SetTrigger("Attack");
+                    }
                 }
                 else
                 {
