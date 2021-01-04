@@ -177,6 +177,9 @@ public class GameState : MonoBehaviour
     /// </summary>
     public static void EnemyDefeated(Enemy enemy)
     {
+        //TODO:
+        //difficulty should probably scale with distance covered rather than enemies defeated
+        //NEEDS: do it
         instance.difficulty++;
         instance.totalEnemies--;
         instance.totalPowerLevel -= enemy.powerLevel;

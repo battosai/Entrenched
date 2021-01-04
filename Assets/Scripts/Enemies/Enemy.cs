@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO:
+//add ranged attack enemy, crouching will dodge ranged attack (gives reason to crouch)
+//NEEDS: do it, might need collider work
+
 public enum EnemyType {CULTIST, POSSESSED};
 public class Enemy : MonoBehaviour
 {

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64120de0911310440be18c02f11ab5c6, type: 3}
   m_Name: Plasmagun
   m_EditorClassIdentifier: 
-  ammo: 5
   range: 100
-  chargeTime: 0.5
   ap: 3
   dmg: 2
+  ammo: 5
+  chargeTime: 0.5
   standIdle: {fileID: 7400000, guid: fab01775c2cbb0246a7be7476afbe48a, type: 2}
   crouchIdle: {fileID: 7400000, guid: 204856309bc270b479be5b5c87fbcdd2, type: 2}
   run: {fileID: 7400000, guid: d0db939ed75942a4cbc5e13f2c84d1a0, type: 2}

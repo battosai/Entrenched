@@ -148,7 +148,7 @@ public class Krieger : MonoBehaviour
         if(isDead)
             return;
 
-        if(!isReloading)
+        if(!isReloading && !isSwitchingWeapons)
             if(Input.GetKey(KeyCode.D))    
                 isMoving = true;
         if(!isAttacking)
@@ -164,6 +164,7 @@ public class Krieger : MonoBehaviour
             if(Input.GetMouseButtonDown(1))
             {
                 isSwitchingWeapons = true;
+                isMoving = false;
                 anim.SetTrigger("SwitchWeapon");
                 weaponAnim.SetTrigger("SwitchWeapon");
             }

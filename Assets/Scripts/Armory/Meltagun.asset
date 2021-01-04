@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64120de0911310440be18c02f11ab5c6, type: 3}
   m_Name: Meltagun
   m_EditorClassIdentifier: 
-  ammo: 5
   range: 100
-  chargeTime: 1
   ap: 4
   dmg: 5
+  ammo: 5
+  chargeTime: 1
   standIdle: {fileID: 7400000, guid: 83f7d2a31e8ecb84f876f3567960b331, type: 2}
   crouchIdle: {fileID: 7400000, guid: 756f9d43ed5558345aa7fd08026550b3, type: 2}
   run: {fileID: 7400000, guid: db794b1c2c037994dbb02c6e56b1adeb, type: 2}

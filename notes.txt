@@ -1,6 +1,12 @@
 ART NOTES:
 	- kriegsman leg height standing=7, crouching=4
 ANIMATION NOTES:
+	ADDING NEW ONES:
+		- Enemies
+			- add animation event function calls
+		- Krieger Weapons
+			- set all (un)equip anims to proper FPS (20 as of 1/3)
+			- set reload anims to proper FPS (11 as of 1/3)
 	TRANSITIONS:
 		- exit time is what %ofanimation that the transition can begin
 		- transition duration units fixedduration=sec nonfixedduration=%ofanimation
