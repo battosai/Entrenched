@@ -9,7 +9,9 @@ public class Krieger : MonoBehaviour
 
     //player settings
     public float moveSpeed;
-    public int ammo;
+    public int clips;
+    public int maxClips;
+    public int ammoInClip {get; private set;}
 
     //state
     public bool isMoving;
@@ -52,7 +54,7 @@ public class Krieger : MonoBehaviour
         private set
         {
             _rangedWeapon = value;
-            ammo = _rangedWeapon.ammo;
+            ammoInClip = _rangedWeapon.clipSize;
             UpdateEquippedWeaponAnims(newWeapon:true);
         }
     }
@@ -172,7 +174,9 @@ public class Krieger : MonoBehaviour
             {
                 if(Input.GetKeyDown(KeyCode.R))
                 {
-                    if(!isMelee)
+                    if(!isMelee && 
+                        ammoInClip < rangedWeapon.clipSize &&
+                        clips > 0)
                     {
                         isReloading = true;
                         anim.SetTrigger("Reload");
@@ -217,7 +221,7 @@ public class Krieger : MonoBehaviour
         anim.SetBool("Crouching", isCrouching);
         weaponAnim.SetBool("Moving", isMoving);
         weaponAnim.SetBool("Crouching", isCrouching);
-        weaponAnim.SetInteger("Ammo", ammo);
+        weaponAnim.SetInteger("Ammo", ammoInClip);
     }
 
     /// <summary>
@@ -241,12 +245,12 @@ public class Krieger : MonoBehaviour
     /// </summary>
     private void UseWeapon(Weapon weapon)
     {
-        //make sure gun has ammo
+        //make sure gun has ammoInClip
         if(!isMelee)
         {
-            if(ammo == 0)
+            if(ammoInClip == 0)
                 return;
-            ammo = Math.Max(ammo-1, 0);
+            ammoInClip = Math.Max(ammoInClip-1, 0);
         }
 
         int mask = LayerMask.GetMask("Enemies");
@@ -272,7 +276,8 @@ public class Krieger : MonoBehaviour
     private void EndReload()
     {
         isReloading = false;
-        ammo = rangedWeapon.ammo;
+        clips--;
+        ammoInClip = rangedWeapon.clipSize;
     }
 
     /// <summary>

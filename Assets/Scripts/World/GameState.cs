@@ -12,6 +12,10 @@ public class GameState : MonoBehaviour
     //reference for all enemy types
     public Heresy heresy;
 
+    //reference for ammo prefab
+    public Ammo ammoDrop;
+    public List<Ammo> ammoPool {get; private set;}
+
     //determines the max power level that enemies can sum to
     public int difficulty {get; private set;}
 
@@ -55,6 +59,7 @@ public class GameState : MonoBehaviour
             {1, new List<Enemy>()},
             {2, new List<Enemy>()}
         };
+        ammoPool = new List<Ammo>();
 
         Krieger.instance.OnDeath += CalculateDistanceTraversed;
     }

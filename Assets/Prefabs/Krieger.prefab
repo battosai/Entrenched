@@ -70,14 +70,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
-  ammo: 0
-  weaponRange: 100
+  clips: 5
+  maxClips: 10
   isMoving: 0
   isCrouching: 0
+  isCharging: 0
   isAttacking: 0
   isReloading: 0
   isSwitchingWeapons: 0
   isMelee: 0
+  isDead: 0
   armory: {fileID: 11400000, guid: aee87a740342b0643b002bceeb051ac0, type: 2}
 --- !u!95 &8427667212324950943
 Animator:

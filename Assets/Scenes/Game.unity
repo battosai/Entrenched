@@ -644,6 +644,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 419436237}
   heresy: {fileID: 11400000, guid: f8d55637c95af254c99af6244d0996c2, type: 2}
+  ammoDrop: {fileID: -1075817752006989080, guid: 7247c2eb8bff48d4e8ae925330cd5003,
+    type: 3}
   spawnInterval: 5
 --- !u!4 &599293719
 Transform:

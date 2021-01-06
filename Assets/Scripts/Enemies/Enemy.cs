@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Random=UnityEngine.Random;
+
 //TODO:
 //add ranged attack enemy, crouching will dodge ranged attack (gives reason to crouch)
 //NEEDS: do it, might need collider work
@@ -40,6 +42,7 @@ public class Enemy : MonoBehaviour
     //events
     public delegate void Wounded(int dmg);
     public Wounded OnWounded;
+    public event Action<Vector3> OnDeath;
 
     private void Awake()
     {
@@ -55,6 +58,7 @@ public class Enemy : MonoBehaviour
         wounds = maxWounds;
         isDead = false;
         OnWounded += TakeDamage;
+        OnDeath += RollDrops;
 
         Krieger.instance.OnDeath += Freeze;
 
@@ -202,6 +206,7 @@ public class Enemy : MonoBehaviour
 
             if(wounds <= 0)
             {
+                OnDeath?.Invoke(transform.position);
                 StartDeath();
                 anim.SetTrigger("Die");
             }
@@ -216,5 +221,18 @@ public class Enemy : MonoBehaviour
         anim.speed = 0f;
         rb.velocity = Vector3.zero;
         stateMachine.Pause();
+    }
+
+    /// <summary>
+    /// Decide if enemy drops loot.
+    /// </summary>
+    private void RollDrops(Vector3 position)
+    {
+        float roll = Random.Range(0f, 1f);
+
+        if(roll < Ammo.dropChance*maxWounds)
+        {
+            Ammo.Spawn(transform.position);
+        }
     }
 }

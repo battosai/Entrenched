@@ -15,7 +15,7 @@ MonoBehaviour:
   range: 100
   ap: 3
   dmg: 2
-  ammo: 5
+  clipSize: 5
   chargeTime: 0.5
   standIdle: {fileID: 7400000, guid: fab01775c2cbb0246a7be7476afbe48a, type: 2}
   crouchIdle: {fileID: 7400000, guid: 204856309bc270b479be5b5c87fbcdd2, type: 2}
