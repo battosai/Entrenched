@@ -4,6 +4,9 @@ ANIMATION NOTES:
 	ADDING NEW ONES:
 		- Enemies
 			- add animation event function calls
+				- for death anim:
+					- EndDeath should be called on the last non-transparent frame
+					- Cleanup at very end
 		- Krieger Weapons
 			- set all (un)equip anims to proper FPS (20 as of 1/3)
 			- set reload anims to proper FPS (11 as of 1/3)

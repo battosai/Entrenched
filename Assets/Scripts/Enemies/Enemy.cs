@@ -12,7 +12,6 @@ using Random=UnityEngine.Random;
 public enum EnemyType {CULTIST, POSSESSED};
 public class Enemy : MonoBehaviour
 {
-
     //stats
     public EnemyType type;
     public int powerLevel;
@@ -84,6 +83,7 @@ public class Enemy : MonoBehaviour
 
     /// <summary>
     /// Reset stats/components and disable object.
+    /// Called by Scroller and as Animation Event at end of death anims.
     /// </summary>
     public void Cleanup()
     {
@@ -179,9 +179,6 @@ public class Enemy : MonoBehaviour
         this.gameObject.layer = LayerMask.NameToLayer("Corpses");
     }
 
-    //TODO:
-    //bodies should probably have a timer to make them inactive if they've been on screen too long (reduce object creation)
-    //NEED: do it
     /// <summary>
     /// Animation Event: After death clip to finalize.
     /// </summary>
@@ -189,6 +186,28 @@ public class Enemy : MonoBehaviour
     {
         anim.enabled = false;
         GameState.EnemyDefeated(this);
+        StartCoroutine(Decay());
+    }
+
+    /// <summary>
+    /// Timer for how long a dead body should stay on screen before going away.
+    /// </summary>
+    private IEnumerator Decay()
+    {
+        float decayTime = 5f;
+        float timer = Time.time;
+        while(Time.time - timer < decayTime) 
+        {
+            //stop waiting if no longer dead
+            //scroller will call Cleanup()
+            if(!isDead)
+                break;
+            yield return null;
+        }
+
+        //bodies will finish death anims
+        if(isDead)
+            anim.enabled = true;
     }
 
     /// <summary>
