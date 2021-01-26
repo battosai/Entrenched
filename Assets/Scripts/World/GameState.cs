@@ -25,6 +25,7 @@ public class GameState : MonoBehaviour
 
     //util
     public static GameState instance;
+    public bool isReady; //only true once player has selected weapons
     public float spawnInterval;
     private float lastSpawnTime;
     private Krieger player;
@@ -68,6 +69,9 @@ public class GameState : MonoBehaviour
     {
         if(Krieger.instance.isDead)
             return;
+
+        // if(!isReady)
+        //     return;
 
         Spawner();
     }

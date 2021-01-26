@@ -124,6 +124,9 @@ public class Krieger : MonoBehaviour
 
     private void Update()
     {
+        if(!GameState.instance.isReady)
+            return;
+
         ReadInput();
         InputHandler();
     }

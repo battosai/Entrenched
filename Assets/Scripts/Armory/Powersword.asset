@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Powersword
   m_EditorClassIdentifier: 
   range: 10
-  ap: 3
+  ap: 1
   dmg: 1
   cooldown: 0.2
   standIdle: {fileID: 7400000, guid: 00f2b17cd1a6e6841937bfb96cafef02, type: 2}

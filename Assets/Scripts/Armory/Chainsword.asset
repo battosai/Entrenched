@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chainsword
   m_EditorClassIdentifier: 
   range: 10
-  ap: 1
+  ap: 3
   dmg: 1
   cooldown: 0.2
   standIdle: {fileID: 7400000, guid: dfbe149dd94388f4f86a6d2d6cfb45c2, type: 2}

@@ -89,6 +89,9 @@ public class GameUI : MonoBehaviour
     private void EndScreenSequenceWrapper() {StartCoroutine(EndScreenSequence());}
     private IEnumerator EndScreenSequence() 
     {
+        GameObject endGameElements = endGameText.transform.parent.parent.gameObject;
+        endGameElements.SetActive(true);
+
         //fader screen comes in
         yield return StartCoroutine(
             Utils.Fade(
