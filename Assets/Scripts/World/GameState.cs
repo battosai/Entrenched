@@ -70,8 +70,8 @@ public class GameState : MonoBehaviour
         if(Krieger.instance.isDead)
             return;
 
-        // if(!isReady)
-        //     return;
+        if(!isReady)
+            return;
 
         Spawner();
     }

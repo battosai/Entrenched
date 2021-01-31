@@ -1,3 +1,9 @@
+FUCKYWUCKIES:
+	- weapon selection ui
+		- menu board background img has preserve aspect ratio on, but that is purely visual, thus children objects aren't scaling w/ the image but with the recttrans
+			- could do custom scripting for ui arrangement....sounds like a pain in the ass
+			- could change the art so that the menu back isn't separate from the buttons...maybe no menu back?
+
 ART NOTES:
 	- kriegsman leg height standing=7, crouching=4
 ANIMATION NOTES:
