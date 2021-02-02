@@ -7,7 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
+    [Header("General")]
     public Image fader;
+
+    [Header("Weapon Selection")]
+    public GameObject weaponSelection;
+    //TODO:
+    //fix Ready button clickable area is much larger than appears bc image is preserving aspect
+    //NEEDS: do it
+
+    //TODO:
+    //Make selected weapons remain selectedSprite etc.
+    //NEEDS: do it
+    private Button[] weaponButtons;
+
+    [Header("End Game")]
     public Text endGameText;
     public Image[] endGameButtonImages;
 
@@ -19,12 +33,49 @@ public class GameUI : MonoBehaviour
     private void Awake()
     {
         Debug.Assert(fader != null);
+        weaponButtons = weaponSelection.transform.Find("Names").GetComponentsInChildren<Button>();
     }
 
     private void Start()
     {
+        foreach(Button b in weaponButtons)
+        {
+            b.onClick.AddListener(() => SelectWeapon(b.gameObject.name));
+        }
+
         endGameText.transform.localScale = Vector3.one * Camera.main.pixelWidth * textWidthRatio;
         Krieger.instance.OnDeath += EndScreenSequenceWrapper;
+    }
+
+    /// <summary>
+    /// OnClick Listener for weapon selection buttons.
+    /// </summary>
+    private void SelectWeapon(string buttonName)
+    {
+        string realName = Utils.antiLawsuit[buttonName];
+        if(realName.Contains("gun"))
+        {
+            if(Krieger.instance.startingRangedWeapon != realName)
+            {
+                Krieger.instance.startingRangedWeapon = realName;
+            }
+        }
+        else
+        {
+            if(Krieger.instance.startingMeleeWeapon != realName)
+            {
+                Krieger.instance.startingMeleeWeapon = realName;
+            }
+        }
+    }
+
+    /// <summary>
+    /// OnClick Listener for Ready button (WeaponSelection Menu).
+    /// </summary>
+    public void Ready()
+    {
+        weaponSelection.SetActive(false);
+        GameState.instance.isReady = true;
     }
 
     /// <summary>

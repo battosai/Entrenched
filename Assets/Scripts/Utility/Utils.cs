@@ -7,6 +7,20 @@ using UnityEngine.UI;
 
 public class Utils
 {
+    public static Dictionary<string, string> antiLawsuit = new Dictionary<string, string>()
+    {
+        {"Blaster", "Lasgun"},
+        {"Heatblaster", "Hellgun"},
+        {"Shotgun", "Shotgun"},
+        {"Protogun", "Plasmagun"},
+        {"Fusiongun", "Meltagun"},
+
+        {"Shovel", "Shovel"},
+        {"Cutlass", "Powersword"},
+        {"Ripper", "Chainsword"},
+        {"Gauntlet", "Powerfist"}
+    };
+
     public static IEnumerator Fade(
         object element,
         Color start,

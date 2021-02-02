@@ -33,11 +33,6 @@ public class Krieger : MonoBehaviour
     private SpriteRenderer legsRend;
 
     //weapon components
-    //TODO:
-    //starting weapons should probably be read in from a pre-game scene
-    //NEEDS: a pre-game scene 
-    public static string startingRangedWeapon;
-    public static string startingMeleeWeapon;
     public Armory armory;
     private Transform weaponTrans;
     private Animator weaponAnim;
@@ -69,6 +64,34 @@ public class Krieger : MonoBehaviour
         {
             _meleeWeapon = value;
             UpdateEquippedWeaponAnims(newWeapon:true);
+        }
+    }
+    public string startingRangedWeapon
+    {
+        get
+        {
+            return rangedWeapon.name;
+        }
+        set
+        {
+            if(armory.ranged.ContainsKey(value))
+            {
+                rangedWeapon = armory.ranged[value];
+            }
+        }
+    }
+    public string startingMeleeWeapon
+    {
+        get
+        {
+            return meleeWeapon.name;
+        }
+        set
+        {
+            if(armory.melee.ContainsKey(value))
+            {
+                meleeWeapon = armory.melee[value];
+            }
         }
     }
 
@@ -111,13 +134,9 @@ public class Krieger : MonoBehaviour
         isMelee = false;
         isDead = false;
 
-        //equip starting weapons
-        rangedWeapon = String.IsNullOrEmpty(startingRangedWeapon) ?
-            armory.ranged["Lasgun"] :
-            armory.ranged[startingRangedWeapon];
-        meleeWeapon = String.IsNullOrEmpty(startingMeleeWeapon) ?
-            armory.melee["Shovel"] :
-            armory.melee[startingMeleeWeapon];
+        //equip default starting weapons
+        startingRangedWeapon = "Lasgun";
+        startingMeleeWeapon = "Shovel";
 
         OnWounded += TakeDamage;
     }
