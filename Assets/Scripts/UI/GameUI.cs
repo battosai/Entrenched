@@ -12,14 +12,6 @@ public class GameUI : MonoBehaviour
 
     [Header("Weapon Selection")]
     public GameObject weaponSelection;
-    //TODO:
-    //fix Ready button clickable area is much larger than appears bc image is preserving aspect
-    //NEEDS: do it
-
-    //TODO:
-    //Make selected weapons remain selectedSprite etc.
-    //NEEDS: do it
-    private Button[] weaponButtons;
 
     [Header("End Game")]
     public Text endGameText;
@@ -29,42 +21,82 @@ public class GameUI : MonoBehaviour
     // Ratio established w/ iPhone 5/5S/5C/SE
     // (scale of 7)/(viewport width AKA Camera.pixelWidth of 1136)
     private readonly float textWidthRatio = 7f/1136f;
+    private Dictionary<string, Button> weaponNamesToButtons;
 
     private void Awake()
     {
         Debug.Assert(fader != null);
-        weaponButtons = weaponSelection.transform.Find("Names").GetComponentsInChildren<Button>();
+        weaponNamesToButtons = new Dictionary<string, Button>();
     }
 
     private void Start()
     {
+        Button[] weaponButtons = weaponSelection.transform.Find("Names").GetComponentsInChildren<Button>();
         foreach(Button b in weaponButtons)
         {
+            weaponNamesToButtons.Add(b.name, b);
             b.onClick.AddListener(() => SelectWeapon(b.gameObject.name));
         }
 
         endGameText.transform.localScale = Vector3.one * Camera.main.pixelWidth * textWidthRatio;
         Krieger.instance.OnDeath += EndScreenSequenceWrapper;
+
+        SelectWeapon(
+            "Blaster", 
+            initialization:true);
+
+        SelectWeapon(
+            "Shovel",
+            initialization:true);
     }
 
     /// <summary>
     /// OnClick Listener for weapon selection buttons.
+    /// Also used to initialize Krieger weapons and buttons.
     /// </summary>
-    private void SelectWeapon(string buttonName)
+    private void SelectWeapon(
+        string buttonName,
+        bool initialization=false)
     {
+        //TODO:
+        //Make selected weapons remain selectedSprite etc. (see unhighlight/highlight comments)
+        //NEEDS: do it
         string realName = Utils.antiLawsuit[buttonName];
         if(realName.Contains("gun"))
         {
             if(Krieger.instance.startingRangedWeapon != realName)
             {
+                //unhighlight previous weaponNamesToButtons[startingRangedWeapon]
+
                 Krieger.instance.startingRangedWeapon = realName;
+
+                //highlight new weaponNamesToButtons[startingRangedWeapon]
+
+            }
+
+            if(!initialization && 
+                Krieger.instance.isMelee)
+            {
+                Krieger.instance.anim.SetTrigger("SwitchWeapon");
+                Krieger.instance.weaponAnim.SetTrigger("SwitchWeapon");
             }
         }
         else
         {
             if(Krieger.instance.startingMeleeWeapon != realName)
             {
+                //unhighlight previous weaponNamesToButtons[startingMeleeWeapon]
+
                 Krieger.instance.startingMeleeWeapon = realName;
+
+                //highlight new weaponNamesToButtons[startingMeleeWeapon]
+            }
+
+            if(!initialization &&
+                !Krieger.instance.isMelee)
+            {
+                Krieger.instance.anim.SetTrigger("SwitchWeapon");
+                Krieger.instance.weaponAnim.SetTrigger("SwitchWeapon");
             }
         }
     }

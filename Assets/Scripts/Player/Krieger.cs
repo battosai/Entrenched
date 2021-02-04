@@ -28,14 +28,14 @@ public class Krieger : MonoBehaviour
     //krieger components
     private Rigidbody2D rb;
     private Collider2D hitbox;
-    private Animator anim;
+    public Animator anim {get; private set;}
     private SpriteRenderer torsoRend;
     private SpriteRenderer legsRend;
 
     //weapon components
     public Armory armory;
     private Transform weaponTrans;
-    private Animator weaponAnim;
+    public Animator weaponAnim {get; private set;}
     private AnimatorOverrideController weaponAnimOverCont;
     private AnimationClipOverrides weaponAnimOverrides;
     private SpriteRenderer weaponRend;
@@ -70,7 +70,7 @@ public class Krieger : MonoBehaviour
     {
         get
         {
-            return rangedWeapon.name;
+            return rangedWeapon == null ? "" : rangedWeapon.name;
         }
         set
         {
@@ -84,7 +84,7 @@ public class Krieger : MonoBehaviour
     {
         get
         {
-            return meleeWeapon.name;
+            return meleeWeapon == null ? "" : meleeWeapon.name;
         }
         set
         {
@@ -133,10 +133,6 @@ public class Krieger : MonoBehaviour
         //status
         isMelee = false;
         isDead = false;
-
-        //equip default starting weapons
-        startingRangedWeapon = "Lasgun";
-        startingMeleeWeapon = "Shovel";
 
         OnWounded += TakeDamage;
     }
