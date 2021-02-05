@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
+    //TODO:
+    //Add ammo visual
+    //NEED: art + do it
+
     [Header("General")]
     public Image fader;
 
@@ -22,6 +26,7 @@ public class GameUI : MonoBehaviour
     // (scale of 7)/(viewport width AKA Camera.pixelWidth of 1136)
     private readonly float textWidthRatio = 7f/1136f;
     private Dictionary<string, Button> weaponNamesToButtons;
+    private Krieger krieger;
 
     private void Awake()
     {
@@ -38,8 +43,13 @@ public class GameUI : MonoBehaviour
             b.onClick.AddListener(() => SelectWeapon(b.gameObject.name));
         }
 
+        krieger = Krieger.instance;
+        krieger.OnDeath += EndScreenSequenceWrapper;
         endGameText.transform.localScale = Vector3.one * Camera.main.pixelWidth * textWidthRatio;
-        Krieger.instance.OnDeath += EndScreenSequenceWrapper;
+
+        //set to UI so that Fader doesn't affect it during weapon selection
+        krieger.SetRendererLayer("UI");
+        fader.color = new Color(0f, 0f, 0f, 210f/255f);
 
         SelectWeapon(
             "Blaster", 
@@ -58,45 +68,49 @@ public class GameUI : MonoBehaviour
         string buttonName,
         bool initialization=false)
     {
-        //TODO:
-        //Make selected weapons remain selectedSprite etc. (see unhighlight/highlight comments)
-        //NEEDS: do it
         string realName = Utils.antiLawsuit[buttonName];
         if(realName.Contains("gun"))
         {
-            if(Krieger.instance.startingRangedWeapon != realName)
+            if(krieger.startingRangedWeapon != realName)
             {
-                //unhighlight previous weaponNamesToButtons[startingRangedWeapon]
+                //unhighlight previous weapon
+                if(!String.IsNullOrEmpty(krieger.startingRangedWeapon))
+                {
+                    weaponNamesToButtons[Utils.antiLawsuit[krieger.startingRangedWeapon]].interactable = true;
+                }
 
-                Krieger.instance.startingRangedWeapon = realName;
-
-                //highlight new weaponNamesToButtons[startingRangedWeapon]
-
+                //highlight new weapon
+                krieger.startingRangedWeapon = realName;
+                weaponNamesToButtons[buttonName].interactable = false;
             }
 
             if(!initialization && 
-                Krieger.instance.isMelee)
+                krieger.isMelee)
             {
-                Krieger.instance.anim.SetTrigger("SwitchWeapon");
-                Krieger.instance.weaponAnim.SetTrigger("SwitchWeapon");
+                krieger.anim.SetTrigger("SwitchWeapon");
+                krieger.weaponAnim.SetTrigger("SwitchWeapon");
             }
         }
         else
         {
-            if(Krieger.instance.startingMeleeWeapon != realName)
+            if(krieger.startingMeleeWeapon != realName)
             {
-                //unhighlight previous weaponNamesToButtons[startingMeleeWeapon]
+                //unhighlight previous weapon
+                if(!String.IsNullOrEmpty(krieger.startingMeleeWeapon))
+                {
+                    weaponNamesToButtons[Utils.antiLawsuit[krieger.startingMeleeWeapon]].interactable = true;
+                }
 
-                Krieger.instance.startingMeleeWeapon = realName;
-
-                //highlight new weaponNamesToButtons[startingMeleeWeapon]
+                //highlight new weapon
+                krieger.startingMeleeWeapon = realName;
+                weaponNamesToButtons[buttonName].interactable = false;
             }
 
             if(!initialization &&
-                !Krieger.instance.isMelee)
+                !krieger.isMelee)
             {
-                Krieger.instance.anim.SetTrigger("SwitchWeapon");
-                Krieger.instance.weaponAnim.SetTrigger("SwitchWeapon");
+                krieger.anim.SetTrigger("SwitchWeapon");
+                krieger.weaponAnim.SetTrigger("SwitchWeapon");
             }
         }
     }
@@ -106,7 +120,13 @@ public class GameUI : MonoBehaviour
     /// </summary>
     public void Ready()
     {
+        StartCoroutine(Utils.Fade(
+            fader,
+            fader.color,
+            Color.clear,
+            0.1f));
         weaponSelection.SetActive(false);
+        krieger.SetRendererLayer("Gameground");
         GameState.instance.isReady = true;
     }
 

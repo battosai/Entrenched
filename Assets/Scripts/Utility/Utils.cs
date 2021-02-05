@@ -7,20 +7,26 @@ using UnityEngine.UI;
 
 public class Utils
 {
+    /// <summary>
+    /// "Bi-directional" dictionary for WH40K terms
+    /// </summary>
     public static Dictionary<string, string> antiLawsuit = new Dictionary<string, string>()
     {
-        {"Blaster", "Lasgun"},
-        {"Heatblaster", "Hellgun"},
+        {"Blaster", "Lasgun"}, {"Lasgun", "Blaster"},
+        {"Heatblaster", "Hellgun"}, {"Hellgun", "Heatblaster"},
         {"Shotgun", "Shotgun"},
-        {"Protogun", "Plasmagun"},
-        {"Fusiongun", "Meltagun"},
+        {"Protogun", "Plasmagun"}, {"Plasmagun", "Protogun"},
+        {"Fusiongun", "Meltagun"}, {"Meltagun", "Fusiongun"},
 
         {"Shovel", "Shovel"},
-        {"Cutlass", "Powersword"},
-        {"Ripper", "Chainsword"},
-        {"Gauntlet", "Powerfist"}
+        {"Cutlass", "Powersword"}, {"Powersword", "Cutlass"},
+        {"Ripper", "Chainsword"}, {"Chainsword", "Ripper"},
+        {"Gauntlet", "Powerfist"}, {"Powerfist", "Gauntlet"}
     };
 
+    /// <summary>
+    /// Fade any object that has a Color property.
+    /// </summary>
     public static IEnumerator Fade(
         object element,
         Color start,

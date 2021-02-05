@@ -29,8 +29,8 @@ public class Krieger : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D hitbox;
     public Animator anim {get; private set;}
-    private SpriteRenderer torsoRend;
-    private SpriteRenderer legsRend;
+    public SpriteRenderer torsoRend {get; private set;}
+    public SpriteRenderer legsRend {get; private set;}
 
     //weapon components
     public Armory armory;
@@ -38,7 +38,7 @@ public class Krieger : MonoBehaviour
     public Animator weaponAnim {get; private set;}
     private AnimatorOverrideController weaponAnimOverCont;
     private AnimationClipOverrides weaponAnimOverrides;
-    private SpriteRenderer weaponRend;
+    public SpriteRenderer weaponRend {get; private set;}
     private RangedWeapon _rangedWeapon;
     public RangedWeapon rangedWeapon
     {
@@ -224,6 +224,9 @@ public class Krieger : MonoBehaviour
                     chargeStartTime = Time.time;
                 }
             }
+            //TODO:
+            //fix shooting when clicking Ready in WeaponSelection
+            //NEED: do it
             if(Input.GetMouseButtonUp(0) && !isMelee)
             {
                 if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
@@ -376,5 +379,15 @@ public class Krieger : MonoBehaviour
     private void EndDeath()
     {
         anim.speed = 0f;
+    }
+
+    /// <summary>
+    /// Utility function to set all 3 of Krieger's renderer layers.
+    /// </summary>
+    public void SetRendererLayer(string layer)
+    {
+        torsoRend.sortingLayerName = layer;
+        legsRend.sortingLayerName = layer;
+        weaponRend.sortingLayerName = layer;
     }
 }

@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    //TODO:
+    //Add options for options button...
+    //NEED: needs music, sounds, etc.
+
     public Image fader;
 
     /// <summary>
