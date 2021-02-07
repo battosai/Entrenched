@@ -224,16 +224,20 @@ public class Krieger : MonoBehaviour
                     chargeStartTime = Time.time;
                 }
             }
-            //TODO:
-            //fix shooting when clicking Ready in WeaponSelection
-            //NEED: do it
-            if(Input.GetMouseButtonUp(0) && !isMelee)
+
+            //positive charge start time to ensure
+            //there was a corresponding mouse down
+            //(clicking ready button in weapon selection)
+            if(chargeStartTime > 0)
             {
-                if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
+                if(Input.GetMouseButtonUp(0) && !isMelee)
                 {
-                    isAttacking = true;
-                    anim.SetTrigger("Shoot");
-                    weaponAnim.SetTrigger("Shoot");
+                    if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
+                    {
+                        isAttacking = true;
+                        anim.SetTrigger("Shoot");
+                        weaponAnim.SetTrigger("Shoot");
+                    }
                 }
             }
         }
