@@ -100,6 +100,7 @@ public class Krieger : MonoBehaviour
     public delegate void Wounded();
     public Wounded OnWounded;
     public event Action OnDeath;
+    public event Action OnShoot;
 
     private void Awake() 
     {
@@ -278,6 +279,7 @@ public class Krieger : MonoBehaviour
             if(ammoInClip == 0)
                 return;
             ammoInClip = Math.Max(ammoInClip-1, 0);
+            OnShoot?.Invoke();
         }
 
         int mask = LayerMask.GetMask("Enemies");

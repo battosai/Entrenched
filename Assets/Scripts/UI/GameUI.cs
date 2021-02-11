@@ -7,10 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
-    //TODO:
-    //Add ammo visual
-    //NEED: art + do it
-
     [Header("General")]
     public Image fader;
 
@@ -27,6 +23,10 @@ public class GameUI : MonoBehaviour
     private readonly float textWidthRatio = 7f/1136f;
     private Dictionary<string, Button> weaponNamesToButtons;
     private Krieger krieger;
+
+    //yucky
+    private Coroutine ammoDisplay;
+    private Coroutine ammoDisplayFade;
 
     private void Awake()
     {
@@ -45,6 +45,7 @@ public class GameUI : MonoBehaviour
 
         krieger = Krieger.instance;
         krieger.OnDeath += EndScreenSequenceWrapper;
+        krieger.OnShoot += DisplayAmmoWrapper;
         endGameText.transform.localScale = Vector3.one * Camera.main.pixelWidth * textWidthRatio;
 
         //set to UI so that Fader doesn't affect it during weapon selection
@@ -58,6 +59,49 @@ public class GameUI : MonoBehaviour
         SelectWeapon(
             "Shovel",
             initialization:true);
+    }
+
+
+    /// <summary>
+    /// Krieger.OnShoot Listener to display current ammo capacity.
+    /// </summary>
+    private void DisplayAmmoWrapper()
+    {
+        if(ammoDisplay != null)
+            StopCoroutine(ammoDisplay);
+
+        ammoDisplay = StartCoroutine(DisplayAmmo());
+    }
+    private IEnumerator DisplayAmmo()
+    {
+        int ammoInClip = krieger.ammoInClip;
+        SpriteRenderer ammoRend = krieger.ammoRend;
+        RangedWeapon rangedWeapon = krieger.rangedWeapon;
+
+        //cancel previous fade
+        if(ammoDisplayFade != null)
+            StopCoroutine(ammoDisplayFade);
+
+        //update AmmoCount sprite
+        float capacity = (float)ammoInClip / rangedWeapon.clipSize;
+        int capacitySprite = (int)Math.Ceiling(capacity * (rangedWeapon.ammoCounter.Length-1));
+        ammoRend.sprite = rangedWeapon.ammoCounter[capacitySprite];
+
+        //make visible
+        float displayTime = 1f;   
+        float timer = Time.time;
+        ammoRend.color = Color.white;
+        while(Time.time - timer < displayTime)
+            yield return null;
+
+        //do fade
+        ammoDisplayFade = StartCoroutine(Utils.Fade(
+            ammoRend,
+            Color.white,
+            Color.clear,
+            0.25f));
+        yield return ammoDisplayFade;
+        ammoDisplayFade = null;
     }
 
     /// <summary>
