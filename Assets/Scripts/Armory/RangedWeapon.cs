@@ -6,6 +6,9 @@ public class RangedWeapon : Weapon
     public int clipSize;
     public float chargeTime;
 
+    [Header("Ammo Count")]
+    public Sprite[] ammoCounter;
+
     [Header("Animations")]
     public AnimationClip standIdle;
     public AnimationClip crouchIdle;

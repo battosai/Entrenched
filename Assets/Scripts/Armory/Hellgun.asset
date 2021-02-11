@@ -17,6 +17,21 @@ MonoBehaviour:
   dmg: 1
   clipSize: 10
   chargeTime: 0.2
+  ammoCounter:
+  - {fileID: 21300000, guid: 5b11b167bd89b9145a1bf9b432e85524, type: 3}
+  - {fileID: 21300000, guid: 124d9e5d0b9a5f34495d1c02e63f844d, type: 3}
+  - {fileID: 21300000, guid: d44c9bfeace008147aa39cee13d3b53e, type: 3}
+  - {fileID: 21300000, guid: 891f0335aaf51664fa9204fd4933a576, type: 3}
+  - {fileID: 21300000, guid: 1cf9fa39a356896498d29a5634190c40, type: 3}
+  - {fileID: 21300000, guid: 69d36a8e41f5c564f901232e1fc1c924, type: 3}
+  - {fileID: 21300000, guid: 736439bdff1673c48b5ffb96e963b219, type: 3}
+  - {fileID: 21300000, guid: aa8d6fc39b80178499aa4a5047900f96, type: 3}
+  - {fileID: 21300000, guid: 58be4dfbf99ed9740bf9450c6a03e536, type: 3}
+  - {fileID: 21300000, guid: 8142e18594f579b4dbba7c03e257d61c, type: 3}
+  - {fileID: 21300000, guid: 4966906e03964af4a9101273a1870ec8, type: 3}
+  - {fileID: 21300000, guid: 616160eb3121f5e40aa56113c99c600f, type: 3}
+  - {fileID: 21300000, guid: 5472fd399ad9c5a458adf106b138a1ff, type: 3}
+  - {fileID: 21300000, guid: c04616cf8f45f3248a75a44e804223c6, type: 3}
   standIdle: {fileID: 7400000, guid: c4f9da426b1ffb140938c3585e2dedfb, type: 2}
   crouchIdle: {fileID: 7400000, guid: f2e7e1995d9e6ad4e9680726e1fc7bbe, type: 2}
   run: {fileID: 7400000, guid: d886e7cd8620c0c4ebd90f68ba7ded39, type: 2}

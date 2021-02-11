@@ -31,6 +31,7 @@ public class Krieger : MonoBehaviour
     public Animator anim {get; private set;}
     public SpriteRenderer torsoRend {get; private set;}
     public SpriteRenderer legsRend {get; private set;}
+    public SpriteRenderer ammoRend {get; private set;}
 
     //weapon components
     public Armory armory;
@@ -114,6 +115,7 @@ public class Krieger : MonoBehaviour
         anim = GetComponent<Animator>();
         torsoRend = transform.Find("Torso").GetComponent<SpriteRenderer>();
         legsRend = transform.Find("Legs").GetComponent<SpriteRenderer>();
+        ammoRend = transform.Find("AmmoCount").GetComponent<SpriteRenderer>();
 
         weaponTrans = transform.Find("Weapon");
         weaponAnim = weaponTrans.GetComponent<Animator>();
