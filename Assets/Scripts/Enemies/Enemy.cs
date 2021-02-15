@@ -24,6 +24,10 @@ public class Enemy : MonoBehaviour
     public float meleeCooldown;
     public float rangedRange;
     public float rangedCooldown;
+    [Header("Sounds")]
+    public AudioClip[] walks;
+    public AudioClip[] attacks;
+    public AudioClip death;
 
     //state
     public bool isDead {get; private set;}

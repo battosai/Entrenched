@@ -6,6 +6,11 @@ public class RangedWeapon : Weapon
     public int clipSize;
     public float chargeTime;
 
+    [Header("Sounds")]
+    public AudioClip[] shots;
+    public AudioClip[] reloads;
+    public AudioClip[] hits;
+
     [Header("Ammo Count")]
     public Sprite[] ammoCounter;
 

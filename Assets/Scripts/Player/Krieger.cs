@@ -8,10 +8,14 @@ public class Krieger : MonoBehaviour
     public static Krieger instance;
 
     //player settings
+    [Header("Stats")]
     public float moveSpeed;
     public int clips;
     public int maxClips;
     public int ammoInClip {get; private set;}
+
+    [Header("Sounds")]
+    public AudioClip[] walks;
 
     //state
     public bool isMoving;

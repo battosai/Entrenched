@@ -6,6 +6,10 @@ public class MeleeWeapon : Weapon
 {
     public float cooldown;
 
+    [Header("Sounds")]
+    public AudioClip[] swings;
+    public AudioClip[] hits;
+
     [Header("Animations")]
     public AnimationClip standIdle;
     public AnimationClip crouchIdle;
