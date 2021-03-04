@@ -8,6 +8,7 @@ public class RangedWeapon : Weapon
 
     [Header("Sounds")]
     public AudioClip[] shots;
+    public AudioClip[] dryShots;
     public AudioClip[] reloads;
     public AudioClip[] hits;
 

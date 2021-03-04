@@ -30,6 +30,7 @@ public class Krieger : MonoBehaviour
     public bool isDead;
 
     //krieger components
+    private AudioSource audioSource;
     private Rigidbody2D rb;
     private Collider2D hitbox;
     public Animator anim {get; private set;}
@@ -115,6 +116,7 @@ public class Krieger : MonoBehaviour
         Debug.Assert(armory != null);
         armory.Define();
 
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         hitbox = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
@@ -203,6 +205,7 @@ public class Krieger : MonoBehaviour
                         ammoInClip < rangedWeapon.clipSize &&
                         clips > 0)
                     {
+                        AudioManager.PlayOne(audioSource, rangedWeapon.reloads);
                         isReloading = true;
                         anim.SetTrigger("Reload");
                         weaponAnim.SetTrigger("Reload");
@@ -277,11 +280,19 @@ public class Krieger : MonoBehaviour
     /// </summary>
     private void UseWeapon(Weapon weapon)
     {
-        //make sure gun has ammoInClip
-        if(!isMelee)
+        if(isMelee)
         {
+            AudioManager.PlayOne(audioSource, meleeWeapon.swings);
+        }
+        else
+        {
+            //make sure gun has ammoInClip
             if(ammoInClip == 0)
+            {
+                AudioManager.PlayOne(audioSource, rangedWeapon.dryShots);
                 return;
+            }
+            AudioManager.PlayOne(audioSource, rangedWeapon.shots);
             ammoInClip = Math.Max(ammoInClip-1, 0);
             OnShoot?.Invoke();
         }
@@ -295,6 +306,7 @@ public class Krieger : MonoBehaviour
         
         if(hits.Length > 0)
         {
+            AudioManager.PlayOne(audioSource, isMelee ? meleeWeapon.hits : rangedWeapon.hits);
             int wounds = Math.Min(1+weapon.ap, hits.Length);
             for(int i = 0; i < wounds; i++)
             {

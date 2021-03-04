@@ -17,6 +17,14 @@ MonoBehaviour:
   dmg: 1
   clipSize: 10
   chargeTime: 0
+  shots:
+  - {fileID: 8300000, guid: 2d0996364e797554b93c70e6a2a32693, type: 3}
+  - {fileID: 8300000, guid: 184a3328f27eb994f85aceb41c21c4a3, type: 3}
+  - {fileID: 8300000, guid: 7ada8944c5a1ddf439a1c66a3bda138e, type: 3}
+  - {fileID: 8300000, guid: 1abc510c5a716e245a5a710fa199a26b, type: 3}
+  dryShots: []
+  reloads: []
+  hits: []
   ammoCounter:
   - {fileID: 21300000, guid: 3ce50ff678f443e4ba908320348ccc53, type: 3}
   - {fileID: 21300000, guid: 2bba6505c2012394bb91849a6e2f81ab, type: 3}
