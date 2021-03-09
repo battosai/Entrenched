@@ -282,7 +282,9 @@ public class Krieger : MonoBehaviour
     {
         if(isMelee)
         {
-            AudioManager.PlayOne(audioSource, meleeWeapon.swings);
+            // Currently, the hit sounds for melee weapons includes a swing sound as well in the same clip
+            // so we're gonna check to see if there's a hit first and decide what clip to play from there.
+            // AudioManager.PlayOne(audioSource, meleeWeapon.swings);
         }
         else
         {
@@ -312,6 +314,13 @@ public class Krieger : MonoBehaviour
             {
                 hits[i].collider.GetComponent<Enemy>().OnWounded?.Invoke(weapon.dmg);
             }
+        }
+        else
+        {
+            // Currently, the hit sounds for melee weapons includes a swing sound as well in the same clip
+            // so we're gonna check to see if there's a hit first and decide what clip to play from there.
+            if(isMelee)
+                AudioManager.PlayOne(audioSource, meleeWeapon.swings);
         }
     }
 

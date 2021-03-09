@@ -73,7 +73,7 @@ public class GameState : MonoBehaviour
         if(!isReady)
             return;
 
-        // Spawner();
+        Spawner();
     }
 
     /// <summary>

@@ -16,6 +16,14 @@ MonoBehaviour:
   ap: 0
   dmg: 1
   cooldown: 0.2
+  swings:
+  - {fileID: 8300000, guid: e377abea17c384b458e9b09cbaee2ba9, type: 3}
+  - {fileID: 8300000, guid: 29315d46c1ba3374aa8f55208af2650b, type: 3}
+  - {fileID: 8300000, guid: f9427a52636fb3846a3d4b5fc3de7d10, type: 3}
+  hits:
+  - {fileID: 8300000, guid: f76713ea205fcbc4b9576da3d927812a, type: 3}
+  - {fileID: 8300000, guid: 3449e77ef496a3b43a37a7a0456d7831, type: 3}
+  - {fileID: 8300000, guid: 076e3aeb751628e4f82ae0239745d2b2, type: 3}
   standIdle: {fileID: 7400000, guid: f134fb11a431b8945847845659e2ab59, type: 2}
   crouchIdle: {fileID: 7400000, guid: 46b5694177d2f3940a776c55b77eb8f3, type: 2}
   run: {fileID: 7400000, guid: 29e0fc5161d212645b179445628e4563, type: 2}
