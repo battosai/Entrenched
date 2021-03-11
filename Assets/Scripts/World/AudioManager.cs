@@ -8,16 +8,19 @@ public class AudioManager : MonoBehaviour
     [Header("Sounds")]
     public AudioClip[] music;
     public AudioClip[] ambience;
+    public AudioClip[] ammoDrops;
 
     private AudioSource musicSource;
     private AudioSource ambienceSource;
 
     //util
+    public static AudioManager instance;
     private Krieger krieger;
     private int ambienceIndex;
 
     private void Awake()
     {
+        instance = this;
         musicSource = transform.Find("MusicAudioSource").GetComponent<AudioSource>();
         ambienceSource = transform.Find("AmbienceAudioSource").GetComponent<AudioSource>();
     }

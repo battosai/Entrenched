@@ -994,6 +994,8 @@ MonoBehaviour:
   ambience:
   - {fileID: 8300000, guid: 8ba40f8505d16d04d9200bb5eda7cd00, type: 3}
   - {fileID: 8300000, guid: cddc06baec723e34081fb17012f6e928, type: 3}
+  ammoDrops:
+  - {fileID: 8300000, guid: 970a67d6414e033418c4d4684dcbfa4a, type: 3}
 --- !u!4 &605104674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 236548550910505062, guid: 0d10300bd8dbb0147b8e0c459dd501de,

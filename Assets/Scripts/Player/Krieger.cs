@@ -127,10 +127,7 @@ public class Krieger : MonoBehaviour
         weaponTrans = transform.Find("Weapon");
         weaponAnim = weaponTrans.GetComponent<Animator>();
         weaponRend = weaponTrans.GetComponent<SpriteRenderer>();
-    }
 
-    private void Start() 
-    {
         //anim
         weaponAnimOverCont = 
             new AnimatorOverrideController(weaponAnim.runtimeAnimatorController);
@@ -138,7 +135,10 @@ public class Krieger : MonoBehaviour
         weaponAnimOverrides = 
             new AnimationClipOverrides(weaponAnimOverCont.overridesCount);
         weaponAnimOverCont.GetOverrides(weaponAnimOverrides);
+    }
 
+    private void Start() 
+    {
         //status
         isMelee = false;
         isDead = false;

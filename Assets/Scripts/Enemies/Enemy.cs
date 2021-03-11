@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour
     public Animator anim {get; private set;}
     public SpriteRenderer rend {get; private set;}
     private Collider2D hitbox;
+    private AudioSource audioSource;
 
     //events
     public delegate void Wounded(int dmg);
@@ -53,6 +54,7 @@ public class Enemy : MonoBehaviour
         hitbox = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         stateMachine = GetComponent<StateMachine>();
     }
 
@@ -256,6 +258,7 @@ public class Enemy : MonoBehaviour
         if(roll < Ammo.dropChance*maxWounds)
         {
             Ammo.Spawn(transform.position);
+            AudioManager.PlayOne(audioSource, AudioManager.instance.ammoDrops);
         }
     }
 }
