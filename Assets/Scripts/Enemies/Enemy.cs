@@ -5,11 +5,7 @@ using UnityEngine;
 
 using Random=UnityEngine.Random;
 
-//TODO:
-//add ranged attack enemy, crouching will dodge ranged attack (gives reason to crouch)
-//NEEDS: do it, might need collider work
-
-public enum EnemyType {CULTIST, POSSESSED};
+public enum EnemyType {CULTIST, POSSESSED, BELCHER};
 public class Enemy : MonoBehaviour
 {
     //stats
@@ -24,6 +20,7 @@ public class Enemy : MonoBehaviour
     public float meleeCooldown;
     public float rangedRange;
     public float rangedCooldown;
+    public float projectileSpeed;
     [Header("Sounds")]
     public AudioClip[] walks;
     public AudioClip[] attacks;
@@ -139,13 +136,14 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Attack()
     {
-        float range = isMelee ? meleeRange : rangedRange;
-        int mask = LayerMask.GetMask("Player");
+        if(!isMelee)
+            return;
 
+        int mask = LayerMask.GetMask("Player");
         RaycastHit2D hit = Physics2D.Raycast(
             transform.position, 
             Vector2.left,
-            range,
+            meleeRange,
             mask);
         
         if(hit.collider != null)
@@ -162,6 +160,16 @@ public class Enemy : MonoBehaviour
             StartCoroutine(Cooldown(cd));
         else
             isAttacking = false;
+    }
+
+    /// <summary>
+    /// Animation Event: Trigger projectile spawn.
+    /// </summary>
+    private void Shoot()
+    {
+        Projectile.Spawn(
+            transform.position,
+            projectileSpeed);
     }
 
     /// <summary>

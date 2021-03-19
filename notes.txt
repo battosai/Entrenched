@@ -7,6 +7,11 @@ ANIMATION NOTES:
 				- for death anim:
 					- EndDeath should be called on the last non-transparent frame
 					- Cleanup at very end
+				- for alert anim:
+					- Alert should be called on last frame
+				- for attack anim:
+					- Attack/Shoot should be called on first frame that hits can be registered or when projectile should be spawned
+					- EndAttack should be called on final frame that hits can be registered or when cooldown can start
 		- Krieger Weapons
 			- set all (un)equip anims to proper FPS (20 as of 1/3)
 			- set reload anims to proper FPS (11 as of 1/3)

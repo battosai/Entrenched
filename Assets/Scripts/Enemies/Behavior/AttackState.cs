@@ -17,10 +17,13 @@ public class AttackState : BaseState
                 me.rb.velocity = Vector3.zero;
                 me.isAttacking = true;
 
-                if(me.isMelee)
-                    me.anim.SetTrigger("Attack");
-                else
-                    me.anim.SetTrigger("Shoot");
+                // NOTE: Originally would've had different state for this,
+                // no longer in the plan so just use the same state. Animators
+                // will have a state that isn't used, just FYI.
+                // if(me.isMelee)
+                me.anim.SetTrigger("Attack");
+                // else
+                //     me.anim.SetTrigger("Shoot");
             }
             else
             {

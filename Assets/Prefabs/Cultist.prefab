@@ -246,7 +246,7 @@ MonoBehaviour:
   type: 0
   powerLevel: 1
   maxWounds: 1
-  moveSpeed: 15
+  moveSpeed: 18
   aggroRange: 120
   isMelee: 1
   meleeRange: 4

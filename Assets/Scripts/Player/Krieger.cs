@@ -267,6 +267,10 @@ public class Krieger : MonoBehaviour
         rb.velocity = isMoving ? 
             new Vector2(moveSpeed, 0) : 
             Vector2.zero;
+
+        hitbox.offset = isCrouching ?
+            new Vector2(0, -2) :
+            Vector2.zero;
         
         if(isAttacking)
             UseWeapon(

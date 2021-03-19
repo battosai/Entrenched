@@ -50,6 +50,8 @@ public class Scroller : MonoBehaviour
         string layer = LayerMask.LayerToName(other.gameObject.layer);
         switch(layer)
         {
+            case "Projectile":
+                break;
             case "Corpses":
                 Enemy enemy = other.GetComponent<Enemy>();
                 if(enemy.isDead)

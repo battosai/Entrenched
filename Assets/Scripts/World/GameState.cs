@@ -16,6 +16,10 @@ public class GameState : MonoBehaviour
     public Ammo ammoDrop;
     public List<Ammo> ammoPool {get; private set;}
 
+    //reference for projectile prefab
+    public Projectile projectile;
+    public List<Projectile> projectilePool {get; private set;}
+
     //determines the max power level that enemies can sum to
     public int difficulty {get; private set;}
 
@@ -61,6 +65,7 @@ public class GameState : MonoBehaviour
             {2, new List<Enemy>()}
         };
         ammoPool = new List<Ammo>();
+        projectilePool = new List<Projectile>();
 
         Krieger.instance.OnDeath += CalculateDistanceTraversed;
     }
