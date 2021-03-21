@@ -12,6 +12,7 @@ public class GameUI : MonoBehaviour
 
     [Header("Weapon Selection")]
     public GameObject weaponSelection;
+    public Sprite redactedWeaponOption;
 
     [Header("End Game")]
     public Text endGameText;
@@ -52,6 +53,8 @@ public class GameUI : MonoBehaviour
         krieger.SetRendererLayer("UI");
         fader.color = new Color(0f, 0f, 0f, 210f/255f);
 
+        LockUnavailableWeaponsFromPlayerData();
+
         SelectWeapon(
             "Blaster", 
             initialization:true);
@@ -61,6 +64,38 @@ public class GameUI : MonoBehaviour
             initialization:true);
     }
 
+    /// <summary>
+    /// Locks weapons that player has earned.
+    /// </summary>
+    private void LockUnavailableWeaponsFromPlayerData()
+    {
+        float playerDist = PlayerPrefs.GetFloat("Distance", 0);
+
+        Transform rangedOptions = weaponSelection.transform.Find("Names/RangedOptions");
+        Transform meleeOptions = weaponSelection.transform.Find("Names/MeleeOptions");
+        foreach(Transform t in rangedOptions)
+        {
+            if(playerDist < Krieger.instance.armory.ranged[Utils.antiLawsuit[t.name]].unlockDistance)
+                LockWeapon(t);
+        }
+        foreach(Transform t in meleeOptions)
+        {
+            if(playerDist < Krieger.instance.armory.melee[Utils.antiLawsuit[t.name]].unlockDistance)
+                LockWeapon(t);
+        }
+    }
+
+    /// <summary>
+    /// Helper func. for LockUnavailableWeaponsFromPlayerData.
+    /// Disables button interactability andd swaps sprite.
+    /// </summary>
+    private void LockWeapon(Transform weaponButtonTrans)
+    {
+        Button weaponButton = weaponButtonTrans.GetComponent<Button>();
+        weaponButton.enabled = false;
+        Image weaponButtonImg = weaponButtonTrans.GetComponent<Image>();
+        weaponButtonImg.sprite = redactedWeaponOption;
+    }
 
     /// <summary>
     /// Krieger.OnShoot Listener to display current ammo capacity.

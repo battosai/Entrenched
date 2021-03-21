@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64120de0911310440be18c02f11ab5c6, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
+  unlockDistance: 150
   range: 75
   ap: 0
   dmg: 2

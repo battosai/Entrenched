@@ -208,5 +208,13 @@ public class GameState : MonoBehaviour
     {
         int dist = (int)Mathf.Floor(Krieger.instance.transform.position.x / 3);
         feetTraversed = dist;
+
+        // Save if new record
+        float playerDist = PlayerPrefs.GetFloat("Distance", 0);
+        if(dist > playerDist)
+        {
+            PlayerPrefs.SetFloat("Distance", dist);
+            PlayerPrefs.Save();
+        }
     }
 }
