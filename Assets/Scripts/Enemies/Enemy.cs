@@ -148,6 +148,8 @@ public class Enemy : MonoBehaviour
         
         if(hit.collider != null)
             Krieger.instance.OnWounded?.Invoke();
+
+        AudioManager.PlayOne(audioSource, attacks);
     }
 
     /// <summary>
@@ -191,6 +193,7 @@ public class Enemy : MonoBehaviour
         isDead = true;
         rb.velocity = Vector3.zero;
         this.gameObject.layer = LayerMask.NameToLayer("Corpses");
+        AudioManager.Play(audioSource, death);
     }
 
     /// <summary>
