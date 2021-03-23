@@ -44,23 +44,46 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Play a clip once.
+    /// Load audio source with clip and play.
     /// </summary>
     public static void Play(
         AudioSource audioSource,
+        AudioClip clip,
+        bool loop=false,
+        float startTime=-1f)
+    {
+        if(clip == null)
+            return;
+
+        audioSource.loop = loop;
+        audioSource.clip = clip;
+        if(startTime > 0)
+            audioSource.time = startTime;
+
+        audioSource.Play();
+    }
+
+    /// <summary>
+    /// Play a clip once.
+    /// </summary>
+    public static void PlayClip(
+        AudioSource audioSource,
         AudioClip clip)
     {
+        if(clip == null)
+            return;
+
         audioSource.PlayOneShot(clip);
     }
 
     /// <summary>
     /// Plays a random clip in the provided array from the provided source.
     /// </summary>
-    public static void PlayOne(
+    public static void PlayOneClip(
         AudioSource audioSource,
         AudioClip[] clips)
     {
-        if(clips.Length == 0)
+        if(clips == null || clips.Length == 0)
             return;
 
         int roll = Random.Range(0, clips.Length);

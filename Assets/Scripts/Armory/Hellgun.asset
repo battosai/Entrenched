@@ -12,17 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64120de0911310440be18c02f11ab5c6, type: 3}
   m_Name: Hellgun
   m_EditorClassIdentifier: 
-  unlockDistance: 500
+  unlockDistance: 250
   range: 100
   ap: 2
   dmg: 1
   clipSize: 10
   chargeTime: 0.2
+  charge: {fileID: 8300000, guid: 18175b068eee7674695b0a627053931b, type: 3}
+  fullCharge: {fileID: 8300000, guid: e4135f40323d80c4598ee8ccfae89161, type: 3}
   shots:
-  - {fileID: 8300000, guid: 5346e8580fbf444418d9dc358999692a, type: 3}
-  - {fileID: 8300000, guid: b02ae2287a6388e43a1473912aaddbb2, type: 3}
-  dryShots: []
-  reloads: []
+  - {fileID: 8300000, guid: a35a36428a39b2649bdde533b904c0f6, type: 3}
+  - {fileID: 8300000, guid: b144fd9d27496f441982a7879d117a7a, type: 3}
+  - {fileID: 8300000, guid: e55369ef1fe05024f945a88871795429, type: 3}
+  - {fileID: 8300000, guid: 0ff972d23b5d25a4488d55baa3faea08, type: 3}
+  - {fileID: 8300000, guid: 60263bac56e302548ba695ade19cbc8d, type: 3}
+  dryShots:
+  - {fileID: 8300000, guid: b58f1f92b22bc5e40939295c7682bf4e, type: 3}
+  - {fileID: 8300000, guid: b2d58cd1845c3f24bb911e75b24ceba9, type: 3}
+  reloads:
+  - {fileID: 8300000, guid: d24321b307daa414ba3572d596c2a830, type: 3}
   hits: []
   ammoCounter:
   - {fileID: 21300000, guid: 5b11b167bd89b9145a1bf9b432e85524, type: 3}

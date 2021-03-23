@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e78e1e3cf8f76a45b8ef46e50a49c58, type: 3}
   m_Name: Shovel
   m_EditorClassIdentifier: 
+  unlockDistance: 0
   range: 10
   ap: 0
   dmg: 1
-  cooldown: 0.2
+  cooldown: 0.3
   swings:
   - {fileID: 8300000, guid: e377abea17c384b458e9b09cbaee2ba9, type: 3}
   - {fileID: 8300000, guid: 29315d46c1ba3374aa8f55208af2650b, type: 3}

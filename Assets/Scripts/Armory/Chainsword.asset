@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e78e1e3cf8f76a45b8ef46e50a49c58, type: 3}
   m_Name: Chainsword
   m_EditorClassIdentifier: 
-  unlockDistance: 1100
+  unlockDistance: 300
   range: 10
   ap: 3
   dmg: 1
-  cooldown: 0.2
-  swings: []
-  hits: []
+  cooldown: 0.75
+  swings:
+  - {fileID: 8300000, guid: 7ec6be6c9cd4e904fb5c64ba48206dd7, type: 3}
+  hits:
+  - {fileID: 8300000, guid: 018701d0950f7464181150192a7b40f2, type: 3}
+  - {fileID: 8300000, guid: aa3a57a7e6314d74db3849bf4f768faf, type: 3}
   standIdle: {fileID: 7400000, guid: dfbe149dd94388f4f86a6d2d6cfb45c2, type: 2}
   crouchIdle: {fileID: 7400000, guid: bbe9ce21bf0ae8b4385d78d557a9b287, type: 2}
   run: {fileID: 7400000, guid: 3d16eeea1fa226f4d8ebada4e743eb9a, type: 2}

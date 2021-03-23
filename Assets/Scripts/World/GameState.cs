@@ -6,6 +6,10 @@ using Random=UnityEngine.Random;
 
 public class GameState : MonoBehaviour
 {
+    [Header("Test")]
+    public bool testMode;
+
+    [Header("Development")]
     //reference for game ui
     public GameUI ui;
 

@@ -12,16 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64120de0911310440be18c02f11ab5c6, type: 3}
   m_Name: Plasmagun
   m_EditorClassIdentifier: 
-  unlockDistance: 900
+  unlockDistance: 350
   range: 100
   ap: 3
   dmg: 2
   clipSize: 5
   chargeTime: 0.5
+  charge: {fileID: 8300000, guid: 056c1a0c9f76f7744a2f92b569bc9303, type: 3}
+  fullCharge: {fileID: 8300000, guid: e4135f40323d80c4598ee8ccfae89161, type: 3}
   shots:
-  - {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
-  dryShots: []
-  reloads: []
+  - {fileID: 8300000, guid: 83da7e54f691e7146b9e5214ae6e5357, type: 3}
+  - {fileID: 8300000, guid: db8a784e52901e543aff83e427138acc, type: 3}
+  dryShots:
+  - {fileID: 8300000, guid: b58f1f92b22bc5e40939295c7682bf4e, type: 3}
+  - {fileID: 8300000, guid: b2d58cd1845c3f24bb911e75b24ceba9, type: 3}
+  reloads:
+  - {fileID: 8300000, guid: d24321b307daa414ba3572d596c2a830, type: 3}
   hits:
   - {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
   ammoCounter:

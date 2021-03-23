@@ -12,18 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64120de0911310440be18c02f11ab5c6, type: 3}
   m_Name: Lasgun
   m_EditorClassIdentifier: 
+  unlockDistance: 0
   range: 100
   ap: 0
   dmg: 1
   clipSize: 10
   chargeTime: 0
+  charge: {fileID: 0}
+  fullCharge: {fileID: 0}
   shots:
   - {fileID: 8300000, guid: 2d0996364e797554b93c70e6a2a32693, type: 3}
   - {fileID: 8300000, guid: 184a3328f27eb994f85aceb41c21c4a3, type: 3}
   - {fileID: 8300000, guid: 7ada8944c5a1ddf439a1c66a3bda138e, type: 3}
   - {fileID: 8300000, guid: 1abc510c5a716e245a5a710fa199a26b, type: 3}
-  dryShots: []
-  reloads: []
+  dryShots:
+  - {fileID: 8300000, guid: b58f1f92b22bc5e40939295c7682bf4e, type: 3}
+  - {fileID: 8300000, guid: b2d58cd1845c3f24bb911e75b24ceba9, type: 3}
+  reloads:
+  - {fileID: 8300000, guid: d24321b307daa414ba3572d596c2a830, type: 3}
   hits: []
   ammoCounter:
   - {fileID: 21300000, guid: 3ce50ff678f443e4ba908320348ccc53, type: 3}

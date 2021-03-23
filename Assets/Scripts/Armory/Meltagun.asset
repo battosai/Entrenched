@@ -12,16 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64120de0911310440be18c02f11ab5c6, type: 3}
   m_Name: Meltagun
   m_EditorClassIdentifier: 
-  unlockDistance: 1300
+  unlockDistance: 450
   range: 100
   ap: 4
   dmg: 5
   clipSize: 5
   chargeTime: 1
+  charge: {fileID: 8300000, guid: 06a916399d5246541b864a5eb8b0bf11, type: 3}
+  fullCharge: {fileID: 8300000, guid: e4135f40323d80c4598ee8ccfae89161, type: 3}
   shots:
-  - {fileID: 8300000, guid: e88084c6f293c324db2b4dcf575d60dc, type: 3}
-  dryShots: []
-  reloads: []
+  - {fileID: 8300000, guid: 66ff0d43b6270b14fbe015cffcf05f96, type: 3}
+  - {fileID: 8300000, guid: 60af25c1f306d0f4a85c56cb5bd58f68, type: 3}
+  - {fileID: 8300000, guid: 0d55711dcf7bbc44fbde6299fe6e0f4e, type: 3}
+  dryShots:
+  - {fileID: 8300000, guid: b58f1f92b22bc5e40939295c7682bf4e, type: 3}
+  - {fileID: 8300000, guid: b2d58cd1845c3f24bb911e75b24ceba9, type: 3}
+  reloads:
+  - {fileID: 8300000, guid: d24321b307daa414ba3572d596c2a830, type: 3}
   hits: []
   ammoCounter:
   - {fileID: 21300000, guid: 1a2b3d28e4f389143a287a1bb1cd5a2a, type: 3}

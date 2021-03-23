@@ -7,6 +7,8 @@ public class RangedWeapon : Weapon
     public float chargeTime;
 
     [Header("Sounds")]
+    public AudioClip charge;
+    public AudioClip fullCharge;
     public AudioClip[] shots;
     public AudioClip[] dryShots;
     public AudioClip[] reloads;

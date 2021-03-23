@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e78e1e3cf8f76a45b8ef46e50a49c58, type: 3}
   m_Name: Powersword
   m_EditorClassIdentifier: 
-  unlockDistance: 700
+  unlockDistance: 200
   range: 10
   ap: 1
   dmg: 1
-  cooldown: 0.2
+  cooldown: 0.5
   swings:
   - {fileID: 8300000, guid: a7d877eb45b8f004fbce9ad5671811f6, type: 3}
   - {fileID: 8300000, guid: ad004df4acdc0a14db932ea2ed7ae886, type: 3}

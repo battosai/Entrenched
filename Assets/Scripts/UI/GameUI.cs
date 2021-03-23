@@ -69,6 +69,9 @@ public class GameUI : MonoBehaviour
     /// </summary>
     private void LockUnavailableWeaponsFromPlayerData()
     {
+        if(GameState.instance.testMode)
+            return;
+
         float playerDist = PlayerPrefs.GetFloat("Distance", 0);
 
         Transform rangedOptions = weaponSelection.transform.Find("Names/RangedOptions");

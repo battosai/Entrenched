@@ -205,7 +205,7 @@ public class Krieger : MonoBehaviour
                         ammoInClip < rangedWeapon.clipSize &&
                         clips > 0)
                     {
-                        AudioManager.PlayOne(audioSource, rangedWeapon.reloads);
+                        AudioManager.PlayOneClip(audioSource, rangedWeapon.reloads);
                         isReloading = true;
                         anim.SetTrigger("Reload");
                         weaponAnim.SetTrigger("Reload");
@@ -232,15 +232,27 @@ public class Krieger : MonoBehaviour
                 else
                 {
                     chargeStartTime = Time.time;
+                    
+                    if(!isMelee && 
+                        ammoInClip > 0 &&
+                        rangedWeapon.chargeTime > 0)
+                    {
+                        float startTime = rangedWeapon.charge.length - rangedWeapon.chargeTime;
+                        AudioManager.Play(
+                            audioSource, 
+                            rangedWeapon.charge,
+                            startTime:startTime);
+                    }
                 }
             }
 
             //positive charge start time to ensure
             //there was a corresponding mouse down
             //(clicking ready button in weapon selection)
-            if(chargeStartTime > 0)
+            if(chargeStartTime > 0 && !isMelee)
             {
-                if(Input.GetMouseButtonUp(0) && !isMelee)
+                //release
+                if(Input.GetMouseButtonUp(0))
                 {
                     if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
                     {
@@ -248,7 +260,28 @@ public class Krieger : MonoBehaviour
                         anim.SetTrigger("Shoot");
                         weaponAnim.SetTrigger("Shoot");
                     }
+                    chargeStartTime = -1f;
+
+                    if(audioSource.isPlaying)
+                        audioSource.Stop();
                 }
+
+                //hold
+                else if(Input.GetMouseButton(0))
+                {
+                    if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
+                    {
+                        if(!audioSource.isPlaying)
+                        {
+                            audioSource.loop = true;
+                            AudioManager.Play(
+                                audioSource,
+                                rangedWeapon.fullCharge,
+                                loop:true);
+                        }
+                    }
+                }
+
             }
         }
 
@@ -288,17 +321,17 @@ public class Krieger : MonoBehaviour
         {
             // Currently, the hit sounds for melee weapons includes a swing sound as well in the same clip
             // so we're gonna check to see if there's a hit first and decide what clip to play from there.
-            // AudioManager.PlayOne(audioSource, meleeWeapon.swings);
+            // AudioManager.PlayOneClip(audioSource, meleeWeapon.swings);
         }
         else
         {
             //make sure gun has ammoInClip
             if(ammoInClip == 0)
             {
-                AudioManager.PlayOne(audioSource, rangedWeapon.dryShots);
+                AudioManager.PlayOneClip(audioSource, rangedWeapon.dryShots);
                 return;
             }
-            AudioManager.PlayOne(audioSource, rangedWeapon.shots);
+            AudioManager.PlayOneClip(audioSource, rangedWeapon.shots);
             ammoInClip = Math.Max(ammoInClip-1, 0);
             OnShoot?.Invoke();
         }
@@ -312,7 +345,7 @@ public class Krieger : MonoBehaviour
         
         if(hits.Length > 0)
         {
-            AudioManager.PlayOne(audioSource, isMelee ? meleeWeapon.hits : rangedWeapon.hits);
+            AudioManager.PlayOneClip(audioSource, isMelee ? meleeWeapon.hits : rangedWeapon.hits);
             int wounds = Math.Min(1+weapon.ap, hits.Length);
             for(int i = 0; i < wounds; i++)
             {
@@ -324,7 +357,7 @@ public class Krieger : MonoBehaviour
             // Currently, the hit sounds for melee weapons includes a swing sound as well in the same clip
             // so we're gonna check to see if there's a hit first and decide what clip to play from there.
             if(isMelee)
-                AudioManager.PlayOne(audioSource, meleeWeapon.swings);
+                AudioManager.PlayOneClip(audioSource, meleeWeapon.swings);
         }
     }
 
