@@ -337,12 +337,13 @@ public class Krieger : MonoBehaviour
         }
 
         int mask = LayerMask.GetMask("Enemies");
+        int xOffset = 5;
         RaycastHit2D[] hits = Physics2D.RaycastAll(
-            transform.position, 
+            transform.position + (Vector3.left * xOffset), 
             Vector2.right,
-            weapon.range,
+            weapon.range + xOffset,
             mask);
-        
+
         if(hits.Length > 0)
         {
             AudioManager.PlayOneClip(audioSource, isMelee ? meleeWeapon.hits : rangedWeapon.hits);

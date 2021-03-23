@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Powerfist
   m_EditorClassIdentifier: 
   unlockDistance: 400
-  range: 6
+  range: 5
   ap: 3
   dmg: 2
   cooldown: 1
@@ -22,9 +22,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 905a0ff7cd280154f8b5cf475cd28fe9, type: 3}
   - {fileID: 8300000, guid: edd6ad58527aee749a7be686b7b486c4, type: 3}
   hits:
-  - {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
   - {fileID: 8300000, guid: ed5ae11fe3681e340909433c4f2e9259, type: 3}
-  - {fileID: 8300000, guid: 77933fbd427c7cf4483d2cd0ae7bf012, type: 3}
+  - {fileID: 8300000, guid: dfa98fa86bc289e4f980659dd30b9618, type: 3}
   - {fileID: 8300000, guid: 1d1516ce9aeef3348bf75f9d819be827, type: 3}
   standIdle: {fileID: 7400000, guid: d421381fdb8937a48b62f4dd42636729, type: 2}
   crouchIdle: {fileID: 7400000, guid: d130d69d77c34ef4e994e6a0f843c1a8, type: 2}

@@ -28,8 +28,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b2d58cd1845c3f24bb911e75b24ceba9, type: 3}
   reloads:
   - {fileID: 8300000, guid: d24321b307daa414ba3572d596c2a830, type: 3}
-  hits:
-  - {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
+  hits: []
   ammoCounter:
   - {fileID: 21300000, guid: 0c7475503631d244f87888ff2d4ec217, type: 3}
   - {fileID: 21300000, guid: d5ab931b735a73f48880fcb4967d51da, type: 3}

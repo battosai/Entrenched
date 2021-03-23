@@ -21,10 +21,8 @@ MonoBehaviour:
   charge: {fileID: 0}
   fullCharge: {fileID: 0}
   shots:
-  - {fileID: 8300000, guid: 2d0996364e797554b93c70e6a2a32693, type: 3}
-  - {fileID: 8300000, guid: 184a3328f27eb994f85aceb41c21c4a3, type: 3}
-  - {fileID: 8300000, guid: 7ada8944c5a1ddf439a1c66a3bda138e, type: 3}
-  - {fileID: 8300000, guid: 1abc510c5a716e245a5a710fa199a26b, type: 3}
+  - {fileID: 8300000, guid: 7e24d10d6b57c9f4992deac50308cf3e, type: 3}
+  - {fileID: 8300000, guid: 95aae91817398bb4eb777cf74dcd297b, type: 3}
   dryShots:
   - {fileID: 8300000, guid: b58f1f92b22bc5e40939295c7682bf4e, type: 3}
   - {fileID: 8300000, guid: b2d58cd1845c3f24bb911e75b24ceba9, type: 3}
