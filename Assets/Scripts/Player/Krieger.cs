@@ -30,7 +30,7 @@ public class Krieger : MonoBehaviour
     public bool isDead;
 
     //krieger components
-    private AudioSource audioSource;
+    public AudioSource audioSource {get; private set;}
     private Rigidbody2D rb;
     private Collider2D hitbox;
     public Animator anim {get; private set;}

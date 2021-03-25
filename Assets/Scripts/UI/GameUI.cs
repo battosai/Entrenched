@@ -14,14 +14,15 @@ public class GameUI : MonoBehaviour
     public GameObject weaponSelection;
     public Sprite redactedWeaponOption;
 
+    // [Header("Options")]
+    // public Transform optionsMenu;
+    // public Slider musicVolume;
+    // public Slider soundFXVolume;
+
     [Header("End Game")]
     public Text endGameText;
     public Image[] endGameButtonImages;
 
-    // Custom font needs to scale via transform
-    // Ratio established w/ iPhone 5/5S/5C/SE
-    // (scale of 7)/(viewport width AKA Camera.pixelWidth of 1136)
-    private readonly float textWidthRatio = 7f/1136f;
     private Dictionary<string, Button> weaponNamesToButtons;
     private Krieger krieger;
 
@@ -37,6 +38,24 @@ public class GameUI : MonoBehaviour
 
     private void Start()
     {
+        // musicVolume.onValueChanged.AddListener(
+        //     delegate
+        //     {
+        //         AudioManager.musicVolume = musicVolume.value;
+        //         AudioManager.instance.musicSource.volume = AudioManager.musicVolume;
+        //         PlayerPrefs.SetFloat("MusicVolume", AudioManager.musicVolume);
+        //     });
+        // musicVolume.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
+
+        // soundFXVolume.onValueChanged.AddListener(
+        //     delegate
+        //     {
+        //         AudioManager.soundFXVolume = soundFXVolume.value;
+        //         AudioManager.instance.ambienceSource.volume = AudioManager.soundFXVolume;
+        //         PlayerPrefs.SetFloat("SoundFXVolume", AudioManager.soundFXVolume);
+        //     });
+        // soundFXVolume.value = PlayerPrefs.GetFloat("SoundFXVolume", 1f);
+
         Button[] weaponButtons = weaponSelection.transform.Find("Names").GetComponentsInChildren<Button>();
         foreach(Button b in weaponButtons)
         {
@@ -44,10 +63,11 @@ public class GameUI : MonoBehaviour
             b.onClick.AddListener(() => SelectWeapon(b.gameObject.name));
         }
 
+        Utils.AdjustTextScaleForCustomFont(endGameText);
+
         krieger = Krieger.instance;
         krieger.OnDeath += EndScreenSequenceWrapper;
         krieger.OnShoot += DisplayAmmoWrapper;
-        endGameText.transform.localScale = Vector3.one * Camera.main.pixelWidth * textWidthRatio;
 
         //set to UI so that Fader doesn't affect it during weapon selection
         krieger.SetRendererLayer("UI");

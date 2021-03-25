@@ -1,20 +1,27 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 using Random=UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
+    //TODO:
+    //get more sounds for enemies, ui, etc.
+    //NEEDS: do it
+
     [Header("Sounds")]
     public AudioClip[] music;
     public AudioClip[] ambience;
     public AudioClip[] ammoDrops;
 
-    private AudioSource musicSource;
-    private AudioSource ambienceSource;
+    public AudioSource musicSource {get; private set;}
+    public AudioSource ambienceSource {get; private set;}
 
     //util
     public static AudioManager instance;
+    public static float musicVolume;
+    public static float soundFXVolume;
     private Krieger krieger;
     private int ambienceIndex;
 
@@ -28,6 +35,10 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         krieger = Krieger.instance;
+
+        musicSource.volume = musicVolume;
+        ambienceSource.volume = soundFXVolume;
+
         ambienceIndex = Random.Range(0, ambience.Length);
 
         int musicSelection = Random.Range(0, music.Length);
@@ -55,10 +66,10 @@ public class AudioManager : MonoBehaviour
         if(clip == null)
             return;
 
+        audioSource.volume = soundFXVolume;
         audioSource.loop = loop;
         audioSource.clip = clip;
-        if(startTime > 0)
-            audioSource.time = startTime;
+        audioSource.time = (startTime > 0) ? startTime : 0f;
 
         audioSource.Play();
     }
@@ -73,6 +84,7 @@ public class AudioManager : MonoBehaviour
         if(clip == null)
             return;
 
+        audioSource.volume = soundFXVolume;
         audioSource.PlayOneShot(clip);
     }
 
@@ -87,6 +99,7 @@ public class AudioManager : MonoBehaviour
             return;
 
         int roll = Random.Range(0, clips.Length);
+        audioSource.volume = soundFXVolume;
         audioSource.PlayOneShot(clips[roll]);
     }
 }

@@ -7,11 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    //TODO:
-    //Add options for options button...
-    //NEED: needs music, sounds, etc.
-
     public Image fader;
+    public OptionsMenu options;
 
     /// <summary>
     /// OnClick Listener for Play button.
@@ -45,6 +42,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void Options()
     {
-        Debug.Log($"There are no options yet c:");
+        options.gameObject.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 }
