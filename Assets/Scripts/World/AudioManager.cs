@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] music;
     public AudioClip[] ambience;
     public AudioClip[] ammoDrops;
+    public AudioClip[] footsteps;
 
     public AudioSource musicSource {get; private set;}
     public AudioSource ambienceSource {get; private set;}

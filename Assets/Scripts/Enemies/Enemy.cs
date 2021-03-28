@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     [Header("Sounds")]
     public AudioClip[] walks;
     public AudioClip[] attacks;
-    public AudioClip death;
+    public AudioClip[] deaths;
 
     //state
     public bool isDead {get; private set;}
@@ -193,7 +193,7 @@ public class Enemy : MonoBehaviour
         isDead = true;
         rb.velocity = Vector3.zero;
         this.gameObject.layer = LayerMask.NameToLayer("Corpses");
-        AudioManager.PlayClip(audioSource, death);
+        AudioManager.PlayOneClip(audioSource, deaths);
     }
 
     /// <summary>
