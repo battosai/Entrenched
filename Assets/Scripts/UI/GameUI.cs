@@ -12,7 +12,10 @@ public class GameUI : MonoBehaviour
 
     [Header("Weapon Selection")]
     public GameObject weaponSelection;
+    public GameObject weaponStats;
     public Sprite redactedWeaponOption;
+    private Dictionary<string, Button> weaponNamesToButtons;
+    private Dictionary<string, Text> weaponStatToText;
 
     // [Header("Options")]
     // public Transform optionsMenu;
@@ -26,10 +29,8 @@ public class GameUI : MonoBehaviour
     [Header("Sounds")]
     public AudioClip[] clicks;
 
-    private Dictionary<string, Button> weaponNamesToButtons;
+    //util
     private Krieger krieger;
-
-    //yucky
     private Coroutine ammoDisplay;
     private Coroutine ammoDisplayFade;
 
@@ -37,6 +38,7 @@ public class GameUI : MonoBehaviour
     {
         Debug.Assert(fader != null);
         weaponNamesToButtons = new Dictionary<string, Button>();
+        weaponStatToText = new Dictionary<string, Text>();
     }
 
     private void Start()
@@ -59,17 +61,27 @@ public class GameUI : MonoBehaviour
         //     });
         // soundFXVolume.value = PlayerPrefs.GetFloat("SoundFXVolume", 1f);
 
+        //add click sounds
         Button[] buttons = Resources.FindObjectsOfTypeAll<Button>();
         foreach(Button b in buttons)
         {
             b.onClick.AddListener(() => AudioManager.PlayOneClip(AudioManager.instance.ambienceSource, clicks));
         }
 
+        //weapon selection
         Button[] weaponButtons = weaponSelection.transform.Find("Names").GetComponentsInChildren<Button>();
         foreach(Button b in weaponButtons)
         {
             weaponNamesToButtons.Add(b.name, b);
             b.onClick.AddListener(() => SelectWeapon(b.gameObject.name));
+        }
+
+        //weapon stats
+        Text[] weaponStatTexts = weaponStats.transform.GetComponentsInChildren<Text>();
+        foreach(Text t in weaponStatTexts)
+        {
+            weaponStatToText.Add(t.name, t);
+            Utils.AdjustTextScaleForCustomFont(t);
         }
 
         Utils.AdjustTextScaleForCustomFont(endGameText);
@@ -85,16 +97,16 @@ public class GameUI : MonoBehaviour
         LockUnavailableWeaponsFromPlayerData();
 
         SelectWeapon(
-            "Blaster", 
+            "Shovel",
             initialization:true);
 
         SelectWeapon(
-            "Shovel",
+            "Blaster", 
             initialization:true);
     }
 
     /// <summary>
-    /// Locks weapons that player has earned.
+    /// Locks weapons that player has not earned.
     /// </summary>
     private void LockUnavailableWeaponsFromPlayerData()
     {
@@ -193,6 +205,7 @@ public class GameUI : MonoBehaviour
                 //highlight new weapon
                 krieger.startingRangedWeapon = realName;
                 weaponNamesToButtons[buttonName].interactable = false;
+                DisplayWeaponStats(rangedWeapon:krieger.rangedWeapon);
             }
 
             if(!initialization && 
@@ -215,6 +228,7 @@ public class GameUI : MonoBehaviour
                 //highlight new weapon
                 krieger.startingMeleeWeapon = realName;
                 weaponNamesToButtons[buttonName].interactable = false;
+                DisplayWeaponStats(meleeWeapon:krieger.meleeWeapon);
             }
 
             if(!initialization &&
@@ -227,16 +241,53 @@ public class GameUI : MonoBehaviour
     }
 
     /// <summary>
+    /// Updates weapon stats to reflect most recently selected weapon.
+    /// </summary>
+    private void DisplayWeaponStats(
+        RangedWeapon rangedWeapon=null,
+        MeleeWeapon meleeWeapon=null)
+    {
+        if(rangedWeapon == null && meleeWeapon == null)
+            return; 
+
+        Weapon weapon = rangedWeapon != null ? (Weapon)rangedWeapon : (Weapon)meleeWeapon;
+        weaponStatToText["DMG"].text = $"DMG: {weapon.dmg}";
+        weaponStatToText["PEN"].text = $"PEN: {weapon.ap}";
+
+        Text speedText = weaponStatToText["SPEED"];
+        if(weapon is RangedWeapon)
+        {
+            Text clipText = weaponStatToText["CLIP"];
+            clipText.gameObject.SetActive(true);
+            clipText.text = $"CLIP: {rangedWeapon.clipSize}";
+
+            speedText.text = $"SPEED: {10 - (rangedWeapon.chargeTime * 10)}";
+        }
+        else
+        {
+            weaponStatToText["CLIP"].gameObject.SetActive(false);
+
+            speedText.gameObject.SetActive(true);
+            speedText.text = $"SPEED: {Math.Floor(meleeWeapon.cooldown / 0.25f)}";
+        }
+    }
+
+    /// <summary>
     /// OnClick Listener for Ready button (WeaponSelection Menu).
     /// </summary>
     public void Ready()
     {
+        //free up memory
+        weaponNamesToButtons = null;
+        weaponStatToText = null;
+
         StartCoroutine(Utils.Fade(
             fader,
             fader.color,
             Color.clear,
             0.1f));
         weaponSelection.SetActive(false);
+        weaponStats.SetActive(false);
         krieger.SetRendererLayer("Gameground");
         GameState.instance.isReady = true;
     }

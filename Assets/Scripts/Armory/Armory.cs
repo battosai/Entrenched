@@ -5,9 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = ("Wargear/Armory"))]
 public class Armory : ScriptableObject
 {
-    //TODO: 
-    //figure out how to tell player about weapon stat differences
-    //NEED: do it...ui work?
     public List<RangedWeapon> _ranged;
     public Dictionary<string, RangedWeapon> ranged;
     public List<MeleeWeapon> _melee;
