@@ -96,10 +96,6 @@ public class GameState : MonoBehaviour
             int powerLevelDeficit = difficulty - totalPowerLevel;
             if(powerLevelDeficit > 0)
             {
-                //TODO:
-                //spawn stronger enemies if there are higher numbers of enemies and enough space. will probably be a sort of rework for this initial system
-                //NEED: do it, currently just randomly selects any plausible ones, could lean towards stronger ones
-
                 while(powerLevelDeficit > 0)
                 {
                     //randomly pick a power level to spawn for
@@ -195,9 +191,6 @@ public class GameState : MonoBehaviour
     /// </summary>
     public static void EnemyDefeated(Enemy enemy)
     {
-        //TODO:
-        //difficulty should probably scale with distance covered rather than enemies defeated
-        //NEEDS: do it
         instance.difficulty++;
         instance.totalEnemies--;
         instance.totalPowerLevel -= enemy.powerLevel;

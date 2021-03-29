@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
         type: 3}
       propertyPath: deaths.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
         type: 3}
@@ -77,22 +77,22 @@ PrefabInstance:
         type: 3}
       propertyPath: deaths.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: cbc2720189790624cb12f629bb088fa4, type: 3}
+      objectReference: {fileID: 8300000, guid: 9f766d58c3d99964488f9a50d28cc77d, type: 3}
     - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
         type: 3}
       propertyPath: deaths.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 93a1c8602978d2a428891ca62c531a97, type: 3}
+      objectReference: {fileID: 8300000, guid: 31e0f3b2483c295459f8aac5a047388f, type: 3}
     - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
         type: 3}
       propertyPath: deaths.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: a497fa564df997d4b94f2cccb41262ee, type: 3}
+      objectReference: {fileID: 8300000, guid: 44ad5fd525447c048aaff99ca2149bd3, type: 3}
     - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
         type: 3}
       propertyPath: deaths.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: bd5d80cbea9c0af46a58f7f62cc96dea, type: 3}
+      objectReference: {fileID: 8300000, guid: bb799a05d7f2f32499c2682a9e5fe5fd, type: 3}
     - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
         type: 3}
       propertyPath: attackHits.Array.size

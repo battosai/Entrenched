@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   unlockDistance: 150
-  range: 75
+  range: 100
   ap: 0
   dmg: 2
   clipSize: 5

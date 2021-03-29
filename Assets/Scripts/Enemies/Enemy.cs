@@ -245,10 +245,6 @@ public class Enemy : MonoBehaviour
         {
             wounds = Mathf.Max(0, wounds-dmg);
 
-            //TODO:
-            //set an anim param for taking a hit
-            //NEEDS: animation work
-
             if(wounds <= 0)
             {
                 OnDeath?.Invoke(transform.position);
