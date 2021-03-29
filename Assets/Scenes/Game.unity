@@ -680,6 +680,11 @@ MonoBehaviour:
   endGameButtonImages:
   - {fileID: 551645296}
   - {fileID: 618493513}
+  clicks:
+  - {fileID: 8300000, guid: 039fbf676907ef040910de1f5dd87dcd, type: 3}
+  - {fileID: 8300000, guid: 7e7d9277a7695bf4c8ea185e20a76590, type: 3}
+  - {fileID: 8300000, guid: 40a980471c7fae348aa3fca15af4e065, type: 3}
+  - {fileID: 8300000, guid: 29f4cf1712166014d8cf4f837a35ef16, type: 3}
 --- !u!1 &434104702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,6 +1377,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8ba40f8505d16d04d9200bb5eda7cd00, type: 3}
   - {fileID: 8300000, guid: cddc06baec723e34081fb17012f6e928, type: 3}
   ammoDrops:
+  - {fileID: 8300000, guid: 05486f5855c0e634c883675ba1c11b04, type: 3}
   - {fileID: 8300000, guid: 970a67d6414e033418c4d4684dcbfa4a, type: 3}
 --- !u!4 &605104674 stripped
 Transform:
@@ -2624,7 +2630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1112.0001, y: -122.793106}
+  m_AnchoredPosition: {x: 1112.0001, y: -122.79309}
   m_SizeDelta: {x: 2024.0002, y: 195.58621}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1282523153
@@ -4561,7 +4567,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 834.0001, y: 0}
+  m_AnchoredPosition: {x: 768.0001, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2110538582

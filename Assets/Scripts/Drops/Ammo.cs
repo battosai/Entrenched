@@ -49,6 +49,7 @@ public class Ammo : MonoBehaviour
     {
         Krieger.instance.clips = Math.Min(Krieger.instance.maxClips, Krieger.instance.clips+1);
         anim.SetTrigger("Pickup");
+        AudioManager.PlayOneClip(Krieger.instance.audioSource, Krieger.instance.ammoPickups);
     }
 
     /// <summary>

@@ -7,8 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("References")]
     public Image fader;
     public OptionsMenu options;
+
+    [Header("Sounds")]
+    public AudioClip[] clicks;
+
+    private void Start()
+    {
+        Button[] buttons = Resources.FindObjectsOfTypeAll<Button>();
+        foreach(Button b in buttons)
+        {
+            b.onClick.AddListener(() => AudioManager.PlayOneClip(options.soundFXSource, clicks));
+        }
+    }
 
     /// <summary>
     /// OnClick Listener for Play button.

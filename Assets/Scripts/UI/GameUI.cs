@@ -23,6 +23,9 @@ public class GameUI : MonoBehaviour
     public Text endGameText;
     public Image[] endGameButtonImages;
 
+    [Header("Sounds")]
+    public AudioClip[] clicks;
+
     private Dictionary<string, Button> weaponNamesToButtons;
     private Krieger krieger;
 
@@ -55,6 +58,12 @@ public class GameUI : MonoBehaviour
         //         PlayerPrefs.SetFloat("SoundFXVolume", AudioManager.soundFXVolume);
         //     });
         // soundFXVolume.value = PlayerPrefs.GetFloat("SoundFXVolume", 1f);
+
+        Button[] buttons = Resources.FindObjectsOfTypeAll<Button>();
+        foreach(Button b in buttons)
+        {
+            b.onClick.AddListener(() => AudioManager.PlayOneClip(AudioManager.instance.ambienceSource, clicks));
+        }
 
         Button[] weaponButtons = weaponSelection.transform.Find("Names").GetComponentsInChildren<Button>();
         foreach(Button b in weaponButtons)

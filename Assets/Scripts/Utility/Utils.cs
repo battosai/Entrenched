@@ -80,5 +80,6 @@ public static class Utils
             colorProperty.SetValue(element, current);
             yield return null;
         }
+        colorProperty.SetValue(element, end);
     }
 }

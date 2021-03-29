@@ -24,6 +24,11 @@ public class AttackState : BaseState
                 me.anim.SetTrigger("Attack");
                 // else
                 //     me.anim.SetTrigger("Shoot");
+
+                AudioManager.PlayOneClip(
+                    me.audioSource, 
+                    me.attacks,
+                    Enemy.volumeScale); 
             }
             else
             {

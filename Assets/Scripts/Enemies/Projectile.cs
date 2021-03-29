@@ -6,11 +6,17 @@ public class Projectile : MonoBehaviour
 {
     public Rigidbody2D rb {get; private set;}
     public Animator anim {get; private set;}
+    public AudioClip[] impacts;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        Krieger.instance.OnDeath += Freeze;
     }
 
     /// <summary>
@@ -53,6 +59,10 @@ public class Projectile : MonoBehaviour
             {
                 anim.SetBool("Hit", true);
                 Krieger.instance.OnWounded?.Invoke();
+                //use krieger audio source for now
+                AudioManager.PlayOneClip(
+                    Krieger.instance.audioSource,
+                    impacts);
             }
             else
                 this.gameObject.SetActive(false);
@@ -65,5 +75,14 @@ public class Projectile : MonoBehaviour
     private void Deactivate()
     {
         this.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Subscriber to Krieger OnDeath event. Freeze projectile.
+    /// </summary>
+    private void Freeze()
+    {
+        anim.speed = 0f;
+        rb.velocity = Vector3.zero;
     }
 }

@@ -16,9 +16,11 @@ public class Krieger : MonoBehaviour
 
     [Header("Sounds")]
     public AudioClip[] walks;
+    public AudioClip[] ammoPickups;
 
     //state
     public bool isMoving;
+    private float moveStartTime;
     public bool isCrouching;
     public bool isCharging;
     private float chargeStartTime;
@@ -149,6 +151,9 @@ public class Krieger : MonoBehaviour
     private void Update()
     {
         if(!GameState.instance.isReady)
+            return;
+
+        if(isDead)
             return;
 
         ReadInput();
@@ -285,6 +290,11 @@ public class Krieger : MonoBehaviour
             }
         }
 
+        if(!anim.GetBool("Moving") && isMoving)
+            moveStartTime = Time.time;
+        else if(anim.GetBool("Moving") && !isMoving)
+            moveStartTime = -1f;
+
         anim.SetBool("Moving", isMoving);
         anim.SetBool("Crouching", isCrouching);
         weaponAnim.SetBool("Moving", isMoving);
@@ -297,6 +307,20 @@ public class Krieger : MonoBehaviour
     /// </summary>
     private void InputHandler()
     {
+        if(moveStartTime > 0)
+        {
+            //walk anim is 0.5s, each step is half of it
+            float stepDelay = 0.25f;
+            if(Time.time - moveStartTime > stepDelay)
+            {
+                AudioManager.PlayOneClip(
+                    audioSource, 
+                    walks,
+                    0.25f);
+                moveStartTime = Time.time;
+            }
+        }
+
         rb.velocity = isMoving ? 
             new Vector2(moveSpeed, 0) : 
             Vector2.zero;
@@ -434,9 +458,10 @@ public class Krieger : MonoBehaviour
         if(!isDead)
         {
             isDead = true;
-            anim.SetTrigger("Die");
+            rb.velocity = Vector2.zero;
 
             //death animation is entirely on torso rend
+            anim.SetTrigger("Die");
             legsRend.enabled = false;
             weaponRend.enabled = false;
 

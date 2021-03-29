@@ -6,15 +6,10 @@ using Random=UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
-    //TODO:
-    //get more sounds for enemies, ui, etc.
-    //NEEDS: do it
-
     [Header("Sounds")]
     public AudioClip[] music;
     public AudioClip[] ambience;
     public AudioClip[] ammoDrops;
-    public AudioClip[] footsteps;
 
     public AudioSource musicSource {get; private set;}
     public AudioSource ambienceSource {get; private set;}
@@ -80,13 +75,14 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public static void PlayClip(
         AudioSource audioSource,
-        AudioClip clip)
+        AudioClip clip,
+        float volumeScale=1f)
     {
         if(clip == null)
             return;
 
         audioSource.volume = soundFXVolume;
-        audioSource.PlayOneShot(clip);
+        audioSource.PlayOneShot(clip, volumeScale);
     }
 
     /// <summary>
@@ -94,13 +90,14 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public static void PlayOneClip(
         AudioSource audioSource,
-        AudioClip[] clips)
+        AudioClip[] clips,
+        float volumeScale=1f)
     {
         if(clips == null || clips.Length == 0)
             return;
 
         int roll = Random.Range(0, clips.Length);
         audioSource.volume = soundFXVolume;
-        audioSource.PlayOneShot(clips[roll]);
+        audioSource.PlayOneShot(clips[roll], volumeScale);
     }
 }

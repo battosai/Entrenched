@@ -253,9 +253,21 @@ MonoBehaviour:
   meleeCooldown: 2
   rangedRange: 0
   rangedCooldown: 0
-  walks: []
-  attacks: []
-  death: {fileID: 0}
+  projectileSpeed: 0
+  alerts: []
+  attacks:
+  - {fileID: 8300000, guid: 3a9ad03c827661b458fe64975b557b06, type: 3}
+  - {fileID: 8300000, guid: d73f7d637b296974eae6f3a79d59d475, type: 3}
+  - {fileID: 8300000, guid: 7747211594122e9458915c8cd3b1ddc2, type: 3}
+  - {fileID: 8300000, guid: 4ff78a52a7b44dd4582a6071cd73669f, type: 3}
+  attackHits:
+  - {fileID: 8300000, guid: 5c37914b28428e54cb7c23e61a9a7d9c, type: 3}
+  deaths:
+  - {fileID: 8300000, guid: d9b19139d401028459e2b5125d62fe71, type: 3}
+  - {fileID: 8300000, guid: 8ccd4bb7bbdf1f6449a903d9709cfcc4, type: 3}
+  - {fileID: 8300000, guid: 0b4a2daa4c4f3724faad18fe61a25816, type: 3}
+  - {fileID: 8300000, guid: a674838107c213a43bc395465083ac9e, type: 3}
+  - {fileID: 8300000, guid: d8a6f42107ca0d0419123095644ff261, type: 3}
   isAlerted: 0
   isAttacking: 0
 --- !u!95 &2802309893681352689

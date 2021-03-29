@@ -63,6 +63,61 @@ PrefabInstance:
       propertyPath: projectileSpeed
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: deaths.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: attacks.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: deaths.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: cbc2720189790624cb12f629bb088fa4, type: 3}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: deaths.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 93a1c8602978d2a428891ca62c531a97, type: 3}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: deaths.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a497fa564df997d4b94f2cccb41262ee, type: 3}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: deaths.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: bd5d80cbea9c0af46a58f7f62cc96dea, type: 3}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: attackHits.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: attacks.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 339006aeb32794c4eb20e25ddc56329a, type: 3}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: attacks.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 208e597b5089f464c83cb6621d2cf46f, type: 3}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: attackHits.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 38224fb0d07cce84ea125315af52272c, type: 3}
+    - target: {fileID: 6997742343505171660, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
+      propertyPath: attackHits.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 89ffe96895ac7324baa17a47868c4546, type: 3}
     - target: {fileID: 6997742343505171661, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
         type: 3}
       propertyPath: m_Sprite

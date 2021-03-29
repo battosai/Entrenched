@@ -10,7 +10,7 @@ public class OptionsMenu : MonoBehaviour
     //utils
     private MainMenu mainMenu;
     private AudioSource musicSource;
-    private AudioSource soundFXSource;
+    public AudioSource soundFXSource {get; private set;}
     private Text musicText;
     private Text soundFXText;
 
@@ -40,7 +40,7 @@ public class OptionsMenu : MonoBehaviour
                 musicSource.volume = AudioManager.musicVolume;
                 PlayerPrefs.SetFloat("MusicVolume", AudioManager.musicVolume);
             });
-        musicVolume.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        musicVolume.value = AudioManager.musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
 
         soundFXVolume.onValueChanged.AddListener(
             delegate
@@ -49,7 +49,7 @@ public class OptionsMenu : MonoBehaviour
                 soundFXSource.volume = AudioManager.soundFXVolume;
                 PlayerPrefs.SetFloat("SoundFXVolume", AudioManager.soundFXVolume);
             });
-        soundFXVolume.value = PlayerPrefs.GetFloat("SoundFXVolume", 1f);
+        soundFXVolume.value = AudioManager.soundFXVolume = PlayerPrefs.GetFloat("SoundFXVolume", 1f);
 
         this.gameObject.SetActive(false);
     }

@@ -52,6 +52,10 @@ public class Scroller : MonoBehaviour
         {
             case "Projectile":
                 break;
+            case "Drops":
+                Ammo ammo = other.GetComponent<Ammo>();
+                ammo.Cleanup();
+                break;
             case "Corpses":
                 Enemy enemy = other.GetComponent<Enemy>();
                 if(enemy.isDead)

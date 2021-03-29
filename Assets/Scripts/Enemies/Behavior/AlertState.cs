@@ -24,6 +24,10 @@ public class AlertState : BaseState
         {
             me.isAlerted = true;
             me.anim.SetTrigger("Alert");
+            AudioManager.PlayOneClip(
+                me.audioSource, 
+                me.alerts,
+                Enemy.volumeScale);
         }
     }
 }

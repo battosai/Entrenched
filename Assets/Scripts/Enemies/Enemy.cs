@@ -8,6 +8,8 @@ using Random=UnityEngine.Random;
 public enum EnemyType {CULTIST, POSSESSED, BELCHER};
 public class Enemy : MonoBehaviour
 {
+    public static float volumeScale = 0.25f;
+
     //stats
     public EnemyType type;
     public int powerLevel;
@@ -22,8 +24,9 @@ public class Enemy : MonoBehaviour
     public float rangedCooldown;
     public float projectileSpeed;
     [Header("Sounds")]
-    public AudioClip[] walks;
+    public AudioClip[] alerts;
     public AudioClip[] attacks;
+    public AudioClip[] attackHits;
     public AudioClip[] deaths;
 
     //state
@@ -38,7 +41,7 @@ public class Enemy : MonoBehaviour
     public Animator anim {get; private set;}
     public SpriteRenderer rend {get; private set;}
     private Collider2D hitbox;
-    private AudioSource audioSource;
+    public AudioSource audioSource {get; private set;}
 
     //events
     public delegate void Wounded(int dmg);
@@ -147,9 +150,12 @@ public class Enemy : MonoBehaviour
             mask);
         
         if(hit.collider != null)
+        {
             Krieger.instance.OnWounded?.Invoke();
-
-        AudioManager.PlayOneClip(audioSource, attacks);
+            AudioManager.PlayOneClip(
+                audioSource, 
+                attackHits);
+        }
     }
 
     /// <summary>
@@ -193,7 +199,10 @@ public class Enemy : MonoBehaviour
         isDead = true;
         rb.velocity = Vector3.zero;
         this.gameObject.layer = LayerMask.NameToLayer("Corpses");
-        AudioManager.PlayOneClip(audioSource, deaths);
+        AudioManager.PlayOneClip(
+            audioSource, 
+            deaths,
+            volumeScale);
     }
 
     /// <summary>
@@ -268,8 +277,11 @@ public class Enemy : MonoBehaviour
 
         if(roll < Ammo.dropChance*maxWounds)
         {
-            Ammo.Spawn(transform.position);
-            AudioManager.PlayOneClip(audioSource, AudioManager.instance.ammoDrops);
+            Vector3 offset = Vector2.right * 2f;
+            Ammo.Spawn(transform.position + offset);
+            AudioManager.PlayOneClip(
+                audioSource, 
+                AudioManager.instance.ammoDrops);
         }
     }
 }

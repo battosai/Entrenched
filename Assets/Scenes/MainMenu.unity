@@ -2367,7 +2367,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fader: {fileID: 1939856230}
+  buttonsParent: {fileID: 1157721676}
   options: {fileID: 1059419766}
+  clicks:
+  - {fileID: 8300000, guid: 039fbf676907ef040910de1f5dd87dcd, type: 3}
+  - {fileID: 8300000, guid: 7e7d9277a7695bf4c8ea185e20a76590, type: 3}
+  - {fileID: 8300000, guid: 40a980471c7fae348aa3fca15af4e065, type: 3}
+  - {fileID: 8300000, guid: 29f4cf1712166014d8cf4f837a35ef16, type: 3}
 --- !u!1 &1776197288
 GameObject:
   m_ObjectHideFlags: 0

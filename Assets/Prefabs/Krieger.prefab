@@ -74,7 +74,20 @@ MonoBehaviour:
   moveSpeed: 15
   clips: 5
   maxClips: 10
-  walks: []
+  walks:
+  - {fileID: 8300000, guid: 605e9596fd95ffc4c903533a1e47bec7, type: 3}
+  - {fileID: 8300000, guid: d1798a5c94a9fb14e91175816941db62, type: 3}
+  - {fileID: 8300000, guid: 9b94131547aa96645bda246276db5a72, type: 3}
+  - {fileID: 8300000, guid: 9780af5b9d2c4b44b8fd25b6c1e1ff80, type: 3}
+  - {fileID: 8300000, guid: 75a142769faa04e4caddea7f7668096b, type: 3}
+  - {fileID: 8300000, guid: 1133f16ca1443534596d5625782be726, type: 3}
+  - {fileID: 8300000, guid: 35603b5dbed77664ab4d5431bc399c35, type: 3}
+  - {fileID: 8300000, guid: 76732b89341379e4a881e09d21bd1ba3, type: 3}
+  - {fileID: 8300000, guid: 4c967592916b22a4c81c13f02394b3b2, type: 3}
+  ammoPickups:
+  - {fileID: 8300000, guid: 6f674a927e3c36a489f1326e9b1ee250, type: 3}
+  - {fileID: 8300000, guid: 94d6fccb651a413459ba3e3fa2810c0b, type: 3}
+  - {fileID: 8300000, guid: 877d7b7873fe6334c89a00c62404b049, type: 3}
   isMoving: 0
   isCrouching: 0
   isCharging: 0
