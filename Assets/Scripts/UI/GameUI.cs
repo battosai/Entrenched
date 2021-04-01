@@ -377,8 +377,9 @@ public class GameUI : MonoBehaviour
         }
         
         endGameText.text = 
-            $"ENEMIES KILLED: {GameState.instance.enemiesDefeated}\n" +
-            $"DISTANCE WALKED: {GameState.instance.feetTraversed} FT";
+            $"THANK YOU FOR YOUR SERVICE\n" +
+            $"HERETICS PURGED: {GameState.instance.enemiesDefeated}\n" +
+            $"DISTANCE COVERED: {GameState.instance.feetTraversed} FT";
         yield return StartCoroutine(
             Utils.Fade(
                 endGameText,

@@ -1988,9 +1988,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'ENEMIES KILLED: 0
+  m_Text: 'HERETICS PURGED: 0
 
-    DISTANCE MADE: 0 FT'
+    DISTANCE COVERED: 0 FT'
 --- !u!222 &825661232
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4947,7 +4947,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 913.4999, y: 0}
+  m_AnchoredPosition: {x: 426, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2110538582

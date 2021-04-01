@@ -32,6 +32,7 @@ public class Krieger : MonoBehaviour
     public bool isDead;
 
     //krieger components
+    private PlayerInput input;
     public AudioSource audioSource {get; private set;}
     private Rigidbody2D rb;
     private Collider2D hitbox;
@@ -141,6 +142,8 @@ public class Krieger : MonoBehaviour
 
     private void Start() 
     {
+        input = new PlayerInput();
+
         //status
         isMelee = false;
         isDead = false;
@@ -156,23 +159,14 @@ public class Krieger : MonoBehaviour
         if(isDead)
             return;
 
-        ReadInput();
+        input.Read();
         InputHandler();
     }
 
-    //TODO:
-    //mobile input reading
-    //NEED: do it
     /// <summary>
-    /// Reads keyboard input to manipulate status flags.
-    /// Mobile Inputs:
-    /// - hold down a point (no swipe) on the right side to move
-    /// - swipe down and hold on right side to crouch
-    /// - tap or hold (for charging guns) on left side to shoot/attack
-    /// - swipe up to reload
-    /// - swipe to left or right to switch weapons
+    /// Interpret input to manipulate status flags.
     /// </summary>
-    private void ReadInput()
+    private void InputHandler()
     {
         //hold downs
         isMoving = false;
@@ -183,10 +177,10 @@ public class Krieger : MonoBehaviour
             return;
 
         if(!isReloading && !isSwitchingWeapons)
-            if(Input.GetKey(KeyCode.D))    
+            if(input._move)
                 isMoving = true;
         if(!isAttacking)
-            if(Input.GetKey(KeyCode.LeftShift))
+            if(input._crouch)
             {
                 isCrouching = true;
                 isMoving = false;
@@ -195,7 +189,7 @@ public class Krieger : MonoBehaviour
         //one taps (and take animation time to reset)
         if(!isReloading && !isSwitchingWeapons)
         {
-            if(Input.GetMouseButtonDown(1))
+            if(input._switch)
             {
                 isSwitchingWeapons = true;
                 isMoving = false;
@@ -204,7 +198,7 @@ public class Krieger : MonoBehaviour
             }
             if(!isSwitchingWeapons)
             {
-                if(Input.GetKeyDown(KeyCode.R))
+                if(input._reload)
                 {
                     if(!isMelee && 
                         ammoInClip < rangedWeapon.clipSize &&
@@ -222,7 +216,7 @@ public class Krieger : MonoBehaviour
         //instant one-ticks
         if(!isReloading && !isSwitchingWeapons)
         {
-            if(Input.GetMouseButtonDown(0))
+            if(input._attackDown)
             {
                 if(isMelee)
                 {
@@ -257,7 +251,7 @@ public class Krieger : MonoBehaviour
             if(chargeStartTime > 0 && !isMelee)
             {
                 //release
-                if(Input.GetMouseButtonUp(0))
+                if(input._attackRelease)
                 {
                     if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
                     {
@@ -272,7 +266,7 @@ public class Krieger : MonoBehaviour
                 }
 
                 //hold
-                else if(Input.GetMouseButton(0))
+                else if(input._attackHold)
                 {
                     if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
                     {
@@ -300,13 +294,7 @@ public class Krieger : MonoBehaviour
         weaponAnim.SetBool("Moving", isMoving);
         weaponAnim.SetBool("Crouching", isCrouching);
         weaponAnim.SetInteger("Ammo", ammoInClip);
-    }
 
-    /// <summary>
-    /// Interprets status flags.
-    /// </summary>
-    private void InputHandler()
-    {
         if(moveStartTime > 0)
         {
             //walk anim is 0.5s, each step is half of it
