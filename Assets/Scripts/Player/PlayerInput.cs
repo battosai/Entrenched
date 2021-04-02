@@ -199,13 +199,9 @@ public class PlayerInput
                 break;
 
             case TouchPhase.Ended:
-                // if(isLeft)
-                //     _crouch = false;
-                // else
-                // {
                 if(!IsSwipe(touch, touchStart))
+                    if(!isLeft)
                         _attackRelease = true;
-                // }
                 goto case TouchPhase.Canceled;
 
             case TouchPhase.Canceled:

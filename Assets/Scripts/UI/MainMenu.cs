@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [Header("References")]
     public Image fader;
     public OptionsMenu options;
+    public HelpMenu help;
 
     [Header("Sounds")]
     public AudioClip[] clicks;
@@ -56,6 +57,15 @@ public class MainMenu : MonoBehaviour
     public void Options()
     {
         options.gameObject.SetActive(true);
+        this.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// OnClick Listener for Help button.
+    /// </summary>
+    public void Help()
+    {
+        help.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
     }
 }
