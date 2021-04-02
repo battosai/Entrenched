@@ -268,7 +268,7 @@ public class GameUI : MonoBehaviour
             weaponStatToText["CLIP"].gameObject.SetActive(false);
 
             speedText.gameObject.SetActive(true);
-            speedText.text = $"SPEED: {Math.Floor(meleeWeapon.cooldown / 0.25f)}";
+            speedText.text = $"SPEED: {5 - Math.Floor(meleeWeapon.cooldown / 0.25f)}";
         }
     }
 
