@@ -48,9 +48,6 @@ public class PlayerInput
         _attackRelease = Input.GetKeyUp(KeyCode.J);
     }
 
-    //TODO:
-    //mobile input reading
-    //NEED: do it
     /// <summary>
     /// Touch input. Will only allow one touch input at a time on either side.
     /// Move = tap and/or hold left side
