@@ -216,32 +216,30 @@ public class Krieger : MonoBehaviour
         //instant one-ticks
         if(!isReloading && !isSwitchingWeapons)
         {
-            if(input._attackDown)
+            if(input._attackRelease && isMelee)
             {
-                if(isMelee)
+                if(Time.time - lastMeleeAttackTime > meleeWeapon.cooldown)
                 {
-                    if(Time.time - lastMeleeAttackTime > meleeWeapon.cooldown)
-                    {
-                        isAttacking = true;
-                        lastMeleeAttackTime = Time.time;
-                        anim.SetTrigger("Attack");
-                        weaponAnim.SetTrigger("Attack");
-                    }
+                    isAttacking = true;
+                    lastMeleeAttackTime = Time.time;
+                    anim.SetTrigger("Attack");
+                    weaponAnim.SetTrigger("Attack");
                 }
-                else
+            }
+
+            if(input._attackDown && !isMelee)
+            {
+                chargeStartTime = Time.time;
+                
+                if(!isMelee && 
+                    ammoInClip > 0 &&
+                    rangedWeapon.chargeTime > 0)
                 {
-                    chargeStartTime = Time.time;
-                    
-                    if(!isMelee && 
-                        ammoInClip > 0 &&
-                        rangedWeapon.chargeTime > 0)
-                    {
-                        float startTime = rangedWeapon.charge.length - rangedWeapon.chargeTime;
-                        AudioManager.Play(
-                            audioSource, 
-                            rangedWeapon.charge,
-                            startTime:startTime);
-                    }
+                    float startTime = rangedWeapon.charge.length - rangedWeapon.chargeTime;
+                    AudioManager.Play(
+                        audioSource, 
+                        rangedWeapon.charge,
+                        startTime:startTime);
                 }
             }
 

@@ -54,30 +54,50 @@ public class PlayerInput
     /// <summary>
     /// Touch input. Will only allow one touch input at a time on either side.
     /// Move = tap and/or hold left side
-    /// Crouch = swipe down + down left side
-    /// Reload = swipe up left side
+    /// Crouch = vertical swipe left side
+    /// Reload = horizontal swipe left side
     /// Attack = tap and/or hold right side
     /// Switch = swipe right side
     /// </summary>
     private void TouchReader()
     {
+        //_crouch will keep its value
         _move = false;
-        _crouch = false;
         _switch = false;
         _reload = false;
         _attackDown = false;
         _attackHold = false;
         _attackRelease = false;
 
-        float screenHorizontalMiddle = Screen.width/2f;
+        bool foundLeft = false;
+        bool foundRight = false;
+        float screenHorizontalMiddle = ((float)Screen.width)/2f;
         foreach(Touch touch in Input.touches)
         {
+            if(foundLeft && foundRight)
+                break;
+
+            if(hasLeftTouch &&
+                !foundLeft && 
+                touch.fingerId == leftTouch.fingerId)
+            {
+                foundLeft = true;
+                leftTouch = touch;
+                continue;
+            }
+
+            if(hasRightTouch &&
+                !foundRight &&
+                touch.fingerId == rightTouch.fingerId)
+            {
+                foundRight = true;
+                rightTouch = touch;
+                continue;
+            }
+
             //left
             if(touch.position.x < screenHorizontalMiddle)
             {
-                if(hasLeftTouch)
-                    continue;
-
                 if(touch.phase == TouchPhase.Began)
                 {
                     hasLeftTouch = true;
@@ -89,9 +109,6 @@ public class PlayerInput
             //right
             else
             {
-                if(hasRightTouch)
-                    continue;
-
                 if(touch.phase == TouchPhase.Began)
                 {
                     hasRightTouch = true;
@@ -102,12 +119,14 @@ public class PlayerInput
         }
 
         ProcessTouch(
+            isLeft:true,
             ref hasLeftTouch,
             ref usedLeftSwipe,
             ref leftTouch,
             ref leftTouchStart);
 
         ProcessTouch(
+            isLeft:false,
             ref hasRightTouch,
             ref usedRightSwipe,
             ref rightTouch,
@@ -126,6 +145,7 @@ public class PlayerInput
     private Touch rightTouch;
     private Vector2 rightTouchStart;
     private void ProcessTouch(
+        bool isLeft,
         ref bool hasTouch,
         ref bool usedSwipe,
         ref Touch touch,
@@ -133,8 +153,6 @@ public class PlayerInput
     {
         if(!hasTouch)
             return;
-
-        bool isLeft = (touch.position == leftTouch.position);
 
         switch(touch.phase)
         {
@@ -156,27 +174,38 @@ public class PlayerInput
                 break;
 
             case TouchPhase.Moved:
-                if(!usedSwipe && IsSwipe(touch, touchStart))
+                bool isVertical;
+                if(IsSwipe(out isVertical, touch, touchStart))
                 {
-                    usedSwipe = true;
-                    if(isLeft)
+                    if(!usedSwipe)
                     {
-                        if(touch.position.y > touchStart.y)
-                            _reload = true;
+                        usedSwipe = true;
+                        if(isLeft)
+                        {
+                            if(isVertical)
+                                _crouch = touch.position.y < touchStart.y;
+                            else
+                                _reload = true;
+                        }
                         else
-                            _crouch = true;
+                            _switch = true;
                     }
-                    else
-                        _switch = true;
+                }
+                else
+                {
+                    if(isLeft)
+                        _move = true;
                 }
                 break;
 
             case TouchPhase.Ended:
+                // if(isLeft)
+                //     _crouch = false;
+                // else
+                // {
                 if(!IsSwipe(touch, touchStart))
-                {
-                    if(!isLeft)
                         _attackRelease = true;
-                }
+                // }
                 goto case TouchPhase.Canceled;
 
             case TouchPhase.Canceled:
@@ -187,13 +216,18 @@ public class PlayerInput
     }
 
     /// <summary>
-    /// Returns true if up, false if down.
+    /// Decides if touch performed a swipe.
+    /// Output parameter to know if horizontal/vertical.
     /// </summary>
-    private bool IsSwipeUp(
+    private bool IsSwipe(
+        out bool isVertical,
         Touch touch,
         Vector2 startPos)
     {
-        return touch.position.y > startPos.y;
+        float distanceThreshold = ((float)Screen.height)/4f;
+        Vector2 diff = touch.position - startPos;
+        isVertical = Mathf.Abs(diff.y) > Mathf.Abs(diff.x);
+        return (diff.sqrMagnitude > Mathf.Pow(distanceThreshold, 2));
     }
 
     /// <summary>
@@ -203,8 +237,8 @@ public class PlayerInput
         Touch touch,
         Vector2 startPos)
     {
-        float distanceThreshold = 20f;
+        float distanceThreshold = ((float)Screen.height)/6f;
         Vector2 diff = touch.position - startPos;
-        return (diff.sqrMagnitude < Mathf.Pow(distanceThreshold, 2));
+        return (diff.sqrMagnitude > Mathf.Pow(distanceThreshold, 2));
     }
 }
