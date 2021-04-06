@@ -268,13 +268,13 @@ public class Krieger : MonoBehaviour
                 {
                     if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
                     {
-                        if(!audioSource.isPlaying)
+                        if(audioSource.clip != rangedWeapon.fullCharge)
                         {
-                            audioSource.loop = true;
                             AudioManager.Play(
                                 audioSource,
                                 rangedWeapon.fullCharge,
-                                loop:true);
+                                loop:true,
+                                startTime:0f);
                         }
                     }
                 }
