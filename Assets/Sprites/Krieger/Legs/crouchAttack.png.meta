@@ -36,6 +36,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -45,8 +46,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -154,7 +155,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 10e8c4a11faf9fcb0800000000000000
-      internalID: -4829553211942859263
+      internalID: -8149137078262195210
       vertices: []
       indices: 
       edges: []
@@ -175,7 +176,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 21c08eee5de3d8930800000000000000
-      internalID: 4147039920435235858
+      internalID: -6143026196500850062
       vertices: []
       indices: 
       edges: []
@@ -190,6 +191,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      crouchAttack_1: -6143026196500850062
+      crouchAttack_0: -8149137078262195210
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

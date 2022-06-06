@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class HelpMenu : MonoBehaviour
 {
     public Sprite touchControls;
+    public Sprite touchButtonControls;
     public Sprite keyboardControls;
 
     private MainMenu mainMenu;
@@ -19,7 +20,8 @@ public class HelpMenu : MonoBehaviour
     private void Start()
     {
         #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
-            image.sprite = touchControls;
+            // image.sprite = touchControls;
+            image.sprite = touchButtonControls;
         #else
             image.sprite = keyboardControls;
         #endif

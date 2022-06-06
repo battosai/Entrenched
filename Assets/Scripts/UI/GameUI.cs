@@ -10,17 +10,16 @@ public class GameUI : MonoBehaviour
     [Header("General")]
     public Image fader;
 
+    [Header("Touch Controls")]
+    public GameObject touchControlButtons;
+    public Dictionary<string, Button> touchControlToButtons {get; private set;}
+
     [Header("Weapon Selection")]
     public GameObject weaponSelection;
     public GameObject weaponStats;
     public Sprite redactedWeaponOption;
     private Dictionary<string, Button> weaponNamesToButtons;
     private Dictionary<string, Text> weaponStatToText;
-
-    // [Header("Options")]
-    // public Transform optionsMenu;
-    // public Slider musicVolume;
-    // public Slider soundFXVolume;
 
     [Header("End Game")]
     public Text endGameText;
@@ -39,27 +38,20 @@ public class GameUI : MonoBehaviour
         Debug.Assert(fader != null);
         weaponNamesToButtons = new Dictionary<string, Button>();
         weaponStatToText = new Dictionary<string, Text>();
+
+        #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
+            touchControlToButtons = new Dictionary<string, Button>();
+            Button[] touchButtons = touchControlButtons.GetComponentsInChildren<Button>();
+            foreach(Button b in touchButtons)
+            {
+                touchControlToButtons.Add(b.name, b);
+            }
+        #endif
     }
 
     private void Start()
     {
-        // musicVolume.onValueChanged.AddListener(
-        //     delegate
-        //     {
-        //         AudioManager.musicVolume = musicVolume.value;
-        //         AudioManager.instance.musicSource.volume = AudioManager.musicVolume;
-        //         PlayerPrefs.SetFloat("MusicVolume", AudioManager.musicVolume);
-        //     });
-        // musicVolume.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
-
-        // soundFXVolume.onValueChanged.AddListener(
-        //     delegate
-        //     {
-        //         AudioManager.soundFXVolume = soundFXVolume.value;
-        //         AudioManager.instance.ambienceSource.volume = AudioManager.soundFXVolume;
-        //         PlayerPrefs.SetFloat("SoundFXVolume", AudioManager.soundFXVolume);
-        //     });
-        // soundFXVolume.value = PlayerPrefs.GetFloat("SoundFXVolume", 1f);
+        touchControlButtons.SetActive(false);
 
         //add click sounds
         Button[] buttons = Resources.FindObjectsOfTypeAll<Button>();
@@ -290,6 +282,10 @@ public class GameUI : MonoBehaviour
         weaponStats.SetActive(false);
         krieger.SetRendererLayer("Gameground");
         GameState.instance.isReady = true;
+        
+        #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
+            touchControlButtons.SetActive(true);
+        #endif
     }
 
     /// <summary>
@@ -354,6 +350,10 @@ public class GameUI : MonoBehaviour
     private void EndScreenSequenceWrapper() {StartCoroutine(EndScreenSequence());}
     private IEnumerator EndScreenSequence() 
     {
+        #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
+            touchControlButtons.SetActive(false);
+        #endif
+
         GameObject endGameElements = endGameText.transform.parent.parent.gameObject;
         endGameElements.SetActive(true);
 

@@ -66,6 +66,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -75,8 +76,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -184,7 +185,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: be3a8bf460d328810800000000000000
-      internalID: 1766041101199254507
+      internalID: 8804367784563304662
       vertices: []
       indices: 
       edges: []
@@ -205,7 +206,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7a4b72ba54e183a30800000000000000
-      internalID: 4195136337468699815
+      internalID: 4938469764603716984
       vertices: []
       indices: 
       edges: []
@@ -226,7 +227,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: c063ed99a46901930800000000000000
-      internalID: 4111951706942486028
+      internalID: 5265758754626146691
       vertices: []
       indices: 
       edges: []
@@ -247,7 +248,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 92d6cd8e2c0d32760800000000000000
-      internalID: 7432013345640443177
+      internalID: -4253193137982218012
       vertices: []
       indices: 
       edges: []
@@ -268,7 +269,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 3492210f970502be0800000000000000
-      internalID: -1504113790892758717
+      internalID: -813801279496178718
       vertices: []
       indices: 
       edges: []
@@ -289,7 +290,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 19d9bd6ab34888e80800000000000000
-      internalID: -8176139731753788015
+      internalID: -2421722750540854241
       vertices: []
       indices: 
       edges: []
@@ -346,6 +347,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      crouchReload_3: -4253193137982218012
+      crouchReload_7: -2472127857073280983
+      crouchReload_4: -813801279496178718
+      crouchReload_2: 5265758754626146691
+      crouchReload_0: 8804367784563304662
+      crouchReload_1: 4938469764603716984
+      crouchReload_6: 5512719712511257865
+      crouchReload_5: -2421722750540854241
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerInput
 {
@@ -15,6 +18,89 @@ public class PlayerInput
     public PlayerInput()
     {
         hasLeftTouch = hasRightTouch = false;
+
+        #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
+            Dictionary<string, Button> controlToButtons = GameState.instance.ui.touchControlToButtons;
+            foreach (KeyValuePair<string, Button> pair in controlToButtons)
+            {
+                string name = pair.Key;
+                Button button = pair.Value;
+                EventTrigger trigger = button.GetComponent<EventTrigger>();
+                switch (name)
+                {
+                    case "Move":
+                        EventTrigger.Entry moveDown = new EventTrigger.Entry();
+                        EventTrigger.Entry moveUp = new EventTrigger.Entry();
+                        moveDown.eventID = EventTriggerType.PointerDown;
+                        moveUp.eventID = EventTriggerType.PointerUp;
+
+                        moveDown.callback.AddListener((data) => 
+                        {
+                            OnMoveDown((PointerEventData)data);
+                        });
+
+                        moveUp.callback.AddListener((data) => 
+                        {
+                            OnMoveUp((PointerEventData)data);
+                        });
+
+                        trigger.triggers.Add(moveDown);
+                        trigger.triggers.Add(moveUp);
+                        break;
+
+                    case "Crouch":
+                        EventTrigger.Entry crouchDown = new EventTrigger.Entry();
+                        EventTrigger.Entry crouchUp = new EventTrigger.Entry();
+                        crouchDown.eventID = EventTriggerType.PointerDown;
+                        crouchUp.eventID = EventTriggerType.PointerUp;
+
+                        crouchDown.callback.AddListener((data) => 
+                        {
+                            OnCrouchDown((PointerEventData)data);
+                        });
+
+                        crouchUp.callback.AddListener((data) => 
+                        {
+                            OnCrouchUp((PointerEventData)data);
+                        });
+
+                        trigger.triggers.Add(crouchDown);
+                        trigger.triggers.Add(crouchUp);
+                        break;
+
+                    case "Attack":
+                        EventTrigger.Entry attackDown = new EventTrigger.Entry();
+                        EventTrigger.Entry attackUp = new EventTrigger.Entry();
+                        attackDown.eventID = EventTriggerType.PointerDown;
+                        attackUp.eventID = EventTriggerType.PointerUp;
+
+                        attackDown.callback.AddListener((data) => 
+                        {
+                            OnAttackDown((PointerEventData)data);
+                        });
+
+                        attackUp.callback.AddListener((data) => 
+                        {
+                            OnAttackUp((PointerEventData)data);
+                        });
+
+                        trigger.triggers.Add(attackDown);
+                        trigger.triggers.Add(attackUp);
+                        break;
+
+                    case "Reload":
+                        button.onClick.AddListener(OnReload); 
+                        break;
+
+                    case "SwitchWeapon":
+                        button.onClick.AddListener(OnSwitchWeapon); 
+                        break;
+
+                    default:
+                        break;
+                } 
+            }
+        #endif
     }
 
     /// <summary>
@@ -23,7 +109,8 @@ public class PlayerInput
     public void Read()
     {
         #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
-            TouchReader();
+            // TouchReader();
+            ButtonReader();
         #else
             KeyboardReader();
         #endif
@@ -46,6 +133,98 @@ public class PlayerInput
         _attackDown = Input.GetKeyDown(KeyCode.J);
         _attackHold = Input.GetKey(KeyCode.J);
         _attackRelease = Input.GetKeyUp(KeyCode.J);
+    }
+
+    /// <summary>
+    /// Touch button input.
+    /// Most of the changes will be handled via listeners.
+    /// Move = hold to move
+    /// Crouch = hold to crouch
+    /// Reload = tap
+    /// Attack = tap
+    /// Switch = tap
+    /// </summary>
+    private bool switchPressed;
+    private bool reloadPressed;
+    private bool attackPressed;
+    private bool attackReleased;
+    private void ButtonReader()
+    {
+        // _move will keep its value
+        // _crouch will keep its value
+        _switch = switchPressed;
+        _reload = reloadPressed;
+        _attackDown = attackPressed;
+        // _attackHold will keep its value
+        _attackRelease = attackReleased;
+
+        switchPressed = reloadPressed = attackPressed = attackReleased = false;
+    }
+
+    /// <summary>
+    /// Move button press down listener.
+    /// </summary>
+    private void OnMoveDown(PointerEventData data)
+    {
+        _move = true;
+    }
+
+    /// <summary>
+    /// Move button release listener.
+    /// </summary>
+    private void OnMoveUp(PointerEventData data)
+    {
+        _move = false;
+    }
+
+    /// <summary>
+    /// Crouch button press down listener.
+    /// </summary>
+    private void OnCrouchDown(PointerEventData data)
+    {
+        _crouch = true;
+    }
+
+    /// <summary>
+    /// Crouch button release listener.
+    /// </summary>
+    private void OnCrouchUp(PointerEventData data)
+    {
+        _crouch = false;
+    }
+
+    /// <summary>
+    /// Attack button press down listener.
+    /// </summary>
+    private void OnAttackDown(PointerEventData data)
+    {
+        _attackHold = true;
+        attackPressed = true;
+    }
+
+    /// <summary>
+    /// Attack button release listener.
+    /// </summary>
+    private void OnAttackUp(PointerEventData data)
+    {
+        _attackHold = false;
+        attackReleased = true;
+    }
+
+    /// <summary>
+    /// Reload button click listener.
+    /// </summary>
+    private void OnReload()
+    {
+        reloadPressed = true;
+    }
+
+    /// <summary>
+    /// Switch Weapon button click listener.
+    /// </summary>
+    private void OnSwitchWeapon()
+    {
+        switchPressed = true;
     }
 
     /// <summary>

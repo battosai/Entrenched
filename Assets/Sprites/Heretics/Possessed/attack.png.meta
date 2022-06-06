@@ -57,6 +57,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -66,8 +67,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -175,7 +176,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 02d990800cf6ad390800000000000000
-      internalID: -7792793334651970272
+      internalID: 827538889749247048
       vertices: []
       indices: 
       edges: []
@@ -196,7 +197,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 23fa94e26179757e0800000000000000
-      internalID: -1776785406452715726
+      internalID: -5010287565412364656
       vertices: []
       indices: 
       edges: []
@@ -217,7 +218,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 585be3d8918bf0620800000000000000
-      internalID: 2742613117975311749
+      internalID: -5463148037355797382
       vertices: []
       indices: 
       edges: []
@@ -238,7 +239,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 141a77bdbb938c6a0800000000000000
-      internalID: -6428824989067665087
+      internalID: -5182820943178688908
       vertices: []
       indices: 
       edges: []
@@ -259,7 +260,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 2a810f6da32127600800000000000000
-      internalID: 464453755496044706
+      internalID: 7402079830906333199
       vertices: []
       indices: 
       edges: []
@@ -295,6 +296,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      attack_4: 7402079830906333199
+      attack_2: -5463148037355797382
+      attack_1: -5010287565412364656
+      attack_5: 1372099006290288469
+      attack_3: -5182820943178688908
+      attack_0: 827538889749247048
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

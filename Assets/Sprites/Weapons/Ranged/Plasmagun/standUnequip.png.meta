@@ -57,6 +57,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -66,8 +67,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -175,7 +176,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: d22746555e7433e20800000000000000
-      internalID: 3329083599862657581
+      internalID: 2283891523307675119
       vertices: []
       indices: 
       edges: []
@@ -196,7 +197,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 1e9c013fa79643f00800000000000000
-      internalID: 1095616586142763489
+      internalID: 428538297409083200
       vertices: []
       indices: 
       edges: []
@@ -217,7 +218,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: bea055852b8933330800000000000000
-      internalID: 3689460411500137195
+      internalID: 1618646951599780550
       vertices: []
       indices: 
       edges: []
@@ -337,6 +338,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      standUnequip_5: 118336577293873956
+      standUnequip_1: 428538297409083200
+      standUnequip_2: 1618646951599780550
+      standUnequip_4: 6409593708249864247
+      standUnequip_7: 1441829783056024662
+      standUnequip_3: 2844815344820258812
+      standUnequip_6: 8543821120057285494
+      standUnequip_0: 2283891523307675119
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

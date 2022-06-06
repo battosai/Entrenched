@@ -54,6 +54,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,8 +64,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -376,6 +377,17 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      crouchIdle_3: -1443190562702424621
+      crouchIdle_6: -336870381069243295
+      crouchIdle_2: -4011887380188132946
+      crouchIdle_7: -2118322269444704668
+      crouchIdle_1: 5369103139016197590
+      crouchIdle_0: 1850055390765354598
+      crouchIdle_5: 7482970154589936885
+      crouchIdle_8: 1453513173943097037
+      crouchIdle_9: -5409798033565501179
+      crouchIdle_4: -5626766376318551937
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
