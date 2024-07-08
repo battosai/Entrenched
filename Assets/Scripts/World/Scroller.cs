@@ -38,7 +38,7 @@ public class Scroller : MonoBehaviour
         chunkB.position = chunkA.position + Vector3.right * chunkWidth;
 
         //setup scroll collider
-        float collDistFromEdge = 20f;
+        float collDistFromEdge = 0f;
         transform.position = 
             Camera.main.ViewportToWorldPoint(new Vector3(0f, 0.5f)) +
             (Vector3.left * (coll.size.x + collDistFromEdge));
@@ -51,24 +51,42 @@ public class Scroller : MonoBehaviour
         switch(layer)
         {
             case "Projectile":
-                break;
-            case "Drops":
-                Ammo ammo = other.GetComponent<Ammo>();
-                ammo.Cleanup();
-                break;
             case "Corpses":
-                Enemy enemy = other.GetComponent<Enemy>();
-                if(enemy.isDead)
-                    enemy.Cleanup();
-                else
-                    Debug.LogWarning($"Corpse isn't dead: {enemy.gameObject.name}");
+            case "Drops":
                 break;
+
             case "Chunk":
             case "Background":
                 other.transform.position += Vector3.right * chunkWidth * 2;
                 break;
+
             default:
                 Debug.LogWarning($"Scroller hit unknown object named {other.gameObject.name} on layer {layer}.");
+                break;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        string layer = LayerMask.LayerToName(other.gameObject.layer);
+        switch(layer)
+        {
+            case "Drops":
+                Ammo ammo = other.GetComponent<Ammo>();
+                ammo.Cleanup();
+                break;
+
+            case "Corpses":
+                Enemy enemy = other.GetComponent<Enemy>();
+
+                if(enemy.isDead)
+                    enemy.Cleanup();
+                else
+                    Debug.LogWarning($"Corpse isn't dead: {enemy.gameObject.name}");
+
+                break;
+
+            default:
                 break;
         }
     }

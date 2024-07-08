@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2802309893681352689, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
@@ -181,8 +182,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6997742343505171664, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
         type: 3}
+      propertyPath: m_Size.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997742343505171664, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
+        type: 3}
       propertyPath: m_Offset.x
-      value: -4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6997742343505171664, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be,
         type: 3}
@@ -195,4 +201,7 @@ PrefabInstance:
       value: Belcher
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a3a8b5bf689e8f49a8fe5f59055b0be, type: 3}
