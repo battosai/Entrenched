@@ -66,7 +66,8 @@ public class GameState : MonoBehaviour
         enemyPoolsByPowerLevel = new Dictionary<int, List<Enemy>>()
         {
             {1, new List<Enemy>()},
-            {2, new List<Enemy>()}
+            {2, new List<Enemy>()},
+            {3, new List<Enemy>()}
         };
         ammoPool = new List<Ammo>();
         projectilePool = new List<Projectile>();
@@ -90,43 +91,60 @@ public class GameState : MonoBehaviour
     /// </summary>
     private void Spawner()
     {
-        if(Time.time - lastSpawnTime > spawnInterval)
+        // // This was for a spawner based on a timer
+        // // Swapped out for a wave-based spawner
+        // if(Time.time - lastSpawnTime <= spawnInterval)
+        // {
+        //     return;
+        // }
+        // // Chance to not spawn an enemy this interval
+        // float roll = UnityEngine.Random.value;
+        // if (roll < 0.05)
+        // {
+        //     lastSpawnTime = Time.time;
+        //     return;
+        // }
+
+        // Opted to base spawner on "waves",
+        // so we only spawn once all enemies are dead.
+        if (totalPowerLevel > 0)
         {
-            // Chance to not spawn an enemy this interval
-            float roll = UnityEngine.Random.value;
-            if (roll < 0.05)
-            {
-                lastSpawnTime = Time.time;
-                return;
-            }
+            return;
+        }
 
-            float spacing = 0;
-            int powerLevelDeficit = difficulty - totalPowerLevel;
-            if(powerLevelDeficit > 0)
+        float spacing = 0;
+        int powerLevelDeficit = difficulty - totalPowerLevel;
+
+        if(powerLevelDeficit > 0)
+        {
+            while(powerLevelDeficit > 0)
             {
-                while(powerLevelDeficit > 0)
+                //randomly pick a power level to spawn for
+                //between 1 and deficit or highest level we have
+                int incomingPowerLevel = Random.Range(
+                    1, 
+                    1 + Math.Min(
+                        enemyPoolsByPowerLevel.Count, 
+                        powerLevelDeficit));
+
+                powerLevelDeficit -= incomingPowerLevel;
+
+                Enemy enemy = SpawnEnemy(incomingPowerLevel);
+
+                if (enemy != null)
                 {
-                    //randomly pick a power level to spawn for
-                    //between 1 and deficit or highest level we have
-                    int incomingPowerLevel = Random.Range(
-                        1, 
-                        1 + Math.Min(
-                            enemyPoolsByPowerLevel.Count, 
-                            powerLevelDeficit));
-                    powerLevelDeficit -= incomingPowerLevel;
-
-                    Enemy enemy = SpawnEnemy(incomingPowerLevel);
-                    if(enemy != null)
-                        enemy.transform.position = 
-                            player.transform.position + 
-                            new Vector3(150 + spacing, 0, 0);
-
-                    //this new spacing will be used for the next enemy
-                    spacing += enemy.rend.sprite.bounds.size.x;
+                    enemy.transform.position = player.transform.position + 
+                        new Vector3(
+                            150 + spacing, 
+                            0, 
+                            0);
                 }
 
-                lastSpawnTime = Time.time;
+                //this new spacing will be used for the next enemy
+                spacing += enemy.rend.sprite.bounds.size.x;
             }
+
+            lastSpawnTime = Time.time;
         }
     }
 
