@@ -390,6 +390,10 @@ public class Krieger : MonoBehaviour
         isSwitchingWeapons = false;
         isMelee = !isMelee;
         UpdateEquippedWeaponAnims();
+
+        #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
+            GameState.instance.ui.touchControlToButtons["Reload"].interactable = !isMelee;
+        #endif
     }
 
     /// <summary>
