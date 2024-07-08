@@ -30,10 +30,13 @@ public class CameraController : MonoBehaviour
         Sprite targetSprite = followTarget.transform.Find("Torso").GetComponent<SpriteRenderer>().sprite;
         targetWidth = targetSprite.bounds.size.x;
         targetHeight = targetSprite.bounds.size.y;
-        Vector3 currentBottomLeft = cam.ViewportToWorldPoint(new Vector3(0f, 0f, 10f));
-        currentBottomLeft += new Vector3(targetWidth/2f, targetHeight/2f, 0f);
-        Vector3 move = followTarget.transform.position - currentBottomLeft;
+
+        Vector3 bottomLeft = cam.ViewportToWorldPoint(new Vector3(0f, 0f, 10f));
+        bottomLeft += new Vector3(targetWidth/2f, targetHeight/2f + 22f, 0f);
+
+        Vector3 move = followTarget.transform.position - bottomLeft;
         transform.position += move;
+
         offsetFromTarget = transform.position - followTarget.transform.position;
 
         InitializeBackground();
