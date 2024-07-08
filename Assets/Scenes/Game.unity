@@ -1551,7 +1551,7 @@ MonoBehaviour:
   projectile: {fileID: 5996334509509518419, guid: 705b345acbf46c649b80b0a479cf4ed0,
     type: 3}
   isReady: 0
-  spawnInterval: 5
+  spawnInterval: 7
 --- !u!4 &599293719
 Transform:
   m_ObjectHideFlags: 0
@@ -5162,6 +5162,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8427667212324950912, guid: 1f72df765bcb6b74ea63a80416ed778f,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427667212324950912, guid: 1f72df765bcb6b74ea63a80416ed778f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8427667212324950913, guid: 1f72df765bcb6b74ea63a80416ed778f,
         type: 3}
       propertyPath: m_RootOrder
