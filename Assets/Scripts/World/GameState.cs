@@ -92,6 +92,14 @@ public class GameState : MonoBehaviour
     {
         if(Time.time - lastSpawnTime > spawnInterval)
         {
+            // Chance to not spawn an enemy this interval
+            float roll = UnityEngine.Random.value;
+            if (roll < 0.05)
+            {
+                lastSpawnTime = Time.time;
+                return;
+            }
+
             float spacing = 0;
             int powerLevelDeficit = difficulty - totalPowerLevel;
             if(powerLevelDeficit > 0)
@@ -111,7 +119,7 @@ public class GameState : MonoBehaviour
                     if(enemy != null)
                         enemy.transform.position = 
                             player.transform.position + 
-                            new Vector3(100 + spacing, 0, 0);
+                            new Vector3(150 + spacing, 0, 0);
 
                     //this new spacing will be used for the next enemy
                     spacing += enemy.rend.sprite.bounds.size.x;
