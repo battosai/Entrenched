@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Plasmagun
   m_EditorClassIdentifier: 
   unlockDistance: 350
-  range: 100
+  range: 500
   ap: 3
   dmg: 2
   clipSize: 5

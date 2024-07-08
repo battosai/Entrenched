@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hellgun
   m_EditorClassIdentifier: 
   unlockDistance: 250
-  range: 100
+  range: 500
   ap: 2
   dmg: 1
   clipSize: 10
