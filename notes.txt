@@ -1,3 +1,13 @@
+ANDROID BUILD NOTES:
+	- In Edit->Preferences->External Tools, in the Android section
+		- Use the Android Studio installed SDK tools
+			- Path should be "C:\Users\Brian Tsai\AppData\Local\Android\Sdk"
+			- Otherwise open Android Studio's SDK Manager and check
+		- Targeting API Lvl 34
+			- Use cmdline-tools v9.0
+		- Targeting API Lvl 35
+			- Tried using cmdline-tools v13.0
+				- complained about Java Runtime being too updated compared to Unity's installed one
 ART NOTES:
 	- kriegsman leg height standing=7, crouching=4
 ANIMATION NOTES:
