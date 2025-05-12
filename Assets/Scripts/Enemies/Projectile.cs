@@ -52,21 +52,25 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other != null)
+        if (other == null ||
+            other.tag == "Enemies")
         {
-            rb.velocity = Vector2.zero;
-            if(other.tag == "Player")
-            {
-                anim.SetBool("Hit", true);
-                Krieger.instance.OnWounded?.Invoke();
-                //use krieger audio source for now
-                AudioManager.PlayOneClip(
-                    Krieger.instance.audioSource,
-                    impacts);
-            }
-            else
-                this.gameObject.SetActive(false);
+            return;
         }
+
+        rb.velocity = Vector2.zero;
+
+        if(other.tag == "Player")
+        {
+            anim.SetBool("Hit", true);
+            Krieger.instance.OnWounded?.Invoke();
+            //use krieger audio source for now
+            AudioManager.PlayOneClip(
+                Krieger.instance.audioSource,
+                impacts);
+        }
+        else
+            this.gameObject.SetActive(false);
     }
 
     /// <summary>
