@@ -81,6 +81,16 @@ public class Enemy : MonoBehaviour
         };
         stateMachine.SetStates(states);
     }
+    
+    /// <summary>
+    /// Cleanup on game or scene end.
+    /// </summary>
+    private void OnDestroy()
+    {
+        OnWounded -= TakeDamage;
+        OnDeath -= RollDrops;
+        Krieger.instance.OnDeath -= Freeze;
+    }
 
     private void Update()
     {

@@ -75,6 +75,14 @@ public class GameState : MonoBehaviour
         Krieger.instance.OnDeath += CalculateDistanceTraversed;
     }
 
+    /// <summary>
+    /// Cleanup.
+    /// </summary>
+    private void OnDestroy()
+    {
+        Krieger.instance.OnDeath -= CalculateDistanceTraversed;
+    }
+
     private void Update()
     {
         if(Krieger.instance.isDead)

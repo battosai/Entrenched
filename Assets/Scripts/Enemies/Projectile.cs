@@ -20,6 +20,14 @@ public class Projectile : MonoBehaviour
     }
 
     /// <summary>
+    /// Cleanup.
+    /// </summary>
+    private void OnDestroy()
+    {
+        Krieger.instance.OnDeath -= Freeze;
+    }
+
+    /// <summary>
     /// Spawn projectile at position with velocity.
     /// </summary>
     public static void Spawn(

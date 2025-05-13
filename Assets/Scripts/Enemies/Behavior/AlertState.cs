@@ -8,6 +8,14 @@ public class AlertState : BaseState
         e.stateMachine.OnStateChanged += Alert;
     }
 
+    /// <summary>
+    /// Cleanup.
+    /// </summary>
+    ~AlertState()
+    {
+        me.stateMachine.OnStateChanged -= Alert;
+    }
+
     public override Type Tick()
     {
         if(me.isDead)

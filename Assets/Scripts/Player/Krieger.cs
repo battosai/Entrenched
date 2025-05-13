@@ -151,6 +151,14 @@ public class Krieger : MonoBehaviour
         OnWounded += TakeDamage;
     }
 
+    /// <summary>
+    /// Cleanup.
+    /// </summary>
+    private void OnDestroy()
+    {
+        OnWounded -= TakeDamage;
+    }
+
     private void Update()
     {
         if(!GameState.instance.isReady)
