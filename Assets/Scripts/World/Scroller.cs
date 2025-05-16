@@ -50,7 +50,7 @@ public class Scroller : MonoBehaviour
         string layer = LayerMask.LayerToName(other.gameObject.layer);
         switch(layer)
         {
-            case "Projectile":
+            case "EnemyProjectile":
             case "Corpses":
             case "Drops":
                 break;

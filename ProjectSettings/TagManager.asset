@@ -21,9 +21,9 @@ TagManager:
   - Corpses
   - Background
   - Drops
-  - Projectile
-  - 
-  - 
+  - EnemyProjectile
+  - EndOfScreen
+  - PlayerProjectile
   - 
   - 
   - 

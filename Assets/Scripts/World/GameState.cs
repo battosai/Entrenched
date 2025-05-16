@@ -1,9 +1,15 @@
+// Standard library includes
 using System;
+using System.Collections;
 using System.Collections.Generic;
+
+// Unity includes
+using Random=UnityEngine.Random;
 using UnityEngine;
 
-using Random=UnityEngine.Random;
-
+/// <summary>
+/// Manager for game loop.
+/// </summary>
 public class GameState : MonoBehaviour
 {
     [Header("Test")]
@@ -31,11 +37,17 @@ public class GameState : MonoBehaviour
     private int totalEnemies;
     private int totalPowerLevel;
 
+    /// <summary>
+    /// Event for when spawner needs to take a break.
+    /// </summary>
+    public delegate void SpawnerPause(float duration_s);
+    public SpawnerPause OnSpawnerPause;
+
     //util
     public static GameState instance;
     public bool isReady; //only true once player has selected weapons
-    public float spawnInterval;
-    private float lastSpawnTime;
+    public float spawnInterval_s;
+    private float lastSpawnTime_s;
     private Krieger player;
     private Dictionary<int, List<Enemy>> enemyPoolsByPowerLevel;
 
@@ -62,7 +74,7 @@ public class GameState : MonoBehaviour
         difficulty = 1;
         totalPowerLevel = 0;
         totalEnemies = 0;
-        lastSpawnTime = -1f;
+        lastSpawnTime_s = -1f;
         enemyPoolsByPowerLevel = new Dictionary<int, List<Enemy>>()
         {
             {1, new List<Enemy>()},
@@ -72,6 +84,7 @@ public class GameState : MonoBehaviour
         ammoPool = new List<Ammo>();
         projectilePool = new List<Projectile>();
 
+        OnSpawnerPause += PauseSpawnerWrapper;
         Krieger.instance.OnDeath += CalculateDistanceTraversed;
     }
 
@@ -80,6 +93,7 @@ public class GameState : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
+        OnSpawnerPause -= PauseSpawnerWrapper;
         Krieger.instance.OnDeath -= CalculateDistanceTraversed;
     }
 
@@ -101,7 +115,7 @@ public class GameState : MonoBehaviour
     {
         // // This was for a spawner based on a timer
         // // Swapped out for a wave-based spawner
-        // if(Time.time - lastSpawnTime <= spawnInterval)
+        // if(Time.time - lastSpawnTime_s <= spawnInterval_s)
         // {
         //     return;
         // }
@@ -109,7 +123,7 @@ public class GameState : MonoBehaviour
         // float roll = UnityEngine.Random.value;
         // if (roll < 0.05)
         // {
-        //     lastSpawnTime = Time.time;
+        //     lastSpawnTime_s = Time.time;
         //     return;
         // }
 
@@ -152,7 +166,7 @@ public class GameState : MonoBehaviour
                 spacing += enemy.rend.sprite.bounds.size.x;
             }
 
-            lastSpawnTime = Time.time;
+            lastSpawnTime_s = Time.time;
         }
     }
 
@@ -163,7 +177,7 @@ public class GameState : MonoBehaviour
     {
         Enemy enemy = heresy.enemyByType[eType];
 
-        lastSpawnTime = Time.time;
+        lastSpawnTime_s = Time.time;
         totalEnemies++;
         totalPowerLevel += enemy.powerLevel;
 
@@ -198,7 +212,7 @@ public class GameState : MonoBehaviour
                 eTypes.Count)];
         Enemy enemy = heresy.enemyByType[eType];
 
-        lastSpawnTime = Time.time;
+        lastSpawnTime_s = Time.time;
         totalEnemies++;
         totalPowerLevel += enemy.powerLevel;
 
@@ -218,6 +232,29 @@ public class GameState : MonoBehaviour
         Enemy newEnemy = Instantiate(enemy);
         enemyPool.Add(newEnemy);
         return newEnemy;
+    }
+
+    /// <summary>
+    /// Wrapper for pausing spawner coroutine.
+    /// </summary>
+    private void PauseSpawnerWrapper(float duration_s)
+    {
+        StartCoroutine(PauseSpawner(duration_s));
+    }
+
+    /// <summary>
+    /// Coroutine that pauses the spawner for a designated amount of time.
+    /// </summary>
+    private IEnumerator PauseSpawner(float duration_s)
+    {
+        float time_s = Time.time;
+        float elapsedSpawnInterval_s = time_s - lastSpawnTime_s;
+
+        while (Time.time - time_s < duration_s)
+        {
+            lastSpawnTime_s = Time.time - elapsedSpawnInterval_s;
+            yield return null;
+        }
     }
 
     /// <summary>
