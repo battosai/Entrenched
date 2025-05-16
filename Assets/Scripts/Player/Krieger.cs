@@ -18,7 +18,19 @@ public class Krieger : MonoBehaviour
     public AudioClip[] walks;
     public AudioClip[] ammoPickups;
 
-    //state
+    /// <summary>
+    /// Whether or not the player is in the middle of something.
+    /// </summary>
+    private bool busy
+    {
+        get
+        {
+            return isReloading == true ||
+                isSwitchingWeapons == true ||
+                isIssuingOrder == true;
+        }
+    }
+
     public bool isMoving;
     private float moveStartTime;
     public bool isCrouching;
@@ -29,6 +41,7 @@ public class Krieger : MonoBehaviour
     public bool isReloading;
     public bool isSwitchingWeapons;
     public bool isMelee;
+    public bool isIssuingOrder;
     public bool isDead;
 
     //krieger components
@@ -104,6 +117,11 @@ public class Krieger : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Ability to give out commands.
+    /// </summary>
+    public VoiceOfCommand voice {get; private set;}
+
     //events
     public delegate void Wounded();
     public Wounded OnWounded;
@@ -130,6 +148,8 @@ public class Krieger : MonoBehaviour
         weaponTrans = transform.Find("Weapon");
         weaponAnim = weaponTrans.GetComponent<Animator>();
         weaponRend = weaponTrans.GetComponent<SpriteRenderer>();
+
+        voice = transform.Find("VoiceOfCommand").GetComponent<VoiceOfCommand>();
 
         //anim
         weaponAnimOverCont = 
@@ -176,57 +196,85 @@ public class Krieger : MonoBehaviour
     /// </summary>
     private void InputHandler()
     {
-        //hold downs
+        // Hold downs
         isMoving = false;
         isCrouching = false;
         isAttacking = false;
 
-        if(isDead)
+        // Ignore if dead
+        if (isDead == true)
+        {
             return;
+        }
 
-        if(!isReloading && !isSwitchingWeapons)
-            if(input._move)
+        // Can only move if we aren't reloading/switching
+        if (busy == false)
+        {
+            if (input._move == true)
+            {
                 isMoving = true;
-        if(!isAttacking)
-            if(input._crouch)
+            }
+        }
+
+        // Can only begin crouching if we aren't attacking
+        if (isAttacking == false)
+        {
+            if (input._crouch == true)
             {
                 isCrouching = true;
                 isMoving = false;
             }
+        }
 
-        //one taps (and take animation time to reset)
-        if(!isReloading && !isSwitchingWeapons)
+        // One taps (and take animation time to reset)
+        if (busy == false)
         {
-            if(input._switch)
+            // Start issuing order
+            if (input._issueOrder == true &&
+                voice.available == true)
+            {
+
+                isIssuingOrder = true;
+                isMoving = false;
+                voice.Issue("FixBayonets");
+            }
+
+            // Start switching weapons
+            else if (input._switch == true &&
+                isIssuingOrder == false)
             {
                 isSwitchingWeapons = true;
                 isMoving = false;
                 anim.SetTrigger("SwitchWeapon");
                 weaponAnim.SetTrigger("SwitchWeapon");
             }
-            if(!isSwitchingWeapons)
+
+            // Can reload if we aren't currently switching weapons
+            else if (input._reload == true &&
+                isSwitchingWeapons == false)
             {
-                if(input._reload)
+                if (isMelee == false && 
+                    ammoInClip < rangedWeapon.clipSize &&
+                    clips > 0)
                 {
-                    if(!isMelee && 
-                        ammoInClip < rangedWeapon.clipSize &&
-                        clips > 0)
-                    {
-                        AudioManager.PlayOneClip(audioSource, rangedWeapon.reloads);
-                        isReloading = true;
-                        anim.SetTrigger("Reload");
-                        weaponAnim.SetTrigger("Reload");
-                    }
+                    AudioManager.PlayOneClip(audioSource, rangedWeapon.reloads);
+                    isReloading = true;
+                    anim.SetTrigger("Reload");
+                    weaponAnim.SetTrigger("Reload");
                 }
             }
         }
 
-        //instant one-ticks
-        if(!isReloading && !isSwitchingWeapons)
+        // Instant one-ticks
+        if (busy == false)
         {
-            if(input._attackRelease && isMelee)
+            // TODO: Change non-charging weapons to trigger on KeyDown 
+
+            // Perform melee attack
+            if (input._attackRelease == true && 
+                isMelee == true)
             {
-                if(Time.time - lastMeleeAttackTime > meleeWeapon.cooldown)
+                if (Time.time - lastMeleeAttackTime > meleeWeapon.cooldown)
                 {
                     isAttacking = true;
                     lastMeleeAttackTime = Time.time;
@@ -235,11 +283,13 @@ public class Krieger : MonoBehaviour
                 }
             }
 
-            if(input._attackDown && !isMelee)
+            // Start charging ranged weapon
+            if (input._attackDown == true && 
+                isMelee == false)
             {
                 chargeStartTime = Time.time;
                 
-                if(!isMelee && 
+                if (isMelee == false &&
                     ammoInClip > 0 &&
                     rangedWeapon.chargeTime > 0)
                 {
@@ -251,32 +301,36 @@ public class Krieger : MonoBehaviour
                 }
             }
 
-            //positive charge start time to ensure
-            //there was a corresponding mouse down
-            //(clicking ready button in weapon selection)
-            if(chargeStartTime > 0 && !isMelee)
+            // Positive charge start time to ensure
+            // there was a corresponding mouse down
+            // (clicking ready button in weapon selection)
+            if (chargeStartTime > 0 && 
+                isMelee == false)
             {
-                //release
-                if(input._attackRelease)
+                // Release charge
+                if (input._attackRelease == true)
                 {
-                    if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
+                    if (Time.time - chargeStartTime > rangedWeapon.chargeTime)
                     {
                         isAttacking = true;
                         anim.SetTrigger("Shoot");
                         weaponAnim.SetTrigger("Shoot");
                     }
+
                     chargeStartTime = -1f;
 
-                    if(audioSource.isPlaying)
+                    if (audioSource.isPlaying == true)
+                    {
                         audioSource.Stop();
+                    }
                 }
 
-                //hold
-                else if(input._attackHold)
+                // Hold charge
+                else if (input._attackHold == true)
                 {
-                    if(Time.time - chargeStartTime > rangedWeapon.chargeTime)
+                    if (Time.time - chargeStartTime > rangedWeapon.chargeTime)
                     {
-                        if(audioSource.clip != rangedWeapon.fullCharge)
+                        if (audioSource.clip != rangedWeapon.fullCharge)
                         {
                             AudioManager.Play(
                                 audioSource,
@@ -290,10 +344,16 @@ public class Krieger : MonoBehaviour
             }
         }
 
-        if(!anim.GetBool("Moving") && isMoving)
+        if (anim.GetBool("Moving") == false && 
+            isMoving == true)
+        {
             moveStartTime = Time.time;
-        else if(anim.GetBool("Moving") && !isMoving)
+        }
+        else if(anim.GetBool("Moving") == true && 
+            isMoving == false)
+        {
             moveStartTime = -1f;
+        }
 
         anim.SetBool("Moving", isMoving);
         anim.SetBool("Crouching", isCrouching);
@@ -301,16 +361,18 @@ public class Krieger : MonoBehaviour
         weaponAnim.SetBool("Crouching", isCrouching);
         weaponAnim.SetInteger("Ammo", ammoInClip);
 
-        if(moveStartTime > 0)
+        if (moveStartTime > 0)
         {
-            //walk anim is 0.5s, each step is half of it
+            // Walk anim is 0.5s, each step is half of it
             float stepDelay = 0.25f;
-            if(Time.time - moveStartTime > stepDelay)
+
+            if (Time.time - moveStartTime > stepDelay)
             {
                 AudioManager.PlayOneClip(
                     audioSource, 
                     walks,
                     0.25f);
+
                 moveStartTime = Time.time;
             }
         }
@@ -323,11 +385,13 @@ public class Krieger : MonoBehaviour
             new Vector2(0, -2) :
             Vector2.zero;
         
-        if(isAttacking)
+        if (isAttacking == true)
+        {
             UseWeapon(
                 isMelee ?
                 (Weapon)meleeWeapon :
                 (Weapon)rangedWeapon);
+        }
     }
 
     /// <summary>
@@ -402,6 +466,17 @@ public class Krieger : MonoBehaviour
         #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
             GameState.instance.ui.touchControlToButtons["Reload"].interactable = !isMelee;
         #endif
+    }
+
+    /// <summary>
+    /// End the issuing order state.
+    /// Can be an Animation Event or just manually 
+    /// called depending on how the order functions.
+    /// </summary>
+    public void EndIssueOrder()
+    {
+        voice.End();
+        isIssuingOrder = false;
     }
 
     /// <summary>
