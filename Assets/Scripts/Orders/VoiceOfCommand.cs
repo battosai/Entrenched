@@ -47,8 +47,9 @@ public class VoiceOfCommand : MonoBehaviour
                 Resources.Load<Sprite>($"T_{order}"));
         }
 
-        shout.sprite = orderSprites[order];
-        shout.enabled = true;
+        orderRend.sprite = orderSprites[order];
+        orderRend.enabled = true;
+        commissarAnim.SetTrigger("Enter");
 
         OnOrderIssued.Invoke(order);
     }
@@ -58,7 +59,8 @@ public class VoiceOfCommand : MonoBehaviour
     /// </summary>
     public void End()
     {
-        shout.enabled = false;
+        orderRend.enabled = false;
+        commissarAnim.SetTrigger("Exit");
     }
 
     // ------------------------------- Data ------------------------------------
@@ -74,9 +76,14 @@ public class VoiceOfCommand : MonoBehaviour
     private float lastOrder_s;
 
     /// <summary>
+    /// Animator for commissar.
+    /// </summary>
+    private Animator commissarAnim;
+
+    /// <summary>
     /// Renderer displaying the name of the order in text form.
     /// </summary>
-    private SpriteRenderer shout;
+    private SpriteRenderer orderRend;
 
     /// <summary>
     /// Order text sprite.
@@ -90,7 +97,8 @@ public class VoiceOfCommand : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        shout = GetComponent<SpriteRenderer>();
+        commissarAnim = GetComponent<Animator>();
+        orderRend = transform.Find("Order").GetComponent<SpriteRenderer>();
         orderSprites = new Dictionary<string, Sprite>();
     }
 
@@ -101,6 +109,6 @@ public class VoiceOfCommand : MonoBehaviour
     {
         cooldown_s = 20f;
         lastOrder_s = Time.time - cooldown_s;
-        shout.enabled = false;
+        orderRend.enabled = false;
     }
 }

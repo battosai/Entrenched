@@ -149,7 +149,7 @@ public class Krieger : MonoBehaviour
         weaponAnim = weaponTrans.GetComponent<Animator>();
         weaponRend = weaponTrans.GetComponent<SpriteRenderer>();
 
-        voice = transform.Find("VoiceOfCommand").GetComponent<VoiceOfCommand>();
+        voice = transform.Find("Commissar").GetComponent<VoiceOfCommand>();
 
         //anim
         weaponAnimOverCont = 
