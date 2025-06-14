@@ -8,6 +8,16 @@ using UnityEngine.UI;
 public static class Utils
 {
     /// <summary>
+    /// Get the distance in "feet" the player has traversed thus far.
+    /// </summary>
+    public static int GetDistanceTraversed()
+    {
+        Debug.Assert(Krieger.instance != null);
+        int dist_ft = (int)Mathf.Floor(Krieger.instance.transform.position.x / 3);
+        return dist_ft;
+    }
+
+    /// <summary>
     /// Resizes text object by scaling to a predetermined hardcoded ratio.
     /// </summary>
     public static void AdjustTextScaleForCustomFont(Text text)

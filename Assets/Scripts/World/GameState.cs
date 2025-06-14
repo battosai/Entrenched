@@ -85,7 +85,7 @@ public class GameState : MonoBehaviour
         projectilePool = new List<Projectile>();
 
         OnSpawnerPause += PauseSpawnerWrapper;
-        Krieger.instance.OnDeath += CalculateDistanceTraversed;
+        Krieger.instance.OnDeath += SaveDistanceTraversed;
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ public class GameState : MonoBehaviour
     private void OnDestroy()
     {
         OnSpawnerPause -= PauseSpawnerWrapper;
-        Krieger.instance.OnDeath -= CalculateDistanceTraversed;
+        Krieger.instance.OnDeath -= SaveDistanceTraversed;
     }
 
     private void Update()
@@ -272,9 +272,9 @@ public class GameState : MonoBehaviour
     /// <summary>
     /// Subscriber to Krieger.OnDeath Event. Find end game distance stat.
     /// </summary>
-    private void CalculateDistanceTraversed()
+    private void SaveDistanceTraversed()
     {
-        int dist = (int)Mathf.Floor(Krieger.instance.transform.position.x / 3);
+        int dist = Utils.GetDistanceTraversed();
         feetTraversed = dist;
 
         // Save if new record

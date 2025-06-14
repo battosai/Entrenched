@@ -1,5 +1,6 @@
 // Standard library includes
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 // Unity includes
@@ -24,13 +25,7 @@ public class VoiceOfCommand : MonoBehaviour
     /// <summary>
     /// Whether or not the order can be used.
     /// </summary>
-    public bool available
-    {
-        get
-        {
-            return Time.time - lastOrder_s >= cooldown_s;
-        }
-    }
+    public bool available {get; private set;}
 
     /// <summary>
     /// Entry point for the player issuing the order.
@@ -38,7 +33,6 @@ public class VoiceOfCommand : MonoBehaviour
     public void Issue(string order)
     {
         Debug.Assert(available == true);
-        lastOrder_s = Time.time;
 
         if (orderSprites.ContainsKey(order) == false)
         {
@@ -48,7 +42,6 @@ public class VoiceOfCommand : MonoBehaviour
         }
 
         orderRend.sprite = orderSprites[order];
-        orderRend.enabled = true;
         commissarAnim.SetTrigger("Enter");
 
         OnOrderIssued.Invoke(order);
@@ -59,21 +52,16 @@ public class VoiceOfCommand : MonoBehaviour
     /// </summary>
     public void End()
     {
-        orderRend.enabled = false;
+        StartCoroutine(Cooldown());
         commissarAnim.SetTrigger("Exit");
     }
 
     // ------------------------------- Data ------------------------------------
 
     /// <summary>
-    /// Time it takes before this order can be used again.
+    /// Distance the player must traverse to activate the ability.
     /// </summary>
-    private float cooldown_s;
-
-    /// <summary>
-    /// Timestamp for when the last order was issued.
-    /// </summary>
-    private float lastOrder_s;
+    private const int distanceRequired_ft = 20;
 
     /// <summary>
     /// Animator for commissar.
@@ -107,8 +95,37 @@ public class VoiceOfCommand : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        cooldown_s = 20f;
-        lastOrder_s = Time.time - cooldown_s;
+        orderSprites.Add(
+            "OrderReady",
+            Resources.Load<Sprite>($"T_OrderReady"));
+
+        StartCoroutine(Cooldown());
+    }
+
+    /// <summary>
+    /// Initiates a cooldown period where this ability is unavailable until its
+    /// requirement is met.
+    /// </summary>
+    private IEnumerator Cooldown()
+    {
+        available = false;
         orderRend.enabled = false;
+
+        // Make sure the game has started before counting down
+        while (GameState.instance.isReady == false)
+        {
+            yield return null;
+        }
+
+        int start_ft = Utils.GetDistanceTraversed();
+
+        while (Utils.GetDistanceTraversed() - start_ft < distanceRequired_ft)
+        {
+            yield return null;
+        }
+
+        available = true;
+        orderRend.enabled = true;
+        orderRend.sprite = orderSprites["OrderReady"];
     }
 }
