@@ -233,7 +233,6 @@ public class Krieger : MonoBehaviour
             if (input._issueOrder == true &&
                 voice.available == true)
             {
-
                 isIssuingOrder = true;
                 isMoving = false;
                 voice.Issue("FixBayonets");
