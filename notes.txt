@@ -1,5 +1,5 @@
 ANDROID BUILD NOTES:
-	- In Edit->Preferences->External Tools, in the Android section
+	- (7/01/24) In Edit->Preferences->External Tools, in the Android section
 		- Use the Android Studio installed SDK tools
 			- Path should be "C:\Users\Brian Tsai\AppData\Local\Android\Sdk"
 			- Otherwise open Android Studio's SDK Manager and check
@@ -8,6 +8,13 @@ ANDROID BUILD NOTES:
 		- Targeting API Lvl 35
 			- Tried using cmdline-tools v13.0
 				- complained about Java Runtime being too updated compared to Unity's installed one
+	- (7/24/25) Building to API lvl 35
+		- https://www.youtube.com/watch?v=27W6R_L3_JM
+		- TLDR
+			- install the needed SDK platform and build tools in Android Studio
+			- Set Unity to use its own Android SDK path
+			- Copy over the desired level's platform and build tools folders
+			- build, ???, profit
 ART NOTES:
 	- kriegsman leg height standing=7, crouching=4
 ANIMATION NOTES:
