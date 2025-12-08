@@ -140,7 +140,7 @@ public class PlayerInput
         _attackDown = Input.GetKeyDown(KeyCode.J);
         _attackHold = Input.GetKey(KeyCode.J);
         _attackRelease = Input.GetKeyUp(KeyCode.J);
-        _issueOrder = Input.GetKeyDown(KeyCode.Q);
+        _issueOrder = Input.GetKeyDown(KeyCode.F);
     }
 
     /// <summary>

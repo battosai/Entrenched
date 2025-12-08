@@ -61,7 +61,7 @@ public class VoiceOfCommand : MonoBehaviour
     /// <summary>
     /// Distance the player must traverse to activate the ability.
     /// </summary>
-    private const int distanceRequired_ft = 20;
+    private const int distanceRequired_ft = 50;
 
     /// <summary>
     /// Animator for commissar.
