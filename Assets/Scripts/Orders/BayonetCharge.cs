@@ -148,7 +148,7 @@ public class BayonetCharge : MonoBehaviour
             Krieger.instance.transform.position + 
             Vector3.left * 40;
 
-        body.velocity = Vector2.right * speed;
+        body.linearVelocity = Vector2.right * speed;
 
         // Randomize the start point in the animation
         // so that they are not in unison
@@ -171,7 +171,7 @@ public class BayonetCharge : MonoBehaviour
     /// </summary>
     private void Freeze()
     {
-        body.velocity = Vector3.zero;
+        body.linearVelocity = Vector3.zero;
 
         foreach (Animator anim in animators)
         {
