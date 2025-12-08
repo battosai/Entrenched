@@ -14,7 +14,7 @@ public class AttackState : BaseState
         {
             if(me.InRange())
             {
-                me.rb.velocity = Vector3.zero;
+                me.rb.linearVelocity = Vector3.zero;
                 me.isAttacking = true;
 
                 // NOTE: Originally would've had different state for this,

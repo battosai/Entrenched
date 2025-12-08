@@ -55,7 +55,7 @@ public class Projectile : MonoBehaviour
         }
 
         projectile.transform.position = position;
-        projectile.rb.velocity = Vector2.left * speed;
+        projectile.rb.linearVelocity = Vector2.left * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -66,7 +66,7 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
 
         if(other.tag == "Player")
         {
@@ -95,6 +95,6 @@ public class Projectile : MonoBehaviour
     private void Freeze()
     {
         anim.speed = 0f;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
     }
 }

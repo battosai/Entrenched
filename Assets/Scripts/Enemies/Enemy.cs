@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        anim.SetBool("Moving", rb.velocity.magnitude > 0);
+        anim.SetBool("Moving", rb.linearVelocity.magnitude > 0);
     }
 
     /// <summary>
@@ -126,7 +126,7 @@ public class Enemy : MonoBehaviour
             return;
 
         isAlerted = false;
-        rb.velocity = Vector2.left * moveSpeed;
+        rb.linearVelocity = Vector2.left * moveSpeed;
     }
 
     /// <summary>
@@ -207,7 +207,7 @@ public class Enemy : MonoBehaviour
     private void StartDeath()
     {
         isDead = true;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         this.gameObject.layer = LayerMask.NameToLayer("Corpses");
         AudioManager.PlayOneClip(
             audioSource, 
@@ -270,7 +270,7 @@ public class Enemy : MonoBehaviour
     private void Freeze()
     {
         anim.speed = 0f;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         stateMachine.Pause();
     }
 
