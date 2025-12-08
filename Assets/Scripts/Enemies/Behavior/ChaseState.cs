@@ -14,7 +14,7 @@ public class ChaseState : BaseState
             return typeof(AttackState);
         else
         {
-            me.rb.velocity = Vector2.left * me.moveSpeed;
+            me.rb.linearVelocity = Vector2.left * me.moveSpeed;
             return null;
         }
     }

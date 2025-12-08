@@ -89,13 +89,13 @@ public class CameraController : MonoBehaviour
     private void ParallaxBackground()
     {
         //only if we're moving
-        if(followTarget.velocity.magnitude > 0) 
+        if(followTarget.linearVelocity.magnitude > 0) 
         {
             foreach(KeyValuePair<string, SpriteRenderer> pair in backgroundElements)
             {
                 //apply parallax effect scaling with sorting layer of rend
                 SpriteRenderer element = pair.Value;
-                Vector3 move = -followTarget.velocity * 
+                Vector3 move = -followTarget.linearVelocity * 
                     parallaxEffect * 
                     Time.deltaTime * 
                     (element.sortingOrder + 1)/(element.sortingOrder + 2);    

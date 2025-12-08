@@ -376,7 +376,7 @@ public class Krieger : MonoBehaviour
             }
         }
 
-        rb.velocity = isMoving ? 
+        rb.linearVelocity = isMoving ? 
             new Vector2(moveSpeed, 0) : 
             Vector2.zero;
 
@@ -530,7 +530,7 @@ public class Krieger : MonoBehaviour
         if(!isDead)
         {
             isDead = true;
-            rb.velocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
 
             //death animation is entirely on torso rend
             anim.SetTrigger("Die");
