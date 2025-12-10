@@ -38,17 +38,8 @@ public class VoiceOfCommand : MonoBehaviour
     public void Issue(string order)
     {
         Debug.Assert(available == true);
-
-        if (orderSprites.ContainsKey(order) == false)
-        {
-            orderSprites.Add(
-                order,
-                Resources.Load<Sprite>($"T_{order}"));
-        }
-
-        orderRend.sprite = orderSprites[order];
         commissarAnim.SetTrigger("Enter");
-
+        orderAnim.SetTrigger("Enter");
         OnOrderIssued.Invoke(order);
     }
 
@@ -59,6 +50,7 @@ public class VoiceOfCommand : MonoBehaviour
     {
         StartCoroutine(Cooldown());
         commissarAnim.SetTrigger("Exit");
+        orderAnim.SetTrigger("Exit");
     }
 
     // ------------------------------- Data ------------------------------------
@@ -74,14 +66,24 @@ public class VoiceOfCommand : MonoBehaviour
     private Animator commissarAnim;
 
     /// <summary>
-    /// Renderer displaying the name of the order in text form.
+    /// Animator for the commissar's order.
     /// </summary>
-    private SpriteRenderer orderRend;
+    private Animator orderAnim;
 
     /// <summary>
-    /// Order text sprite.
+    /// Override animator for the commissar's order.
     /// </summary>
-    private Dictionary<string, Sprite> orderSprites;
+    private AnimatorOverrideController orderAnimOverride;
+
+    /// <summary>
+    /// Override animation clips for the commissar's order.
+    /// </summary>
+    private AnimationClipOverrides orderAnimOverrideClips;
+
+    /// <summary>
+    /// Animation clips for each order.
+    /// </summary>
+    private Dictionary<string, AnimationClip> orderClips;
 
     // ------------------------------ Methods ----------------------------------
 
@@ -91,8 +93,17 @@ public class VoiceOfCommand : MonoBehaviour
     private void Awake()
     {
         commissarAnim = GetComponent<Animator>();
-        orderRend = transform.Find("Order").GetComponent<SpriteRenderer>();
-        orderSprites = new Dictionary<string, Sprite>();
+        orderAnim = transform.Find("Order").GetComponent<Animator>();
+
+        // TODO: Use these to swap out the commissar's order animations based on
+        // what order is being used
+        orderAnimOverride = 
+            new AnimatorOverrideController(orderAnim.runtimeAnimatorController);
+        orderAnimOverrideClips = 
+            new AnimationClipOverrides(orderAnimOverride.overridesCount);
+
+        orderAnim.runtimeAnimatorController = orderAnimOverride;
+        orderAnimOverride.GetOverrides(orderAnimOverrideClips);
     }
 
     /// <summary>
@@ -114,7 +125,6 @@ public class VoiceOfCommand : MonoBehaviour
         #endif
 
         available = false;
-        orderRend.enabled = false;
 
         // Make sure the game has started before counting down
         while (GameState.instance.isReady == false)
@@ -134,7 +144,6 @@ public class VoiceOfCommand : MonoBehaviour
         #endif
 
         available = true;
-        orderRend.enabled = true;
         OnOrderAvailable?.Invoke();
     }
 }
