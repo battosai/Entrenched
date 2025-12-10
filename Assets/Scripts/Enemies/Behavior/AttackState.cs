@@ -7,34 +7,33 @@ public class AttackState : BaseState
     
     public override Type Tick()
     {
-        if(me.isDead)
-            return null;
-
-        if(!me.isAttacking)
+        if (me.isDead == true ||
+            me.isAttacking == true)
         {
-            if(me.InRange())
-            {
-                me.rb.linearVelocity = Vector3.zero;
-                me.isAttacking = true;
-
-                // NOTE: Originally would've had different state for this,
-                // no longer in the plan so just use the same state. Animators
-                // will have a state that isn't used, just FYI.
-                // if(me.isMelee)
-                me.anim.SetTrigger("Attack");
-                // else
-                //     me.anim.SetTrigger("Shoot");
-
-                AudioManager.PlayOneClip(
-                    me.audioSource, 
-                    me.attacks,
-                    Enemy.volumeScale); 
-            }
-            else
-            {
-                return typeof(ChaseState);
-            }
+            return null;
         }
+
+        if (me.InRange() == false)
+        {
+            return typeof(ChaseState);
+        }
+
+        me.rb.linearVelocity = Vector3.zero;
+        me.isAttacking = true;
+
+        // NOTE: Originally would've had different state for this,
+        // no longer in the plan so just use the same state. Animators
+        // will have a state that isn't used, just FYI.
+        // if(me.isMelee)
+        me.anim.SetTrigger("Attack");
+        // else
+        //     me.anim.SetTrigger("Shoot");
+
+        AudioManager.PlayOneClip(
+            me.audioSource, 
+            me.attacks,
+            Enemy.volumeScale); 
+
         return null;
     }
 }

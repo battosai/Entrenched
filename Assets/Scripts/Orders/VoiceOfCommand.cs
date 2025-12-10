@@ -127,6 +127,10 @@ public class VoiceOfCommand : MonoBehaviour
     {
         available = false;
 
+        #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
+            GameState.instance.ui.touchControlToButtons["IssueOrder"].interactable = false;
+        #endif
+
         // Make sure the game has started before counting down
         while (GameState.instance.isReady == false)
         {
@@ -140,11 +144,12 @@ public class VoiceOfCommand : MonoBehaviour
             yield return null;
         }
 
+        available = true;
+
         #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
             GameState.instance.ui.touchControlToButtons["IssueOrder"].interactable = true;
         #endif
 
-        available = true;
         OnOrderAvailable?.Invoke();
     }
 }

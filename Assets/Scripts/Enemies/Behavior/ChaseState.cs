@@ -7,15 +7,17 @@ public class ChaseState : BaseState
 
     public override Type Tick()
     {
-        if(me.isDead)
-            return null;
-
-        if(me.InRange())
-            return typeof(AttackState);
-        else
+        if (me.isDead == true)
         {
-            me.rb.linearVelocity = Vector2.left * me.moveSpeed;
             return null;
         }
+
+        if (me.InRange() == true)
+        {
+            return typeof(AttackState);
+        }
+
+        me.rb.linearVelocity = Vector2.left * me.moveSpeed;
+        return null;
     }
 }

@@ -139,9 +139,7 @@ public class Enemy : MonoBehaviour
             2);
 
         Vector3 dist = Krieger.instance.transform.position - transform.position;
-        float dist2 = Mathf.Pow(dist.magnitude, 2);
-
-        return dist2 <= range2;
+        return dist.sqrMagnitude <= range2;
     }
 
     /// <summary>
