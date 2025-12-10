@@ -7,32 +7,48 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
+    // Data --------------------------------------------------------------------
+
     [Header("General")]
+
     public Image fader;
+    private Krieger krieger;
 
     [Header("Touch Controls")]
+
     public GameObject touchControlButtons;
     public Dictionary<string, Button> touchControlToButtons {get; private set;}
 
     [Header("Weapon Selection")]
+
     public GameObject weaponSelection;
     public GameObject weaponStats;
     public Sprite redactedWeaponOption;
     private Dictionary<string, Button> weaponNamesToButtons;
     private Dictionary<string, Text> weaponStatToText;
 
+    [Header("In Game")]
+
+    /// <summary>
+    /// Animator for the orders radio notification.
+    /// </summary>
+    public Animator ordersRadioAnim; 
+
+    private Coroutine ammoDisplay;
+    private Coroutine ammoDisplayFade;
+
     [Header("End Game")]
+
     public Text endGameText;
     public Image[] endGameButtonImages;
 
     [Header("Sounds")]
+
     public AudioClip[] clicks;
 
-    //util
-    private Krieger krieger;
-    private Coroutine ammoDisplay;
-    private Coroutine ammoDisplayFade;
-
+    /// <summary>
+    /// Initialization Pt I.
+    /// </summary>
     private void Awake()
     {
         Debug.Assert(fader != null);
@@ -49,6 +65,9 @@ public class GameUI : MonoBehaviour
         #endif
     }
 
+    /// <summary>
+    /// Initialization Pt II.
+    /// </summary>
     private void Start()
     {
         touchControlButtons.SetActive(false);
@@ -81,6 +100,8 @@ public class GameUI : MonoBehaviour
         krieger = Krieger.instance;
         krieger.OnDeath += EndScreenSequenceWrapper;
         krieger.OnShoot += DisplayAmmoWrapper;
+        krieger.voice.OnOrderAvailable += RadioInOrders;
+        krieger.voice.OnOrderIssued += RadioOutOrders;
 
         //set to UI so that Fader doesn't affect it during weapon selection
         krieger.SetRendererLayer("UI");
@@ -95,6 +116,18 @@ public class GameUI : MonoBehaviour
         SelectWeapon(
             "Blaster", 
             initialization:true);
+    }
+
+    /// <summary>
+    /// Cleanup.
+    /// </summary>
+    private void OnDestroy()
+    {
+        krieger = Krieger.instance;
+        krieger.OnDeath -= EndScreenSequenceWrapper;
+        krieger.OnShoot -= DisplayAmmoWrapper;
+        krieger.voice.OnOrderAvailable -= RadioInOrders;
+        krieger.voice.OnOrderIssued -= RadioOutOrders;
     }
 
     /// <summary>
@@ -131,6 +164,23 @@ public class GameUI : MonoBehaviour
         weaponButton.enabled = false;
         Image weaponButtonImg = weaponButtonTrans.GetComponent<Image>();
         weaponButtonImg.sprite = redactedWeaponOption;
+    }
+
+    /// <summary>
+    /// VoiceOfCommand.OnOrderAvailable listener to display orders radio 
+    /// notification.
+    /// </summary>
+    private void RadioInOrders()
+    {
+        ordersRadioAnim.SetTrigger("RadioIn");
+    }
+
+    /// <summary>
+    /// VoiceOfCommand.OnOrderIssued listener for when orders are issued.
+    /// </summary>
+    private void RadioOutOrders(string order)
+    {
+        ordersRadioAnim.SetTrigger("RadioOut");
     }
 
     /// <summary>

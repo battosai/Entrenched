@@ -23,6 +23,11 @@ public class VoiceOfCommand : MonoBehaviour
     public event Action<string> OnOrderIssued;
 
     /// <summary>
+    /// Order completing cooldown event.
+    /// </summary>
+    public event Action OnOrderAvailable;
+
+    /// <summary>
     /// Whether or not the order can be used.
     /// </summary>
     public bool available {get; private set;}
@@ -95,10 +100,6 @@ public class VoiceOfCommand : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        orderSprites.Add(
-            "OrderReady",
-            Resources.Load<Sprite>($"T_OrderReady"));
-
         StartCoroutine(Cooldown());
     }
 
@@ -108,6 +109,10 @@ public class VoiceOfCommand : MonoBehaviour
     /// </summary>
     private IEnumerator Cooldown()
     {
+        #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
+            GameState.instance.ui.touchControlToButtons["IssueOrder"].interactable = false;
+        #endif
+
         available = false;
         orderRend.enabled = false;
 
@@ -124,8 +129,12 @@ public class VoiceOfCommand : MonoBehaviour
             yield return null;
         }
 
+        #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
+            GameState.instance.ui.touchControlToButtons["IssueOrder"].interactable = true;
+        #endif
+
         available = true;
         orderRend.enabled = true;
-        orderRend.sprite = orderSprites["OrderReady"];
+        OnOrderAvailable?.Invoke();
     }
 }

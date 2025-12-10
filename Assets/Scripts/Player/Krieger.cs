@@ -122,11 +122,29 @@ public class Krieger : MonoBehaviour
     /// </summary>
     public VoiceOfCommand voice {get; private set;}
 
-    //events
+    // Events ------------------------------------------------------------------
+
+    /// <summary>
+    /// Delegate for taking damage.
+    /// </summary>
     public delegate void Wounded();
+
+    /// <summary>
+    /// Event for taking damage.
+    /// </summary>
     public Wounded OnWounded;
+
+    /// <summary>
+    /// Event for death.
+    /// </summary>
     public event Action OnDeath;
+
+    /// <summary>
+    /// Event for shooting ranged weapon.
+    /// </summary>
     public event Action OnShoot;
+
+    // Methods -----------------------------------------------------------------
 
     private void Awake() 
     {
