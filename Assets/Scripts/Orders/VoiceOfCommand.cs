@@ -38,6 +38,11 @@ public class VoiceOfCommand : MonoBehaviour
     public void Issue(string order)
     {
         Debug.Assert(available == true);
+
+        #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
+            GameState.instance.ui.touchControlToButtons["IssueOrder"].interactable = false;
+        #endif
+
         commissarAnim.SetTrigger("Enter");
         orderAnim.SetTrigger("Enter");
         OnOrderIssued.Invoke(order);
@@ -58,7 +63,7 @@ public class VoiceOfCommand : MonoBehaviour
     /// <summary>
     /// Distance the player must traverse to activate the ability.
     /// </summary>
-    private const int distanceRequired_ft = 50;
+    private const int distanceRequired_ft = 150;
 
     /// <summary>
     /// Animator for commissar.
@@ -120,10 +125,6 @@ public class VoiceOfCommand : MonoBehaviour
     /// </summary>
     private IEnumerator Cooldown()
     {
-        #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
-            GameState.instance.ui.touchControlToButtons["IssueOrder"].interactable = false;
-        #endif
-
         available = false;
 
         // Make sure the game has started before counting down
