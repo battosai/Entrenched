@@ -101,7 +101,8 @@ public class PlayerInput
                         break;
 
                     case "IssueOrder":
-                        button.OnClick.AddListener(OnIssueOrder);
+                        button.onClick.AddListener(OnIssueOrder);
+                        break;
 
                     default:
                         break;
