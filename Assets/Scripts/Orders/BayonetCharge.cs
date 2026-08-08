@@ -3,6 +3,10 @@ using System;
 
 // Unity includes
 using UnityEngine;
+using UnityEngine.Assertions;
+
+// Aliases
+using Random=UnityEngine.Random;
 
 /// <summary>
 /// The group of kriegers charging from the Fix Bayonets order.
@@ -21,17 +25,30 @@ public class BayonetCharge : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    /// <summary>
+    /// Number of people walking to simulate audio.
+    /// </summary>
+    [SerializeField]
+    private int walkers;
+
+    /// <summary>
+    /// Time between footstep sounds for a single walker.
+    /// </summary>
+    [SerializeField]
+    private float baseStepInterval_s;
+
+    /// <summary>
+    /// Variance applied to each walker's footstep sound interval.
+    /// </summary>
+    [SerializeField]
+    private float stepIntervalJitter_s;
+
     [Header("Audio Clips")]
 
     /// <summary>
     /// Trench whistle sound.
     /// </summary>
     public AudioClip trenchWhistle;
-
-    /// <summary>
-    /// Group of people running sound.
-    /// </summary>
-    public AudioClip runningGroup;
 
     // ------------------------------- Data ------------------------------------
 
@@ -44,6 +61,21 @@ public class BayonetCharge : MonoBehaviour
     /// Damage this deals to enemeis.
     /// </summary>
     private const int dmg = 2;
+
+    /// <summary>
+    /// Timers for each simulated walker.
+    /// </summary>
+    private float[] walkerTimers_s;
+
+    /// <summary>
+    /// Step intervals for each simulated walker.
+    /// </summary>
+    private float[] walkerIntervals_s;
+
+    /// <summary>
+    /// Timer for bayonet swings.
+    /// </summary>
+    private float swingTimer_s;
 
     /// <summary>
     /// List of krieger animators.
@@ -60,6 +92,16 @@ public class BayonetCharge : MonoBehaviour
     /// </summary>
     private Rigidbody2D body;
 
+    /// <summary>
+    /// AudioSource component.
+    /// </summary>
+    private AudioSource audioSource;
+
+    /// <summary>
+    /// Cached reference to Krieger's powersword.
+    /// </summary>
+    private MeleeWeapon kriegerSword;
+
     // ------------------------------ Methods ----------------------------------
 
     /// <summary>
@@ -67,9 +109,15 @@ public class BayonetCharge : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        // Cache component references
         hitbox = GetComponent<Collider2D>();
         body = GetComponent<Rigidbody2D>();
+        audioSource =  GetComponent<AudioSource>();
         animators = GetComponentsInChildren<Animator>();
+        Assert.IsNotNull(hitbox);
+        Assert.IsNotNull(body);
+        Assert.IsNotNull(audioSource);
+        Assert.IsTrue(animators.Length > 0);
     }
 
     /// <summary>
@@ -78,8 +126,31 @@ public class BayonetCharge : MonoBehaviour
     private void Start()
     {
         gameObject.SetActive(false);
+
+        Assert.IsNotNull(Krieger.instance);
         Krieger.instance.voice.OnOrderIssued += Charge;
         Krieger.instance.OnDeath += Freeze;
+
+        kriegerSword = Krieger.instance.armory.melee["Powersword"];
+        Assert.IsNotNull(kriegerSword);
+
+        // Initialize audio timers
+        Assert.IsTrue(walkers > 0);
+        walkerTimers_s = new float[walkers];
+        walkerIntervals_s = new float[walkers];
+
+        for(int ii = 0;
+            ii < walkers;
+            ii++)
+        {
+            walkerTimers_s[ii] = Random.Range(
+                0f,
+                baseStepInterval_s);
+
+            walkerIntervals_s[ii] = GetRandomWalkerInterval();
+        }
+
+       swingTimer_s = 0; 
     }
 
     /// <summary>
@@ -89,6 +160,52 @@ public class BayonetCharge : MonoBehaviour
     {
         Krieger.instance.voice.OnOrderIssued -= Charge;
         Krieger.instance.OnDeath -= Freeze;
+    }
+
+    /// <summary>
+    /// Every frame update loop.
+    /// </summary>
+    private void Update()
+    {
+        // Simulate group footstep sounds
+        Assert.IsNotNull(Krieger.instance);
+        Assert.IsNotNull(Krieger.instance.walks);
+        Assert.IsTrue(Krieger.instance.walks.Length > 0);
+
+        for(int ii = 0;
+            ii < walkerTimers_s.Length;
+            ii++)
+        {
+            walkerTimers_s[ii] += Time.deltaTime;
+            if (walkerTimers_s[ii] < walkerIntervals_s[ii])
+            {
+                continue;
+            }
+
+            walkerTimers_s[ii] = 0f;
+            walkerIntervals_s[ii] = GetRandomWalkerInterval();
+            AudioManager.PlayOneClip(
+                audioSource,
+                Krieger.instance.walks,
+                0.5f);
+        }
+
+        // Bayonet swing sound
+        Assert.IsNotNull(kriegerSword);
+        Assert.IsNotNull(kriegerSword.swings);
+
+        const float swingInterval_s = 0.25f;
+        swingTimer_s += Time.deltaTime;
+        if (swingTimer_s < swingInterval_s)
+        {
+            return;
+        }
+
+        swingTimer_s = 0f;
+        AudioManager.PlayOneClip(
+            audioSource,
+            kriegerSword.swings,
+            0.4f);
     }
 
     /// <summary>
@@ -104,7 +221,15 @@ public class BayonetCharge : MonoBehaviour
         // Kill enemies
         if (other.tag == "Enemies")
         {
-            other.GetComponent<Enemy>().OnWounded?.Invoke(dmg);
+            Enemy enemy = other.GetComponent<Enemy>();
+            Assert.IsNotNull(enemy);
+            enemy.OnWounded.Invoke(dmg);
+
+            Assert.IsNotNull(kriegerSword);
+            Assert.IsNotNull(kriegerSword.hits);
+            AudioManager.PlayOneClip(
+                audioSource,
+                kriegerSword.hits);
         }
     }
 
@@ -163,6 +288,20 @@ public class BayonetCharge : MonoBehaviour
         AudioManager.PlayClip(
             Krieger.instance.audioSource, 
             trenchWhistle);
+    }
+
+    /// <summary>
+    /// Get a randomized step interval.
+    /// </summary>
+    private float GetRandomWalkerInterval()
+    {
+        float interval_s = baseStepInterval_s + Random.Range(
+            -stepIntervalJitter_s, 
+            stepIntervalJitter_s);
+
+        return Mathf.Max(
+            0.05f, // Safety clamp
+            interval_s);
     }
 
     /// <summary>
