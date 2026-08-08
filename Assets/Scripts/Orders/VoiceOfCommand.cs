@@ -17,6 +17,11 @@ public class VoiceOfCommand : MonoBehaviour
     // ----------------------------- Interface ---------------------------------
 
     /// <summary>
+    /// Sound for when this ability is ready.
+    /// </summary>
+    public AudioClip ready;
+
+    /// <summary>
     /// Order being issued event.
     /// Order-specific effects should listen to this event.
     /// </summary>
@@ -150,6 +155,11 @@ public class VoiceOfCommand : MonoBehaviour
             GameState.instance.ui.touchControlToButtons["IssueOrder"].interactable = true;
         #endif
 
+        // Voice is ready
         OnOrderAvailable?.Invoke();
+
+        AudioManager.PlayClip(
+            AudioManager.instance.ambienceSource,
+            ready);
     }
 }
